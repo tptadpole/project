@@ -33,3 +33,12 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+      
+  phpcs:
+      name: PHPCS
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: PHPCS check
+          uses: chekalsky/phpcs-action@v1
+
