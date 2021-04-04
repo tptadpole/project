@@ -65,7 +65,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('我要去購物') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item"s href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('我要賣商品') }}
