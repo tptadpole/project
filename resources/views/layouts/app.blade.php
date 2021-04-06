@@ -60,24 +60,20 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('登出') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ url('/') }}"
+                                       >
                                         {{ __('我要去購物') }}
                                     </a>
-                                    <a class="dropdown-item"s href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ url('/') }}"
+                                       >
                                         {{ __('我要賣商品') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ url('/') }}"
+                                       >
                                         {{ __('檢查購物車') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ url('/') }}"
+                                       >
                                         {{ __('結帳') }}
                                     </a>
 

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">你已經登入成功了</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,8 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    歡迎回來: {{ Auth::user()->name }}<br>
+                    在尋找什麼東西嗎?
                 </div>
             </div>
         </div>
