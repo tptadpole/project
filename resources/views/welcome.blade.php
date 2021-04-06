@@ -1,23 +1,16 @@
 @extends('layouts.app')
-
+ 
 @section('content')
-
-@if (Route::has('login'))
-
-    @auth
+    <div class="container">
+        首頁
         @can('admin')
-            <!-- 系統管理者 -->
-            <p>您好,系統管理者：{{ Auth::user()->name }}</p>
+            <p>Hello ~ 系統管理者</p>
         @elsecan('manager')
-            <!-- 一般管理者 -->
-            <p>您好,一般管理者：{{ Auth::user()->name }}</p>
+            <p>一般管理者</p>
+        @elsecan('user')
+            <p>一般使用者</p>
         @else
-            <!-- 一般使用者 -->
-            <p>您好,一般使用者：{{ Auth::user()->name }}</p>
+            <p>遊客</p>
         @endcan
-    @else
-        <p>您好,遊客</p>
-    @endauth
-
-@endif
+    </div>
 @endsection
