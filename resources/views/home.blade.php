@@ -15,7 +15,6 @@
                     @endif
 
                     歡迎回來: {{ Auth::user()->name }}<br>
-                    在尋找什麼東西嗎?
                 </div>
             </div>
         </div>
