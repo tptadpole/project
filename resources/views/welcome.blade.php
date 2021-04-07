@@ -13,4 +13,24 @@
             <p>遊客</p>
         @endcan
     </div>
+    <div class="container">
+        <div class="card">
+            <ul class="list-group">
+                @foreach( $homepageProducts as $homepageProduct )
+                    <li class="list-group-item">
+                        <ul type="disc"><li>{{$homepageProduct['name']}}</li> </ul>     
+                    </li>
+                    <li class="list-group-item">
+                        <ul type="disc"><li>{{$homepageProduct['description']}}</li> </ul>     
+                    </li>
+                    <li class="list-group-item">
+                        <ul type="disc"><li>{{$homepageProduct['vote']}}</li> </ul>     
+                    </li>
+                    <li class="list-group-item">
+                        <ul type="disc"><li>{{$homepageProduct['comment']}}</li> </ul>     
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
 @endsection

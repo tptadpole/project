@@ -15,12 +15,10 @@ class CreateSpuTable extends Migration
     {
         Schema::create('spu', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('seller_id')->unsigned()->default(0);
             $table->string('name');
-            $table->integer('amount')->unsigned()->default(0);
+            $table->string('description');
             $table->integer('vote')->default(0);
             $table->string('comment');
-            $table->integer('stock')->unsigned()->default(0);
             $table->timestamps();
         });
     }

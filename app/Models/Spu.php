@@ -21,12 +21,10 @@ class Spu extends Model
      * @var array
      */
     protected $fillable = [
-        'seller_id',
         'name',
-        'amount',
+        'description',
         'vote',
         'comment',
-        'stock',
     ];
 
     /**

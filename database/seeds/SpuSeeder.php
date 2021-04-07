@@ -17,12 +17,10 @@ class SpuSeeder extends Seeder
         for ($i = 1; $i <= 5; $i++) {
             Spu::create([
                 'id' => $i ,
-                'seller_id' => $faker->numberBetween($min = 1, $max = 10),
                 'name' => $faker->word,
-                'amount' => $faker->numberBetween($min = 1, $max = 100),
+                'description' => $faker->word,
                 'vote' => $faker->numberBetween($min = 0, $max = 20),
                 'comment' => $faker->word,
-                'stock' => $faker->numberBetween($min = 0, $max = 20),
             ]);
         }
     }
