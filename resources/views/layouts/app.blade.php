@@ -33,7 +33,30 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="navbar-brand" href="{{ url('/') }}"
+                                >
+                                {{ __('我要去購物') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" href="{{ url('/seller') }}"
+                                >
+                                {{ __('我要賣商品') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" href="{{ url('/') }}"
+                                >
+                                {{ __('檢查購物車') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" href="{{ url('/') }}"
+                                >
+                                {{ __('結帳') }}
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -64,7 +87,7 @@
                                        >
                                         {{ __('我要去購物') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ url('/') }}"
+                                    <a class="dropdown-item" href="{{ url('/seller') }}"
                                        >
                                         {{ __('我要賣商品') }}
                                     </a>
@@ -73,7 +96,7 @@
                                         {{ __('檢查購物車') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ url('/') }}"
-                                       >
+                                    >
                                         {{ __('結帳') }}
                                     </a>
 

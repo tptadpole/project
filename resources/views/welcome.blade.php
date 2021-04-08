@@ -23,9 +23,6 @@
                   <h5 class="card-title">{{$homepageProduct['name']}}</h5>
                   <p class="card-text">{{$homepageProduct['description']}}</p>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">{{$homepageProduct['comment']}}</small>
-                </div>
               </div>
             </div>
             @endforeach
