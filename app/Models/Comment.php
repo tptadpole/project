@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Spu extends Model
+class Comment extends Model
 {
+    
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'spu';
+    protected $table = 'comment';
 
 
     /**
@@ -21,8 +22,8 @@ class Spu extends Model
      */
     protected $fillable = [
         'users_id',
-        'name',
-        'description',
+        'spu_id',
+        'comment',
     ];
 
     /**
@@ -31,6 +32,6 @@ class Spu extends Model
      * @var array
      */
     protected $attributes = [
-        'name' => '',
+        'comment' => '',
     ];
 }

@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Spu;
+use App\Models\Vote;
 use Illuminate\Database\Seeder;
 
-class SpuSeeder extends Seeder
+class VoteSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +14,11 @@ class SpuSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         for ($i = 1; $i <= 5; $i++) {
-            Spu::create([
+            Vote::create([
                 'id' => $i ,
                 'users_id' => $faker->numberBetween($min = 1, $max = 15),
-                'name' => $faker->word,
-                'description' => $faker->word,
+                'spu_id' => $faker->numberBetween($min = 1, $max = 15),
+                'vote' => $faker->boolean($chanceOfGettingTrue = 100),
             ]);
         }
     }

@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Spu extends Model
+class Sku extends Model
 {
+    
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'spu';
+    protected $table = 'sku';
 
 
     /**
@@ -20,17 +21,9 @@ class Spu extends Model
      * @var array
      */
     protected $fillable = [
-        'users_id',
-        'name',
-        'description',
-    ];
-
-    /**
-     * The model's default values for attributes.
-     *
-     * @var array
-     */
-    protected $attributes = [
-        'name' => '',
+        'spu_id',
+        'price',
+        'capacity',
+        'stock',
     ];
 }

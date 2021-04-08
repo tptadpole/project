@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSpuTable extends Migration
+class CreateCommentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateSpuTable extends Migration
      */
     public function up()
     {
-        Schema::create('spu', function (Blueprint $table) {
+        Schema::create('comment', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('users_id');
-            $table->string('name');
-            $table->string('description');
+            $table->integer('spu_id');
+            $table->string('comment');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateSpuTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('spu');
+        Schema::dropIfExists('comment');
     }
 }

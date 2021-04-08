@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Spu extends Model
+class Vote extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'spu';
+    protected $table = 'vote';
 
 
     /**
@@ -21,16 +21,7 @@ class Spu extends Model
      */
     protected $fillable = [
         'users_id',
-        'name',
-        'description',
-    ];
-
-    /**
-     * The model's default values for attributes.
-     *
-     * @var array
-     */
-    protected $attributes = [
-        'name' => '',
+        'spu_id',
+        'vote',
     ];
 }
