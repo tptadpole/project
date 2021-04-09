@@ -37,3 +37,6 @@ Route::post('/seller/commodity/{id}/store', 'SellerSkuController@store')->middle
 Route::delete('/seller/commodity/{id}/destroy', 'SellerSkuController@destroy')->middleware('auth');
 Route::patch('/seller/commodity/{id}/update', 'SellerSkuController@update')->middleware('auth');
 Route::get('/seller/commodity/{id}/edit', 'SellerSkuController@edit')->middleware('auth');
+
+Route::get('/customer', 'CustomerController@index')->middleware('auth');
+Route::get('/customer/{id}', 'CustomerController@show')->middleware('auth');

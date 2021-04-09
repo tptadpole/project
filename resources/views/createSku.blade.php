@@ -24,6 +24,10 @@
             <form method="post" action="/seller/commodity/{{ $spu_id }}/store">
                 <div class="form-group">
                     @csrf
+                    <label for="name">款式:</label>
+                    <input type="text" class="form-control" name="name"/>
+                </div>
+                <div class="form-group">
                     <label for="price">價格:</label>
                     <input type="text" class="form-control" name="price"/>
                 </div>

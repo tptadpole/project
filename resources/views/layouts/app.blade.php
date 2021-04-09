@@ -34,7 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="navbar-brand text-primary" href="{{ url('/') }}">
+                            <a class="navbar-brand text-primary" href="{{ url('/customer') }}">
                                 <span data-feather="shopping-bag"></span>{{ __('我要去購物') }}
                             </a>
                         </li>
@@ -79,7 +79,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('登出') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ url('/') }}">
+                                    <a class="dropdown-item" href="{{ url('/customer') }}">
                                         {{ __('我要去購物') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ url('/seller') }}">

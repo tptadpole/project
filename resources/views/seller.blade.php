@@ -11,6 +11,8 @@
             <div class="card-body">
                 <h5 class="card-title">{{$commodity['name']}}</h5>
                 <p class="card-text">{{$commodity['description']}}</p>
+            </div>
+            <div class="card-footer">
                 <a href="/seller/commodity/{{$commodity['id']}}" class="btn btn-primary">查看更多</a>
                 <form action="/seller/{{ $commodity['id'] }}/destroy" method="POST">
                     {{ csrf_field() }}

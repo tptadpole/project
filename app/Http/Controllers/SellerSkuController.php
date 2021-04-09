@@ -48,6 +48,7 @@ class SellerSkuController extends Controller
     {
         $id = $spu_id;
         $validatedData = $request->validate([
+            'name' => 'required|string',
             'price' => 'required|numeric',
             'capacity' => 'required|numeric',
             'stock' => 'required|numeric',
@@ -97,13 +98,14 @@ class SellerSkuController extends Controller
     public function update(Request $request, $sku_id)
     {
         $request->validate([
+            'name' => 'required|string',
             'price' => 'required|numeric',
             'capacity' => 'required|numeric',
             'stock' => 'required|numeric',
         ]);
 
         if (! $sku = Sku::find($sku_id)) {
-            throw new APIException('課程找不到', 404);
+            throw new APIException('商品細項找不到', 404);
         }
         $status = $sku->update($request->toArray());
         $spu_id = $sku->toArray();

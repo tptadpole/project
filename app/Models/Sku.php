@@ -22,6 +22,7 @@ class Sku extends Model
      */
     protected $fillable = [
         'spu_id',
+        'name',
         'price',
         'capacity',
         'stock',
@@ -34,6 +35,7 @@ class Sku extends Model
      * @var array
      */
     protected $attributes = [
+        'name' => '',
         'image' => '',
     ];
 }

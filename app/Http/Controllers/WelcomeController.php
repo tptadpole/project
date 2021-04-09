@@ -9,13 +9,13 @@ use DB;
 class WelcomeController extends Controller
 {
     /**
-     * Show the homepage and recommend commodity
+     * Display the homepage and recommend commodity
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $homepageProducts = Spu::all()->toArray();
+        $homepageProducts = DB::table('spu')->take(8)->get();
         return view('welcome')->with(['homepageProducts' => $homepageProducts]);
     }
 }

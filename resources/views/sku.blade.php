@@ -8,6 +8,8 @@
         <div class="card-body">
             <h5 class="card-title">{{$spu[0]['name']}}</h5>
             <p class="card-text">{{$spu[0]['description']}}</p>
+        </div>
+        <div class="card-footer">
             <a href="/seller/{{ $spu[0]['id'] }}/edit" class="btn btn-primary">修改</a>
             <form action="/seller/{{ $spu[0]['id'] }}/destroy" method="POST">
                 {{ csrf_field() }}
@@ -24,11 +26,14 @@
             <div class="card h-100">
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#6c757d"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
                 <div class="card-body">
-                    <h5 class="card-title">{{$spu[0]['name']}}容量:{{$commodity['capacity']}}ml</h5>
-                    <h4 class="card-text">價格:{{$commodity['price']}}</h4>
+                    <h2 class="card-title">{{$commodity['name']}}</h2>
+                    <h5 class="text-info">{{$spu[0]['name']}}單瓶容量:{{$commodity['capacity']}}ml</h5>
+                    <h4 class="text-danger">價格:{{$commodity['price']}}</h4>
                     <div class="card-footer">
                         <h5 class="text-muted">剩餘存貨:{{$commodity['stock']}}</h5>
                     </div>
+                </div>
+                <div class="card-footer">
                     <a href="/seller/commodity/{{ $commodity['id'] }}/edit" class="btn btn-primary">修改</a>
                     <form action="/seller/commodity/{{ $commodity['id'] }}/destroy" method="POST">
                         {{ csrf_field() }}

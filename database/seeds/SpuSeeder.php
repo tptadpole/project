@@ -13,7 +13,7 @@ class SpuSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= 17; $i++) {
             Spu::create([
                 'id' => $i ,
                 'users_id' => $faker->numberBetween($min = 1, $max = 15),
