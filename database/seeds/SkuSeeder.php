@@ -20,6 +20,7 @@ class SkuSeeder extends Seeder
                 'price' => $faker->numberBetween($min = 30, $max = 200),
                 'capacity' => $faker->numberBetween($min = 300, $max = 2000),
                 'stock' => $faker->numberBetween($min = 0, $max = 50),
+                'image' => '',
             ]);
         }
     }

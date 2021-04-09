@@ -74,4 +74,39 @@ class SellerSkuController extends Controller
         $status = $sku->delete();
         return redirect()->action('SellerSkuController@index', ['id' => $spu_id]);
     }
+
+    /**
+     * edit the specified commodity of detail from storage.
+     *
+     * @param int $sku_id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($sku_id)
+    {
+        $data = Sku::find($sku_id)->toArray();
+        return view('editSku')->with(['data' => $data]);
+    }
+
+    /**
+     * Update the specified commodity of datail in storage.
+     *
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $sku_id)
+    {
+        $request->validate([
+            'price' => 'required|numeric',
+            'capacity' => 'required|numeric',
+            'stock' => 'required|numeric',
+        ]);
+
+        if (! $sku = Sku::find($sku_id)) {
+            throw new APIException('課程找不到', 404);
+        }
+        $status = $sku->update($request->toArray());
+        $spu_id = $sku->toArray();
+        return redirect()->action('SellerSkuController@index', ['id' =>$spu_id['spu_id']]);
+    }
 }

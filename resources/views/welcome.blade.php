@@ -22,6 +22,8 @@
                 <div class="card-body">
                   <h5 class="card-title">{{$homepageProduct['name']}}</h5>
                   <p class="card-text">{{$homepageProduct['description']}}</p>
+                  <a href="#" class="btn btn-light">加入購物車</a>
+                  <a href="#" class="btn btn-primary">結帳</a>
                 </div>
               </div>
             </div>

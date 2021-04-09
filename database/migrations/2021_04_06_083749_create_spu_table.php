@@ -18,6 +18,7 @@ class CreateSpuTable extends Migration
             $table->integer('users_id');
             $table->string('name');
             $table->string('description');
+            $table->string('image');
             $table->timestamps();
         });
     }

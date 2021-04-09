@@ -25,5 +25,15 @@ class Sku extends Model
         'price',
         'capacity',
         'stock',
+        'image'
+    ];
+
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'image' => '',
     ];
 }

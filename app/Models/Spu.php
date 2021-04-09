@@ -23,6 +23,7 @@ class Spu extends Model
         'users_id',
         'name',
         'description',
+        'image'
     ];
 
     /**
@@ -32,5 +33,6 @@ class Spu extends Model
      */
     protected $attributes = [
         'name' => '',
+        'image' => '',
     ];
 }

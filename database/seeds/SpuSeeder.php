@@ -19,6 +19,7 @@ class SpuSeeder extends Seeder
                 'users_id' => $faker->numberBetween($min = 1, $max = 15),
                 'name' => $faker->word,
                 'description' => $faker->word,
+                'image' => '',
             ]);
         }
     }
