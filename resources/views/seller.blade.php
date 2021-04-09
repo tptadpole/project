@@ -8,7 +8,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{$commodity['name']}}</h5>
                 <p class="card-text">{{$commodity['description']}}</p>
-                <a href="/seller/{{$commodity['id']}}" class="btn btn-primary">查看更多</a>
+                <a href="/seller/commodity/{{$commodity['id']}}" class="btn btn-primary">查看更多</a>
                 <a href="#" class="btn btn-danger">刪除</a>
             </div>
         </div>

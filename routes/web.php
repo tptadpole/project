@@ -25,8 +25,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/seller', 'SellerController@index')->middleware('auth');
 Route::get('/seller/create', 'SellerController@create')->middleware('auth');
-Route::POST('/seller/store', 'SellerController@store')->middleware('auth');
+Route::post('/seller/store', 'SellerController@store')->middleware('auth');
 
-Route::GET('/seller/{id}', 'SellerSkuController@index')->middleware('auth');
-Route::GET('/seller/{id}/create', 'SellerSkuController@create')->middleware('auth');
-Route::POST('/seller/{id}/store', 'SellerSkuController@store')->middleware('auth');
+Route::get('/seller/commodity/{id}', 'SellerSkuController@index')->middleware('auth');
+Route::get('/seller/commodity/{id}/create', 'SellerSkuController@create')->middleware('auth');
+Route::post('/seller/commodity/{id}/store', 'SellerSkuController@store')->middleware('auth');
+Route::delete('/seller/commodity/{id}/destroy', 'SellerSkuController@destroy')->middleware('auth');

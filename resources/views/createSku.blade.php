@@ -21,7 +21,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="/seller/{{ $spu_id }}/store">
+            <form method="post" action="/seller/commodity/{{ $spu_id }}/store">
                 <div class="form-group">
                     @csrf
                     <label for="price">價格:</label>

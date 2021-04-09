@@ -20,7 +20,16 @@
                     <h5 class="text-muted">剩餘存貨:{{$commodity['stock']}}</h5>
                   </div>
                 <a href="#" class="btn btn-primary">修改</a>
-                <a href="#" class="btn btn-danger">刪除</a>
+                <form action="/seller/commodity/{{ $commodity['id'] }}/destroy" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-danger" value="刪除">
+                    </div>
+                    {{-- <a href="" class="btn btn-danger">刪除</a> --}}
+                </form>
+            
+                {{-- <a href="/seller/{{$commodity['id']}}/destroy" class="btn btn-danger">刪除</a> --}}
             </div>
         </div>
     @endforeach
@@ -28,7 +37,7 @@
         <div class="card-body">
             <h5 class="card-title">要賣新的種類嗎?</h5>
             <p class="card-text">歡迎你使用104電商來販售物品,用過的都說讚</p>
-            <a href="/seller/{{$spu[0]['id']}}/create" class="btn btn-success">新增商品種類</a>
+            <a href="/seller/commodity/{{$spu[0]['id']}}/create" class="btn btn-success">新增商品種類</a>
         </div>
     </div>
 </div>

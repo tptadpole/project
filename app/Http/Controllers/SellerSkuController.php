@@ -57,4 +57,21 @@ class SellerSkuController extends Controller
    
         return redirect()->action('SellerSkuController@index', ['id' => $id]);
     }
+
+    /**
+     * Remove the specified detail of commodity from storage.
+     *
+     * @param  int  $sku_Id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($sku_id)
+    {
+        if (! $sku = Sku::find($sku_id)) {
+            throw new APIException('商品細項找不到', 404);
+        }
+        $id = $sku->toArray();
+        $spu_id = $id['spu_id'];
+        $status = $sku->delete();
+        return redirect()->action('SellerSkuController@index', ['id' => $spu_id]);
+    }
 }
