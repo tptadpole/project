@@ -24,7 +24,7 @@
             <form method="post" action="/seller/commodity/{{ $spu_id }}/store">
                 <div class="form-group">
                     @csrf
-                    <label for="name">款式:</label>
+                    <label for="name">商品名稱:</label>
                     <input type="text" class="form-control" name="name"/>
                 </div>
                 <div class="form-group">

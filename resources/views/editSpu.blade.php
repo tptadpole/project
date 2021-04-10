@@ -26,7 +26,7 @@
                 {{ method_field('PATCH') }}
                 <div class="form-group">
                     @csrf
-                    <label for="name">商品名稱:</label>
+                    <label for="name">商品種類 :</label>
                     <input type="text" class="form-control" name="name" value="{{$data['name']}}"/>
                 </div>
                 <div class="form-group">

@@ -12,7 +12,7 @@
         @else
             <p>遊客</p>
         @endcan
-        
+
         <div class="row row-cols-1 row-cols-md-4">
             @foreach( $homepageProducts as $homepageProduct ) 
             <div class="col mb-4">
@@ -21,7 +21,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{$homepageProduct->name}}</h5>
                   <p class="card-text">{{$homepageProduct->description}}</p>
-                  <a href="#" class="btn btn-primary">查看更多</a>
+                  <a href="/customer/{{$homepageProduct->id}}" class="btn btn-primary">查看更多</a>
                 </div>
               </div>
             </div>

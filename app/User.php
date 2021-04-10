@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Sku;
 
 class User extends Authenticatable
 {
@@ -40,4 +41,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sku()
+    {
+        return $this->belongsToMany(
+            Sku::class,
+            'cart_items',
+            'users_id',
+        )->withPivot('amount');
+    }
 }

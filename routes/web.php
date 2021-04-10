@@ -38,5 +38,11 @@ Route::delete('/seller/commodity/{id}/destroy', 'SellerSkuController@destroy')->
 Route::patch('/seller/commodity/{id}/update', 'SellerSkuController@update')->middleware('auth');
 Route::get('/seller/commodity/{id}/edit', 'SellerSkuController@edit')->middleware('auth');
 
-Route::get('/customer', 'CustomerController@index')->middleware('auth');
-Route::get('/customer/{id}', 'CustomerController@show')->middleware('auth');
+Route::get('/customer', 'CustomerController@index');
+Route::get('/customer/{id}', 'CustomerController@show');
+
+Route::get('/cart', 'CartController@index');
+Route::post('/cart/{id}/store', 'CartController@store');
+
+
+Route::get('/admin', 'AdminController@index');

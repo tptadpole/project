@@ -44,7 +44,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="navbar-brand text-primary" href="{{ url('/') }}">
+                            <a class="navbar-brand text-primary" href="{{ url('/cart') }}">
                                 <span data-feather="shopping-cart"></span>{{ __('檢查購物車') }}
                             </a>
                         </li>
@@ -85,13 +85,17 @@
                                     <a class="dropdown-item" href="{{ url('/seller') }}">
                                         {{ __('我要賣商品') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ url('/') }}">
+                                    <a class="dropdown-item" href="{{ url('/cart') }}">
                                         {{ __('檢查購物車') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ url('/') }}">
                                         {{ __('結帳') }}
                                     </a>
-
+                                    @can('admin')
+                                        <a class="dropdown-item" href="{{ url('/admin') }}">
+                                            {{ __('admin後台') }}
+                                        </a>
+                                    @endcan
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>

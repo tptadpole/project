@@ -29,11 +29,11 @@
                 {{ method_field('PATCH') }}
                 <div class="form-group">
                     @csrf
-                    <label for="name">商品細項額外說明 :</label>
+                    <label for="name">商品名稱 :</label>
                     <input type="text" class="form-control" name="name" value="{{$data['name']}}"/>
                 </div>
                 <div class="form-group">
-                    <label for="price">商品價格:</label>
+                    <label for="price">商品價格 :</label>
                     <input type="text" class="form-control" name="price" value="{{$data['price']}}"/>
                 </div>
                 <div class="form-group">
