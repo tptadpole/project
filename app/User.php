@@ -48,6 +48,6 @@ class User extends Authenticatable
             Sku::class,
             'cart_items',
             'users_id',
-        )->withPivot('amount');
+        )->withPivot('id', 'amount');
     }
 }

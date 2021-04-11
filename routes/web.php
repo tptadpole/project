@@ -41,8 +41,10 @@ Route::get('/seller/commodity/{id}/edit', 'SellerSkuController@edit')->middlewar
 Route::get('/customer', 'CustomerController@index');
 Route::get('/customer/{id}', 'CustomerController@show');
 
-Route::get('/cart', 'CartController@index');
-Route::post('/cart/{id}/store', 'CartController@store');
-
+Route::get('/cart', 'CartController@index')->middleware('auth');
+Route::post('/cart/{id}/store', 'CartController@store')->middleware('auth');
+Route::get('/cart/{id}/edit', 'CartController@edit')->middleware('auth');
+Route::patch('/cart/{id}/update', 'CartController@update')->middleware('auth');
+Route::delete('/cart/{id}/destroy', 'CartController@destroy')->middleware('auth');
 
 Route::get('/admin', 'AdminController@index');

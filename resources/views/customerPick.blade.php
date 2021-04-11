@@ -3,13 +3,13 @@
 @section('content')
 <div class="container">
     @can('admin')
-      <h3>歡迎回來: {{ Auth::user()->name }} 目前的商品總共有{{$commodities->total()}}項</h3>
+      <h3>歡迎回來: {{ Auth::user()->name }} 目前的商品總共有{{$commodities->total()}}種</h3>
     @elsecan('manager')
-      <h3>歡迎回來: {{ Auth::user()->name }} 目前的商品總共有{{$commodities->total()}}項</h3>
+      <h3>歡迎回來: {{ Auth::user()->name }} 目前的商品總共有{{$commodities->total()}}種</h3>
     @elsecan('manager')
-      <h3>歡迎回來: {{ Auth::user()->name }} 目前的商品總共有{{$commodities->total()}}項</h3>
+      <h3>歡迎回來: {{ Auth::user()->name }} 目前的商品總共有{{$commodities->total()}}種</h3>
     @else
-      <h3>您好遊客: 目前的商品總共有{{$commodities->total()}}項</h3>
+      <h3>您好遊客: 目前的商品總共有{{$commodities->total()}}種</h3>
     @endcan
     <div class="row row-cols-1 row-cols-md-4">
         @foreach( $commodities as $commodity ) 

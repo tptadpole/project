@@ -24,7 +24,7 @@
             <form method="post" action="{{ url('/seller/store') }}">
                 <div class="form-group">
                     @csrf
-                    <label for="name">商品種類:</label>
+                    <label for="name">商品標題:</label>
                     <input type="text" class="form-control" name="name"/>
                 </div>
                 <div class="form-group">

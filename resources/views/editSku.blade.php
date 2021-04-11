@@ -21,9 +21,6 @@
                     </ul>
                 </div><br/>
             @endif
-            <?php
-                //dd($data);
-            ?>
             <form method="post" action="/seller/commodity/{{$data['id']}}/update">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}

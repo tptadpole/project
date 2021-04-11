@@ -56,4 +56,56 @@ class CartController extends Controller
 
         return redirect()->action('CustomerController@show', ['id' => $sku[0]['spu_id']]);
     }
+
+    /**
+     * edit the buy amount of specified commodity in cart.
+     *
+     * @param int $cart_id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($cart_id)
+    {
+        $cart = CartItem::find($cart_id)->toArray();
+        $sku = Sku::find($cart['sku_id'])->toArray();
+
+        return view('editCart')->with([ 'cart' => $cart, 'sku' => $sku ]);
+    }
+
+    /**
+     * Update the buy amount of specified commodity in cart.
+     *
+     * @param Request $request
+     * @param int $cart_id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $cart_id)
+    {
+        $validatedData = $request->validate([
+            'amount' => 'required|numeric',
+        ]);
+
+        if (! $cart = CartItem::find($cart_id)) {
+            throw new APIException('商品細項找不到', 404);
+        }
+
+        $status = $cart->update($validatedData);
+
+        return redirect()->action('CartController@index');
+    }
+
+    /**
+     * Remove the buying of commodity from cart.
+     *
+     * @param  int  $cart_Id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($cart_id)
+    {
+        if (! $cart = CartItem::find($cart_id)) {
+            throw new APIException('購物車內商品找不到', 404);
+        }
+
+        $status = $cart->delete();
+        return redirect()->action('CartController@index');
+    }
 }
