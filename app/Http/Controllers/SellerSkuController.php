@@ -49,7 +49,7 @@ class SellerSkuController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string',
             'price' => 'required|numeric',
-            'capacity' => 'required|numeric',
+            'specification' => 'required|string',
             'stock' => 'required|numeric',
             'image' => 'required|image',
         ]);
@@ -110,7 +110,7 @@ class SellerSkuController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string',
             'price' => 'required|numeric',
-            'capacity' => 'required|numeric',
+            'specification' => 'required|string',
             'stock' => 'required|numeric',
         ]);
 

@@ -32,10 +32,16 @@
           <a class="nav-link" href="/admin/users">會員</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">標題</a>
+          <a class="nav-link" href="/admin/spu">商品標題</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">商品</a>
+          <a class="nav-link" href="#">商品名稱</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">購物車</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">訂單</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/">返回一般版</a>

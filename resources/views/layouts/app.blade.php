@@ -53,6 +53,11 @@
                                 <span data-feather="credit-card"></span>{{ __('結帳') }}
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand text-primary" href="{{ url('/') }}">
+                                <span data-feather="book-open"></span>{{ __('我的訂單') }}
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -94,6 +99,10 @@
                                     @can('admin')
                                         <a class="dropdown-item" href="{{ url('/admin') }}">
                                             {{ __('admin後台') }}
+                                        </a>
+                                    @elsecan('user')
+                                        <a class="dropdown-item" href="{{ url('/admin') }}">
+                                            {{ __('未出貨訂單') }}
                                         </a>
                                     @endcan
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

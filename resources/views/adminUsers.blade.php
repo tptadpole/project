@@ -21,11 +21,19 @@
             <td>{{$user['role']}}</td>
             <td>{{$user['email']}}</td>
             <td>
-                <a href="/admin/users/{{$user['id']}}/edit">
-                    <button type="button" class="btn btn-primary">修改</button>
-                </a>
+              <a href="/admin/users/{{$user['id']}}/edit">
+                  <button type="button" class="btn btn-primary">修改</button>
+              </a>
             </td>
-            <td><button type="button" class="btn btn-danger">刪除</button></td>
+            <td>
+              <form action="/admin/users/{{$user['id']}}/destroy" method="POST">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <div class="form-group">
+                    <input type="submit" class="btn btn-danger" value="刪除">
+                </div>
+              </form>
+            </td>
           </tr>
         @endforeach
         </tbody>
@@ -34,7 +42,7 @@
         <div class="card-body">
             <h5 class="card-title">要直接新增會員嗎?</h5>
             <p class="card-text">Admin請小心使用</p>
-            <a href="#" class="btn btn-success">新增會員</a>
+            <a href="/admin/users/create" class="btn btn-success">新增會員</a>
         </div>
     </div>
     {!! $users->links() !!}

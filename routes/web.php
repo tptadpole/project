@@ -47,8 +47,13 @@ Route::get('/cart/{id}/edit', 'CartController@edit')->middleware('auth');
 Route::patch('/cart/{id}/update', 'CartController@update')->middleware('auth');
 Route::delete('/cart/{id}/destroy', 'CartController@destroy')->middleware('auth');
 
-Route::get('/admin', 'AdminController@index');
+Route::get('/admin', 'AdminController@index')->middleware('can:admin');
 
+Route::get('/admin/users', 'AdminUserController@index')->middleware('can:admin');
+Route::get('/admin/users/create', 'AdminUserController@create')->middleware('can:admin');
+Route::post('/admin/users/store', 'AdminUserController@store')->middleware('can:admin');
+Route::get('/admin/users/{id}/edit', 'AdminUserController@edit')->middleware('can:admin');
+Route::patch('/admin/users/{id}/update', 'AdminUserController@update')->middleware('can:admin');
+Route::delete('/admin/users/{id}/destroy', 'AdminUserController@destroy')->middleware('can:admin');
 
-Route::get('/admin/users', 'AdminUserController@index');
-Route::get('/admin/users/{id}/edit', 'AdminUserController@edit');
+Route::get('/admin/spu', 'AdminSpuController@index')->middleware('can:admin');

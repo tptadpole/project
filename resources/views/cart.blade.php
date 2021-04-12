@@ -32,7 +32,7 @@
                             <td data-th="Name">
                                 <div class="col-md-9 text-left mt-sm-2">
                                     <h4>{{$carts['name']}}</h4>
-                                    <p class="font-weight-light">{{$carts['capacity']}}ml</p>
+                                    <p class="font-weight-light">{{$carts['specification']}}</p>
                                 </div>
                             </td>
                             <td data-th="Price">{{$carts['price']}}元</td>

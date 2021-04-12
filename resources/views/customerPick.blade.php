@@ -18,7 +18,7 @@
             <img src="{{asset('/images'). "/" . $commodity['image']}}"  width="250px;" height="250px;" >
             <div class="card-body">
               <h2 class="text-title">{{$commodity['name']}}</h2>
-              <h5 class="text-info">單瓶容量: {{$commodity['capacity']}}ml</h5>
+              <h5 class="text-info">規格: {{$commodity['specification']}}</h5>
               <h4 class="text-danger">價格: {{$commodity['price']}}</h4>
               <p class="card-text">剩餘存貨: {{$commodity['stock']}}</p>
             </div>

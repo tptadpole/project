@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card uper">
         <div class="card-header">
-            編輯商品售價與容量與存貨
+            編輯會員名稱,角色,信箱
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -16,27 +16,25 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="/admin/user/{{$user['id']}}/update">
+            <form method="post" action="/admin/users/{{$user['id']}}/update">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
-                <div class="form-group row">
+                <div class="form-group">
                     @csrf
-                    <div class="col-sm-2 col-form-label">用戶名稱</div>
-                    <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" value="{{$user['name']}}">
-                    </div>
+                    <label for="name">會員名稱:</label>
+                    <input type="text" class="form-control" name="name" value="{{$user['name']}}"/>
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm-2 col-form-label">Role</div>
-                    <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" value="{{$user['role']}}">
-                    </div>
+                <div class="form-group">
+                    <label for="password">會員密碼 :</label>
+                    <input type="text" class="form-control" name="password"/>
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm-2 col-form-label">信箱</div>
-                    <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" value="{{$user['email']}}">
-                    </div>
+                <div class="form-group">
+                    <label for="role">會員角色(user,manager,admin) :</label>
+                    <input type="text" class="form-control" name="role" value="{{$user['role']}}"/>
+                </div>
+                <div class="form-group">
+                    <label for="email">會員信箱(請記得更換) :</label>
+                    <input type="text" class="form-control" name="email" value="{{$user['email']}}"/>
                 </div>
                 <button type="submit" class="btn btn-success">確定編輯</button>
             </form>

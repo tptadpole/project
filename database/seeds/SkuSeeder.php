@@ -19,7 +19,7 @@ class SkuSeeder extends Seeder
                 'name' => $faker->word,
                 'spu_id' => $faker->numberBetween($min = 1, $max = 15),
                 'price' => $faker->numberBetween($min = 30, $max = 200),
-                'capacity' => $faker->numberBetween($min = 300, $max = 2000),
+                'specification' => $faker->word,
                 'stock' => $faker->numberBetween($min = 0, $max = 50),
                 'image' => '',
             ]);

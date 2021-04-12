@@ -18,7 +18,7 @@ class CreateSkuTable extends Migration
             $table->integer('spu_id');
             $table->string('name');
             $table->integer('price');
-            $table->integer('capacity');
+            $table->string('specification');
             $table->integer('stock')->default(0);
             $table->string('image')->nullable();
             $table->timestamps();

@@ -24,7 +24,7 @@ class Sku extends Model
         'spu_id',
         'name',
         'price',
-        'capacity',
+        'specification',
         'stock',
         'image'
     ];
@@ -36,6 +36,7 @@ class Sku extends Model
      */
     protected $attributes = [
         'name' => '',
+        'specification' => '',
         'image' => '',
     ];
 }

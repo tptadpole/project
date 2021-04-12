@@ -34,8 +34,8 @@
                     <input type="text" class="form-control" name="price" value="{{$data['price']}}"/>
                 </div>
                 <div class="form-group">
-                    <label for="capacity">商品容量 :</label>
-                    <input type="text" class="form-control" name="capacity" value="{{$data['capacity']}}"/>
+                    <label for="specification">規格 :</label>
+                    <input type="text" class="form-control" name="capacity" value="{{$data['specification']}}"/>
                 </div>
                 <div class="form-group">
                     <label for="stock">商品存貨 :</label>
