@@ -48,3 +48,7 @@ Route::patch('/cart/{id}/update', 'CartController@update')->middleware('auth');
 Route::delete('/cart/{id}/destroy', 'CartController@destroy')->middleware('auth');
 
 Route::get('/admin', 'AdminController@index');
+
+
+Route::get('/admin/users', 'AdminUserController@index');
+Route::get('/admin/users/{id}/edit', 'AdminUserController@edit');
