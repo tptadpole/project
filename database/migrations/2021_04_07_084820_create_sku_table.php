@@ -20,7 +20,7 @@ class CreateSkuTable extends Migration
             $table->integer('price');
             $table->integer('capacity');
             $table->integer('stock')->default(0);
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

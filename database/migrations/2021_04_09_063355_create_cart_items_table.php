@@ -17,6 +17,7 @@ class CreateCartItemsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('users_id');
             $table->integer('sku_id');
+            $table->string('image')->nullable();
             $table->integer('amount');
             $table->timestamps();
         });

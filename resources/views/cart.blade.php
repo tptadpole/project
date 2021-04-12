@@ -16,7 +16,8 @@
                 <table id="shoppingCart" class="table table-condensed table-responsive">
                     <thead>
                         <tr>
-                            <th style="width:30%">商品名稱</th>
+                            <th style="width:30%">圖片</th>
+                            <th style="width:20%">商品名稱</th>
                             <th style="width:12%">單價</th>
                             <th style="width:10%">數量</th>
                             <th style="width:16%"></th>
@@ -26,14 +27,12 @@
                         @foreach( $cart as $carts )
                         <tr>                               
                             <td data-th="Product">
-                                <div class="row">
-                                    <div class="col-md-3 text-left">
-                                        <img src="https://via.placeholder.com/250x250/5fa9f8/ffffff" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
-                                    </div>
-                                    <div class="col-md-9 text-left mt-sm-2">
-                                        <h4>{{$carts['name']}}</h4>
-                                        <p class="font-weight-light">{{$carts['capacity']}}ml</p>
-                                    </div>
+                                <img src="{{asset('/images'). "/" . $carts['image']}}"  width="150px;" height="150px;" >
+                            </td>
+                            <td data-th="Name">
+                                <div class="col-md-9 text-left mt-sm-2">
+                                    <h4>{{$carts['name']}}</h4>
+                                    <p class="font-weight-light">{{$carts['capacity']}}ml</p>
                                 </div>
                             </td>
                             <td data-th="Price">{{$carts['price']}}元</td>

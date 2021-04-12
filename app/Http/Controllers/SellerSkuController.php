@@ -19,9 +19,8 @@ class SellerSkuController extends Controller
     public function index($spu_id)
     {
         $spu = Spu:: where('id', '=', $spu_id)->get()->toArray();
-        //dd($spu);
 
-        $commodities = Sku:: where('spu_id', '=', $spu_id)->get()->toArray();
+        $commodities = Sku:: where('spu_id', '=', $spu_id)->paginate(8);
 
         return view('sku')->with([ 'spu' => $spu, 'commodities' => $commodities ]);
     }
@@ -52,8 +51,19 @@ class SellerSkuController extends Controller
             'price' => 'required|numeric',
             'capacity' => 'required|numeric',
             'stock' => 'required|numeric',
+            'image' => 'required|image',
         ]);
         $validatedData['spu_id'] = $id;
+
+        if (request()->hasFile('image')) {
+            $image = $request->file('image');
+            // 檔案存在，所以存到project/storage/app/public，並拿到url，此範例會拿到public/fileName
+            $imageURL = request()->file('image')->store('/public');
+            // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
+            $validatedData['image'] = substr($imageURL, 7);
+            $image->move(public_path('/images'), $imageURL);
+        }
+
         $show = Sku::create($validatedData);
    
         return redirect()->action('SellerSkuController@index', ['id' => $id]);
@@ -97,7 +107,7 @@ class SellerSkuController extends Controller
      */
     public function update(Request $request, $sku_id)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string',
             'price' => 'required|numeric',
             'capacity' => 'required|numeric',
@@ -107,7 +117,17 @@ class SellerSkuController extends Controller
         if (! $sku = Sku::find($sku_id)) {
             throw new APIException('商品細項找不到', 404);
         }
-        $status = $sku->update($request->toArray());
+
+        if (request()->hasFile('image')) {
+            $image = $request->file('image');
+            // 檔案存在，所以存到project/storage/app/public，並拿到url，此範例會拿到public/fileName
+            $imageURL = request()->file('image')->store('/public');
+            // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
+            $validatedData['image'] = substr($imageURL, 7);
+            $image->move(public_path('/images'), $imageURL);
+        }
+
+        $status = $sku->update($validatedData);
         $spu_id = $sku->toArray();
         return redirect()->action('SellerSkuController@index', ['id' =>$spu_id['spu_id']]);
     }

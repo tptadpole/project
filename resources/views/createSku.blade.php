@@ -21,7 +21,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="/seller/commodity/{{ $spu_id }}/store">
+            <form method="post" action="/seller/commodity/{{ $spu_id }}/store" enctype="multipart/form-data">
                 <div class="form-group">
                     @csrf
                     <label for="name">商品名稱:</label>
@@ -39,7 +39,10 @@
                     <label for="stock">剩餘存貨:</label>
                     <input type="text" class="form-control" name="stock"/>
                 </div>
-                
+                <div class="form-group">
+                    <label for="image">商品圖片 :</label>
+                    <input type="file" class="form-control" name="image"/>
+                </div>
                 <button type="submit" class="btn btn-success">新增</button>
             </form>
         </div>

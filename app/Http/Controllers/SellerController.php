@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Spu;
@@ -18,7 +19,7 @@ class SellerController extends Controller
     public function index()
     {
         $id = Auth::id();
-        $commodities = Spu:: where('users_id', '=', $id)->get()->toArray();
+        $commodities = Spu:: where('users_id', '=', $id)->paginate(8);
         return view('seller')->with(['commodities' => $commodities]);
     }
 
@@ -44,8 +45,19 @@ class SellerController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'description' => 'required|max:255',
+            'image' => ['required', 'image'],
         ]);
         $validatedData['users_id'] = $id;
+
+        if (request()->hasFile('image')) {
+            $image = $request->file('image');
+            // 檔案存在，所以存到project/storage/app/public，並拿到url，此範例會拿到public/fileName
+            $imageURL = request()->file('image')->store('/public');
+            // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
+            $validatedData['image'] = substr($imageURL, 7);
+            $image->move(public_path('/images'), $imageURL);
+        }
+
         $show = Spu::create($validatedData);
    
         return redirect('/seller')->with('success', '新的商品已成功儲存');
@@ -93,7 +105,7 @@ class SellerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string',
             'description' => 'required|string',
         ]);
@@ -101,7 +113,17 @@ class SellerController extends Controller
         if (! $spu = Spu::find($id)) {
             throw new APIException('課程找不到', 404);
         }
-        $status = $spu->update($request->toArray());
+
+        if (request()->hasFile('image')) {
+            $image = $request->file('image');
+            // 檔案存在，所以存到project/storage/app/public，並拿到url，此範例會拿到public/fileName
+            $imageURL = request()->file('image')->store('/public');
+            // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
+            $validatedData['image'] = substr($imageURL, 7);
+            $image->move(public_path('/images'), $imageURL);
+        }
+
+        $status = $spu->update($validatedData);
         return redirect()->action('SellerController@index');
     }
 }

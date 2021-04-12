@@ -22,5 +22,6 @@ class CartItem extends Model
         'users_id',
         'sku_id',
         'amount',
+        'image',
     ];
 }

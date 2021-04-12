@@ -21,7 +21,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="{{ url('/seller/store') }}">
+            <form method="post" action="{{ url('/seller/store') }}" enctype="multipart/form-data">
                 <div class="form-group">
                     @csrf
                     <label for="name">商品標題:</label>
@@ -30,6 +30,10 @@
                 <div class="form-group">
                     <label for="description">商品描述(敘述多一些會讓你的商品有更好的表達) :</label>
                     <textarea rows="5" columns="5" class="form-control" name="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image">商品圖片 :</label>
+                    <input type="file" class="form-control" name="image"/>
                 </div>
                 <button type="submit" class="btn btn-success">新增</button>
             </form>

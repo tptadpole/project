@@ -4,7 +4,7 @@
 <div class="container">
     <h3>歡迎回來: {{ Auth::user()->name }} 你目前所販賣的{{$spu[0]['name']}}總共有{{count($commodities)}}種</h3>
     <div class="card w-100">
-        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#6c757d"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+        <img src="{{asset('/images'). "/" . $spu[0]['image']}}"  width="250px;" height="250px;" >
         <div class="card-body">
             <h5 class="card-title">{{$spu[0]['name']}}</h5>
             <p class="card-text">{{$spu[0]['description']}}</p>
@@ -24,7 +24,7 @@
     @foreach( $commodities as $commodity )
         <div class="col mb-4">
             <div class="card h-100">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#6c757d"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+                <img src="{{asset('/images'). "/" . $commodity['image']}}"  width="250px;" height="250px;" >
                 <div class="card-body">
                     <h2 class="card-title">{{$commodity['name']}}</h2>
                     <h5 class="text-info">{{$spu[0]['name']}}單瓶容量:{{$commodity['capacity']}}ml</h5>
@@ -54,5 +54,6 @@
             <a href="/seller/commodity/{{$spu[0]['id']}}/create" class="btn btn-success">新增商品種類</a>
         </div>
     </div>
+    {!! $commodities->links() !!}
 </div>
 @endsection

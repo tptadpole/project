@@ -21,7 +21,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="/seller/commodity/{{$data['id']}}/update">
+            <form method="post" action="/seller/commodity/{{$data['id']}}/update" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
                 <div class="form-group">
@@ -40,6 +40,10 @@
                 <div class="form-group">
                     <label for="stock">商品存貨 :</label>
                     <input type="text" class="form-control" name="stock" value="{{$data['stock']}}"/>
+                </div>
+                <div class="form-group">
+                    <label for="image">商品圖片 :</label>
+                    <input type="file" class="form-control" name="image"/>
                 </div>
                 <button type="submit" class="btn btn-success">確定編輯</button>
             </form>
