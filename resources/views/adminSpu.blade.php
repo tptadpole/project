@@ -30,7 +30,7 @@
               </a>
             </td>
             <td>
-              <form action="#" method="POST">
+              <form action="/admin/spu/{{$spu['id']}}/destroy" method="POST">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
                 <div class="form-group">

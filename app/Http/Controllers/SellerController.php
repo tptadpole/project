@@ -74,14 +74,11 @@ class SellerController extends Controller
         if (! $spu = Spu::find($spu_id)) {
             throw new APIException('商品細項找不到', 404);
         }
-        $temp = $spu->toArray();
-        $id = $temp['id'];
         $status = $spu->delete();
 
-        // 在刪除商品的時候也要把商品細項一起刪除
-        $deleteSku = Sku:: where('spu_id', '=', $id)->delete();
+        $deleteSku = Sku:: where('spu_id', '=', $spu_id)->delete();
 
-        return redirect()->action('SellerController@index', ['id' => $id]);
+        return redirect()->action('SellerController@index');
     }
 
     /**

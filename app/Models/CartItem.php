@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Sku;
 
 class CartItem extends Model
 {
@@ -24,4 +25,11 @@ class CartItem extends Model
         'amount',
         'image',
     ];
+
+    public function sku()
+    {
+        return $this->belongsTo(
+            Sku::class,
+        );
+    }
 }

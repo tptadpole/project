@@ -35,10 +35,10 @@
           <a class="nav-link" href="/admin/spu">商品標題</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">商品名稱</a>
+          <a class="nav-link" href="/admin/sku">商品</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">購物車</a>
+          <a class="nav-link" href="/admin/cart">購物車</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">訂單</a>

@@ -81,8 +81,10 @@ class SellerSkuController extends Controller
             throw new APIException('商品細項找不到', 404);
         }
         $id = $sku->toArray();
-        $spu_id = $id['spu_id'];
         $status = $sku->delete();
+
+        $spu_id = $id['spu_id'];
+
         return redirect()->action('SellerSkuController@index', ['id' => $spu_id]);
     }
 
@@ -129,6 +131,7 @@ class SellerSkuController extends Controller
 
         $status = $sku->update($validatedData);
         $spu_id = $sku->toArray();
-        return redirect()->action('SellerSkuController@index', ['id' =>$spu_id['spu_id']]);
+
+        return redirect()->action('SellerSkuController@index', ['id' => $spu_id['spu_id']]);
     }
 }
