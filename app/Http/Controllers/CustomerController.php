@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Spu;
 use App\Models\Sku;
-use DB;
 
 class CustomerController extends Controller
 {
@@ -18,7 +17,7 @@ class CustomerController extends Controller
     public function index()
     {
         $users_id = Auth::id();
-        $commodities = Spu::where('id', '!=', $users_id)->paginate(8);
+        $commodities = Spu::where('users_id', '!=', $users_id)->paginate(8);
         return view('customerTotal')->with(['commodities' => $commodities]);
     }
 

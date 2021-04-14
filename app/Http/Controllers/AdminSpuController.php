@@ -41,8 +41,8 @@ class AdminSpuController extends Controller
     public function update(Request $request, $spu_id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
+            'name' => 'required|string|max:20',
+            'description' => 'required|string|max:50',
         ]);
 
         if (! $spu = Spu::find($spu_id)) {

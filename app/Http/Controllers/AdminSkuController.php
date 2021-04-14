@@ -40,8 +40,8 @@ class AdminSkuController extends Controller
     public function update(Request $request, $sku_id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string',
-            'specification' => 'required|string',
+            'name' => 'required|string|max:20',
+            'specification' => 'required|string|max:50',
             'price' => 'required|numeric',
             'stock' => 'required|numeric',
         ]);

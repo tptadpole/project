@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Sku;
 use App\Models\CartItem;
 use App\User;
-use DB;
 
 class CartController extends Controller
 {
@@ -30,7 +29,7 @@ class CartController extends Controller
     }
 
     /**
-     * Store a newly created commodity in storage
+     * Store a newly created commodity in cart
      *
      * @param Request $request
      * @return \Illuminate\Http\Response
@@ -45,9 +44,11 @@ class CartController extends Controller
         ]);
 
         if ($cart = CartItem:: where([['users_id', '=', $id],['sku_id', '=', $sku_id]])->first()) {
-            $cart->update([
-                'amount' => $cart->amount + $request->amount,
-            ]);
+            if (($cart->amount + $request->amount) <= $sku[0]['stock']) {
+                $cart->update([
+                    'amount' => $cart->amount + $request->amount,
+                ]);
+            }
         } else {
             $validatedData['users_id'] = $id;
             $validatedData['sku_id'] = $sku_id;

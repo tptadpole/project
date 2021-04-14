@@ -3,17 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Spu;
 
-class Sku extends Model
+class Order extends Model
 {
-    
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'sku';
+    protected $table = 'orders';
 
 
     /**
@@ -22,12 +20,13 @@ class Sku extends Model
      * @var array
      */
     protected $fillable = [
-        'spu_id',
+        'users_id',
         'name',
-        'price',
-        'specification',
-        'stock',
-        'image'
+        'address',
+        'phone',
+        'total_amount',
+        'status',
+        'payment',
     ];
 
     /**
@@ -37,14 +36,8 @@ class Sku extends Model
      */
     protected $attributes = [
         'name' => '',
-        'specification' => '',
-        'image' => '',
+        'address' => '',
+        'status' => '',
+        'payment' => '',
     ];
-
-    public function spu()
-    {
-        return $this->belongsTo(
-            Spu::class,
-        );
-    }
 }

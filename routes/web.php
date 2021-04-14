@@ -46,6 +46,14 @@ Route::get('/cart/{id}/edit', 'CartController@edit')->middleware('auth');
 Route::patch('/cart/{id}/update', 'CartController@update')->middleware('auth');
 Route::delete('/cart/{id}/destroy', 'CartController@destroy')->middleware('auth');
 
+Route::get('/order/create', 'OrderController@create')->middleware('auth');
+Route::post('/order/store', 'OrderController@store')->middleware('auth');
+
+Route::get('/orderItem/{id}/store', 'OrderItemController@store')->middleware('auth');
+
+
+
+
 Route::get('/admin', 'AdminController@index')->middleware('can:admin');
 
 Route::get('/admin/users', 'AdminUserController@index')->middleware('can:admin');

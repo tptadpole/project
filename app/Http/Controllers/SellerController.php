@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Spu;
 use App\Models\Sku;
-use DB;
 
 class SellerController extends Controller
 {
@@ -43,8 +42,8 @@ class SellerController extends Controller
     {
         $id = Auth::id();
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required|max:255',
+            'name' => 'required|max:20',
+            'description' => 'required|max:50',
             'image' => ['required', 'image'],
         ]);
         $validatedData['users_id'] = $id;
@@ -58,7 +57,7 @@ class SellerController extends Controller
             $image->move(public_path('/images'), $imageURL);
         }
 
-        $show = Spu::create($validatedData);
+        $status = Spu::create($validatedData);
    
         return redirect('/seller')->with('success', '新的商品已成功儲存');
     }
@@ -103,8 +102,8 @@ class SellerController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
+            'name' => 'required|string|max:20',
+            'description' => 'required|string|max:50',
         ]);
 
         if (! $spu = Spu::find($id)) {

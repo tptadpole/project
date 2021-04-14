@@ -6,7 +6,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Sku;
 use App\Models\Spu;
-use DB;
 
 class SellerSkuController extends Controller
 {
@@ -47,9 +46,9 @@ class SellerSkuController extends Controller
     {
         $id = $spu_id;
         $validatedData = $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string|max:20',
             'price' => 'required|numeric',
-            'specification' => 'required|string',
+            'specification' => 'required|string|max:50',
             'stock' => 'required|numeric',
             'image' => 'required|image',
         ]);
@@ -110,9 +109,9 @@ class SellerSkuController extends Controller
     public function update(Request $request, $sku_id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string|max:20',
             'price' => 'required|numeric',
-            'specification' => 'required|string',
+            'specification' => 'required|string|max:50',
             'stock' => 'required|numeric',
         ]);
 
