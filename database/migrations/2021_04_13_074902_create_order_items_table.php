@@ -15,10 +15,12 @@ class CreateOrderItemsTable extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('users_id');
             $table->integer('order_id');
             $table->integer('sku_id');
             $table->integer('amount');
             $table->integer('price');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\Models\Sku;
 use App\Models\Spu;
 
@@ -53,6 +55,7 @@ class SellerSkuController extends Controller
             'image' => 'required|image',
         ]);
         $validatedData['spu_id'] = $id;
+        $validatedData['users_id'] = Auth::id();
 
         if (request()->hasFile('image')) {
             $image = $request->file('image');
@@ -79,10 +82,9 @@ class SellerSkuController extends Controller
         if (! $sku = Sku::find($sku_id)) {
             throw new APIException('商品細項找不到', 404);
         }
-        $id = $sku->toArray();
-        $status = $sku->delete();
+        $spu_id = $sku->toArray()['spu_id'];
 
-        $spu_id = $id['spu_id'];
+        $status = $sku->delete();
 
         return redirect()->action('SellerSkuController@index', ['id' => $spu_id]);
     }
@@ -126,6 +128,17 @@ class SellerSkuController extends Controller
             // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
             $validatedData['image'] = substr($imageURL, 7);
             $image->move(public_path('/images'), $imageURL);
+
+            $image_path = public_path('/images') . '/' . $sku->toArray() ['image'];
+            $storage_path = public_path('/storage') . '/' . $sku->toArray() ['image'];
+
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
+            if (File::exists($storage_path)) {
+                dd(true);
+                File::delete($storage_path);
+            }
         }
 
         $status = $sku->update($validatedData);

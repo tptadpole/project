@@ -21,7 +21,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="/seller/{{$data['id']}}/update" enctype="multipart/form-data">
+            <form method="post" action="/seller/{{$data['id']}}/update" enctype="multipart/form-data" autocomplete="off">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
                 <div class="form-group">
@@ -38,6 +38,7 @@
                     <input type="file" class="form-control" name="image"/>
                 </div>
                 <button type="submit" class="btn btn-success">確定編輯</button>
+                <a href="/seller/commodity/{{$data['id']}}" class="btn btn-light">取消</a>
             </form>
         </div>
     </div>

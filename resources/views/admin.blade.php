@@ -51,33 +51,25 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/admin/order">
             <span data-feather="book-open"></span>訂單
           </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/">
-              <span data-feather="home"></span>返回一般版
-            </a>
-          </li>
-      </ul>
-
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            Dropdown link
+          <a class="nav-link" href="/admin/orderItem/index">
+            <span data-feather="book-open"></span>訂單項目
           </a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 2</a>
-            <a class="dropdown-item" href="#">Link 3</a>
-          </div>
         </li>
-
-        <form class="form-inline" action="/action_page.php">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-success" type="submit">Search</button>
-        </form>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/orderItem/show">
+            <span data-feather="truck"></span>運送中訂單
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            <span data-feather="home"></span>返回一般版
+          </a>
+        </li>
       </ul>
     </div>
 </nav>

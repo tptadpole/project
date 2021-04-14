@@ -21,7 +21,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="/order/store">
+            <form method="post" action="/order/store" autocomplete="off">
                 <div class="form-group">
                     @csrf
                     <label for="name">簽收者姓名:</label>
@@ -32,7 +32,7 @@
                     <input type="text" class="form-control" name="address"/>
                 </div>
                 <div class="form-group">
-                    <label for="phone">電話:</label>
+                    <label for="phone">手機號碼:</label>
                     <input type="text" class="form-control" name="phone"/>
                 </div>
                 <div class="form-group">

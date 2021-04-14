@@ -16,7 +16,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="/admin/users/{{$user['id']}}/update">
+            <form method="post" action="/admin/users/{{$user['id']}}/update" autocomplete="off">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
                 <div class="form-group">

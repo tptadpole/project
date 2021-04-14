@@ -49,12 +49,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="navbar-brand text-primary" href="{{ url('/') }}">
-                                <span data-feather="credit-card"></span>{{ __('結帳') }}
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="navbar-brand text-primary" href="{{ url('/') }}">
+                            <a class="navbar-brand text-primary" href="{{ url('/order') }}">
                                 <span data-feather="book-open"></span>{{ __('我的訂單') }}
                             </a>
                         </li>
@@ -93,16 +88,15 @@
                                     <a class="dropdown-item" href="{{ url('/cart') }}">
                                         {{ __('檢查購物車') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ url('/') }}">
-                                        {{ __('結帳') }}
+                                    <a class="dropdown-item" href="{{ url('/order') }}">
+                                        {{ __('我的訂單') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/orderItem') }}">
+                                        {{ __('未出貨訂單') }}
                                     </a>
                                     @can('admin')
                                         <a class="dropdown-item" href="{{ url('/admin') }}">
                                             {{ __('admin後台') }}
-                                        </a>
-                                    @elsecan('user')
-                                        <a class="dropdown-item" href="{{ url('/admin') }}">
-                                            {{ __('未出貨訂單') }}
                                         </a>
                                     @endcan
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

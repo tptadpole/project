@@ -16,7 +16,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="/admin/users/store">
+            <form method="post" action="/admin/users/store" autocomplete="off">
                 <div class="form-group">
                     @csrf
                     <label for="name">會員名稱:</label>

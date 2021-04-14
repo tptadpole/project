@@ -52,6 +52,7 @@
             <h5 class="card-title">要賣新的種類嗎?</h5>
             <p class="card-text">歡迎你使用104電商來販售物品,用過的都說讚</p>
             <a href="/seller/commodity/{{$spu[0]['id']}}/create" class="btn btn-success">新增商品種類</a>
+            <a href="/seller" class="btn btn-light">點擊我回上一頁</a>
         </div>
     </div>
     {!! $commodities->links() !!}

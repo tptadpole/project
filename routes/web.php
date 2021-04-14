@@ -46,10 +46,14 @@ Route::get('/cart/{id}/edit', 'CartController@edit')->middleware('auth');
 Route::patch('/cart/{id}/update', 'CartController@update')->middleware('auth');
 Route::delete('/cart/{id}/destroy', 'CartController@destroy')->middleware('auth');
 
+Route::get('/order', 'OrderController@index')->middleware('auth');
 Route::get('/order/create', 'OrderController@create')->middleware('auth');
 Route::post('/order/store', 'OrderController@store')->middleware('auth');
 
+Route::get('/orderItem', 'OrderItemController@index')->middleware('auth');
+Route::get('/orderItem/{id}', 'OrderItemController@show')->middleware('auth');
 Route::get('/orderItem/{id}/store', 'OrderItemController@store')->middleware('auth');
+Route::patch('/orderItem/{id}/update', 'OrderItemController@update')->middleware('auth');
 
 
 
@@ -75,3 +79,11 @@ Route::delete('/admin/sku/{id}/destroy', 'AdminSkuController@destroy')->middlewa
 
 Route::get('/admin/cart', 'AdminCartController@index')->middleware('can:admin');
 Route::delete('/admin/cart/{id}/destroy', 'AdminCartController@destroy')->middleware('can:admin');
+
+Route::get('/admin/order', 'AdminOrderController@index')->middleware('can:admin');
+Route::delete('/admin/order/{id}/destroy', 'AdminOrderController@destroy')->middleware('can:admin');
+
+Route::get('/admin/orderItem/index', 'AdminOrderItemController@index')->middleware('can:admin');
+Route::get('/admin/orderItem/show', 'AdminOrderItemController@show')->middleware('can:admin');
+Route::patch('/admin/orderItem/{id}/update', 'AdminOrderItemController@update')->middleware('can:admin');
+Route::delete('/admin/orderItem/{id}/destroy', 'AdminOrderItemController@destroy')->middleware('can:admin');

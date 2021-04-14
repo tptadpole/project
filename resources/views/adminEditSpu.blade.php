@@ -16,7 +16,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="/admin/spu/{{$spu['id']}}/update" enctype="multipart/form-data">
+            <form method="post" action="/admin/spu/{{$spu['id']}}/update" enctype="multipart/form-data" autocomplete="off">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
                 <div class="form-group">

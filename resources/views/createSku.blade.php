@@ -21,7 +21,7 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="/seller/commodity/{{ $spu_id }}/store" enctype="multipart/form-data">
+            <form method="post" action="/seller/commodity/{{ $spu_id }}/store" enctype="multipart/form-data" autocomplete="off">
                 <div class="form-group">
                     @csrf
                     <label for="name">商品名稱:</label>
@@ -44,6 +44,7 @@
                     <input type="file" class="form-control" name="image"/>
                 </div>
                 <button type="submit" class="btn btn-success">新增</button>
+                <a href="/seller/commodity/{{ $spu_id }}" class="btn btn-light">取消</a>
             </form>
         </div>
     </div>

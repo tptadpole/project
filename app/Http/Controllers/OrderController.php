@@ -10,6 +10,18 @@ use App\Models\Order;
 class OrderController extends Controller
 {
     /**
+     * Display the users order
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $id = Auth::id();
+        $orders = Order:: where('users_id', '=', $id)->paginate(8);
+        return view('order')->with(['orders' => $orders]);
+    }
+
+    /**
      * Create a new order,get total from user->sku pivot cart
      *
      * @return \Illuminate\Http\Response
@@ -50,7 +62,7 @@ class OrderController extends Controller
         ]);
 
         $validatedData['users_id'] = $id;
-        $validatedData['status'] = 'shipment';
+        $validatedData['status'] = '出貨';
 
         $status = Order::create($validatedData);
 

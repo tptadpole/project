@@ -37,5 +37,10 @@
         @endforeach
     </div>
     {!! $commodities->links() !!}
+    <div class="card text-center">
+      <div class="card-body">
+          <a href="/customer" class="btn btn-success">點擊我回上一頁</a>
+      </div>
+  </div>
 </div>
 @endsection

@@ -22,6 +22,7 @@ class Sku extends Model
      * @var array
      */
     protected $fillable = [
+        'users_id',
         'spu_id',
         'name',
         'price',
