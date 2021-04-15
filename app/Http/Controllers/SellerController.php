@@ -72,7 +72,7 @@ class SellerController extends Controller
      */
     public function destroy($spu_id)
     {
-        $this->authorize('delete', Spu::find($id));
+        $this->authorize('delete', Spu::find($spu_id));
 
         if (! $spu = Spu::find($spu_id)) {
             throw new APIException('商品細項找不到', 404);
