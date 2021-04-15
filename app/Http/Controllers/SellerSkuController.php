@@ -79,6 +79,8 @@ class SellerSkuController extends Controller
      */
     public function destroy($sku_id)
     {
+        $this->authorize('update', Sku::find($sku_id));
+
         if (! $sku = Sku::find($sku_id)) {
             throw new APIException('商品細項找不到', 404);
         }
@@ -110,6 +112,9 @@ class SellerSkuController extends Controller
      */
     public function update(Request $request, $sku_id)
     {
+
+        $this->authorize('update', Sku::find($sku_id));
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
             'price' => 'required|numeric',
@@ -130,14 +135,9 @@ class SellerSkuController extends Controller
             $image->move(public_path('/images'), $imageURL);
 
             $image_path = public_path('/images') . '/' . $sku->toArray() ['image'];
-            $storage_path = public_path('/storage') . '/' . $sku->toArray() ['image'];
 
             if (File::exists($image_path)) {
                 File::delete($image_path);
-            }
-            if (File::exists($storage_path)) {
-                dd(true);
-                File::delete($storage_path);
             }
         }
 

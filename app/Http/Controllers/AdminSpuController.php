@@ -56,7 +56,16 @@ class AdminSpuController extends Controller
             // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
             $validatedData['image'] = substr($imageURL, 7);
             $image->move(public_path('/images'), $imageURL);
+
+            $image_path = public_path('/images') . '/' . $spu->toArray() ['image'];
+
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
         }
+
+       
+
 
         $status = $spu->update($validatedData);
 

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\Spu;
 use App\Models\Sku;
+use App\User;
 
 class SellerController extends Controller
 {
@@ -71,6 +72,8 @@ class SellerController extends Controller
      */
     public function destroy($spu_id)
     {
+        $this->authorize('delete', Spu::find($id));
+
         if (! $spu = Spu::find($spu_id)) {
             throw new APIException('商品細項找不到', 404);
         }
@@ -102,6 +105,9 @@ class SellerController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $this->authorize('update', Spu::find($id));
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
             'description' => 'required|string|max:50',

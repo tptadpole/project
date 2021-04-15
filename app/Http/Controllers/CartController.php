@@ -81,6 +81,9 @@ class CartController extends Controller
      */
     public function update(Request $request, $cart_id)
     {
+
+        $this->authorize('update', CartItem::find($cart_id));
+
         $validatedData = $request->validate([
             'amount' => 'required|numeric',
         ]);

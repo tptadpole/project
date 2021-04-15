@@ -3,6 +3,12 @@
 namespace App\Providers;
 
 use App\User;
+use App\Models\Spu;
+use App\Models\Sku;
+use App\Models\CartItem;
+use App\Policies\SpuPolicy;
+use App\Policies\SkuPolicy;
+use App\Policies\CartItemPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -15,6 +21,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
+        Spu::class => SpuPolicy::class,
+        Sku::class => SkuPolicy::class,
+        CartItem::class => CartItemPolicy::class,
     ];
 
     /**

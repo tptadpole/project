@@ -30,8 +30,8 @@
                     <input type="text" class="form-control" name="name" value="{{$data['name']}}"/>
                 </div>
                 <div class="form-group">
-                    <label for="description">商品描述(敘述多一些會讓你的商品有更好的表達) :</label>
-                    <textarea rows="5" columns="5" class="form-control" name="description" value="{{$data['description']}}"></textarea>
+                    <label for="description">商品敘述 :</label>
+                    <input type="text" class="form-control" name="description" value="{{$data['description']}}"/>
                 </div>
                 <div class="form-group">
                     <label for="image">商品圖片 :</label>
