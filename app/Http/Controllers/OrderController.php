@@ -74,17 +74,17 @@ class OrderController extends Controller
     /**
      * Remove the customer order.
      *
-     * @param  int  $order_Id
+     * @param  int  $order_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($orderId)
+    public function destroy($order_id)
     {
-        if (! $order = Order::find($orderId)) {
+        if (! $order = Order::find($order_id)) {
             throw new APIException('商品細項找不到', 404);
         }
         
-        $this->authorize('delete', Order::find($order_Id));
-        $orderItems = Order::find($orderId)->orderItems->toArray();
+        $this->authorize('delete', Order::find($order_id));
+        $orderItems = Order::find($order_id)->orderItems->toArray();
 
         $canDelete = true;
         foreach ($orderItems as $orderItem) {
