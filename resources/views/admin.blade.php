@@ -52,7 +52,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/admin/order">
-            <span data-feather="book-open"></span>訂單
+            <span data-feather="credit-card"></span>訂單
           </a>
         </li>
         <li class="nav-item">
