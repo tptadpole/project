@@ -25,7 +25,7 @@
             <td>{{$order['created_at']}}</td>
             <td>
                 <div class="form-group">
-                    <a href="/orderItem/{{$order['id']}}" class="btn btn-primary">查看更多</a>
+                    <a href="/admin/orderItem/{{$order['id']}}/display" class="btn btn-primary">查看更多</a>
                 </div>
             </td>
             <td>

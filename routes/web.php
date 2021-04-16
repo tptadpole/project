@@ -86,5 +86,6 @@ Route::delete('/admin/order/{id}/destroy', 'AdminOrderController@destroy')->midd
 
 Route::get('/admin/orderItem/index', 'AdminOrderItemController@index')->middleware('can:admin');
 Route::get('/admin/orderItem/show', 'AdminOrderItemController@show')->middleware('can:admin');
+Route::get('/admin/orderItem/{id}/display', 'AdminOrderItemController@display')->middleware('can:admin');
 Route::patch('/admin/orderItem/{id}/update', 'AdminOrderItemController@update')->middleware('can:admin');
 Route::delete('/admin/orderItem/{id}/destroy', 'AdminOrderItemController@destroy')->middleware('can:admin');

@@ -30,6 +30,17 @@ class AdminOrderItemController extends Controller
     }
 
     /**
+     * Display the specific transport orderItem's
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function display($order_id)
+    {
+        $orderItems = OrderItem::where('order_id', '=', $order_id)->paginate(10);
+        return view('adminOrderItemSpecific')->with(['orderItems' => $orderItems]);
+    }
+
+    /**
      * Remove the transport orderItem's information.
      *
      * @param  int  $orderItem_id
