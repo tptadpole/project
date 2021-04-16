@@ -18,6 +18,7 @@ class CartController extends Controller
     public function index()
     {
         $users_id = Auth::id();
+
         $carts = User::find($users_id)->sku()->get()->toArray();
         
         $total = 0;
@@ -36,21 +37,21 @@ class CartController extends Controller
      */
     public function store(Request $request, $sku_id)
     {
-        $id = Auth::id();
+        $users_id = Auth::id();
         $sku = Sku:: where('id', '=', $sku_id)->get()->toArray();
 
         $validatedData = $request->validate([
             'amount' => 'required|numeric',
         ]);
 
-        if ($cart = CartItem:: where([['users_id', '=', $id],['sku_id', '=', $sku_id]])->first()) {
+        if ($cart = CartItem:: where([['users_id', '=', $users_id],['sku_id', '=', $sku_id]])->first()) {
             if (($cart->amount + $request->amount) <= $sku[0]['stock']) {
                 $cart->update([
                     'amount' => $cart->amount + $request->amount,
                 ]);
             }
         } else {
-            $validatedData['users_id'] = $id;
+            $validatedData['users_id'] = $users_id;
             $validatedData['sku_id'] = $sku_id;
             $show = CartItem::create($validatedData);
         }
@@ -66,8 +67,15 @@ class CartController extends Controller
      */
     public function edit($cart_id)
     {
-        $cart = CartItem::find($cart_id)->toArray();
-        $sku = Sku::find($cart['sku_id'])->toArray();
+        if (! $cart = CartItem::find($cart_id)) {
+            abort(404);
+        }
+        $cart = $cart->toArray();
+
+        if (!$sku = Sku::find($cart['sku_id'])) {
+            abort(404);
+        }
+        $sku = $sku->toArray();
 
         return view('editCart')->with([ 'cart' => $cart, 'sku' => $sku ]);
     }
@@ -89,7 +97,7 @@ class CartController extends Controller
         ]);
 
         if (! $cart = CartItem::find($cart_id)) {
-            throw new APIException('商品細項找不到', 404);
+            abort(404);
         }
 
         $status = $cart->update($validatedData);
@@ -106,7 +114,7 @@ class CartController extends Controller
     public function destroy($cart_id)
     {
         if (! $cart = CartItem::find($cart_id)) {
-            throw new APIException('購物車內商品找不到', 404);
+            abort(404);
         }
 
         $status = $cart->delete();

@@ -26,7 +26,11 @@ class AdminSkuController extends Controller
      */
     public function edit($sku_id)
     {
-        $sku = Sku::find($sku_id)->toArray();
+        if (! $sku = Sku::find($sku_id)) {
+            abort(404);
+        }
+
+        $sku = $sku->toArray();
         return view('adminEditSku')->with([ 'sku' => $sku ]);
     }
 
@@ -47,7 +51,7 @@ class AdminSkuController extends Controller
         ]);
 
         if (! $sku = Sku::find($sku_id)) {
-            throw new APIException('商品細項找不到', 404);
+            abort(404);
         }
 
         if (request()->hasFile('image')) {
@@ -79,7 +83,7 @@ class AdminSkuController extends Controller
     public function destroy($sku_id)
     {
         if (! $sku = Sku::find($sku_id)) {
-            throw new APIException('購物車內商品找不到', 404);
+            abort(404);
         }
 
         $status = $sku->delete();

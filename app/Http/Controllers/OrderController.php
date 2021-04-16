@@ -16,8 +16,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $id = Auth::id();
-        $orders = Order:: where('users_id', '=', $id)->paginate(8);
+        $users_id = Auth::id();
+        $orders = Order:: where('users_id', '=', $users_id)->paginate(8);
         return view('order')->with(['orders' => $orders]);
     }
 
@@ -29,19 +29,19 @@ class OrderController extends Controller
     public function create()
     {
 
-        $id = Auth::id();
-        $cart = User::find($id)->sku()->get()->toArray();
+        $users_id = Auth::id();
+        $cart = User::find($users_id)->sku()->get()->toArray();
         
-        $total = 0;
+        $totalPrice = 0;
         foreach ($cart as $carts) {
-            $total += ($carts['pivot']['amount'] * $carts['price']);
+            $totalPrice += ($carts['pivot']['amount'] * $carts['price']);
         }
 
-        if ($total == 0) {
+        if ($totalPrice == 0) {
             return redirect()->action('CartController@index');
         }
 
-        return view('createOrder')->with(['total_price' => $total]);
+        return view('createOrder')->with(['totalPrice' => $totalPrice]);
     }
 
     /**
@@ -52,7 +52,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $id = Auth::id();
+        $users_id = Auth::id();
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
             'address' => 'required|string|max:50',
@@ -61,7 +61,7 @@ class OrderController extends Controller
             'payment' => 'required|in:cash,credit-card',
         ]);
 
-        $validatedData['users_id'] = $id;
+        $validatedData['users_id'] = $users_id;
         $validatedData['status'] = '出貨';
 
         $status = Order::create($validatedData);
@@ -80,11 +80,11 @@ class OrderController extends Controller
     public function destroy($order_id)
     {
         if (! $order = Order::find($order_id)) {
-            throw new APIException('商品細項找不到', 404);
+            abort(404);
         }
         
-        $this->authorize('delete', Order::find($order_id));
-        $orderItems = Order::find($order_id)->orderItems->toArray();
+        $this->authorize('delete', $order);
+        $orderItems = $order->orderItems->toArray();
 
         $canDelete = true;
         foreach ($orderItems as $orderItem) {
@@ -93,7 +93,7 @@ class OrderController extends Controller
             }
         }
 
-        if ($canDelete == true) {
+        if ($canDelete) {
             $status = $order->delete();
         }
 

@@ -17,7 +17,7 @@
             @foreach( $homepageProducts as $homepageProduct ) 
             <div class="col mb-4">
               <div class="card h-100">
-                <img src="{{asset('/images'). "/" . $homepageProduct['image']}}"  width="250px;" height="250px;" >
+                <img src="{{asset('/storage'). "/" . $homepageProduct['image']}}"  width="250px;" height="250px;" >
                 <div class="card-body">
                   <h5 class="card-title">{{$homepageProduct['name']}}</h5>
                   <p class="card-text">{{$homepageProduct['description']}}</p>

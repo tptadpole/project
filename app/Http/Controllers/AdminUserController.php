@@ -83,7 +83,7 @@ class AdminUserController extends Controller
         ]);
 
         if (! $user = User::find($users_id)) {
-            throw new APIException('商品細項找不到', 404);
+            abort(404);
         }
 
         $status = $user->update($validatedData);
@@ -100,7 +100,7 @@ class AdminUserController extends Controller
     public function destroy($user_id)
     {
         if (! $user = User::find($user_id)) {
-            throw new APIException('購物車內商品找不到', 404);
+            abort(404);
         }
 
         $status = $user->delete();

@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <label for="total_amount">總金額</label>
-                    <input type="text" readonly class="form-control-plaintext" name="total_amount" value="{{$total_price}}">
+                    <input type="text" readonly class="form-control-plaintext" name="total_amount" value="{{$totalPrice}}">
                 </div>
                 <form class="form-inline">
                     <label class="my-1 mr-2" for="payment">Payment</label>

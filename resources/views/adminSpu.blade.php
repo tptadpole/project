@@ -20,7 +20,7 @@
             <td>{{$spu['users_id']}}</td>
             <td>{{$spu['name']}}</td>
             <td>
-                <img src="{{asset('/images'). "/" . $spu['image']}}"  width="75px;" height="75px;" >
+                <img src="{{asset('/storage'). "/" . $spu['image']}}"  width="75px;" height="75px;" >
             </td>
             <td>{{$spu['description']}}</td>
             <td>{{$spu['updated_at']}}</td>

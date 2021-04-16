@@ -24,7 +24,7 @@
             <td>{{$sku['spu_id']}}</td>
             <td>{{$sku['name']}}</td>
             <td>
-                <img src="{{asset('/images'). "/" . $sku['image']}}"  width="75px;" height="75px;" >
+                <img src="{{asset('/storage'). "/" . $sku['image']}}"  width="75px;" height="75px;" >
             </td>
             <td>{{$sku['specification']}}</td>
             <td>{{$sku['price']}}</td>

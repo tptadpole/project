@@ -27,7 +27,11 @@ class AdminSpuController extends Controller
      */
     public function edit($spu_id)
     {
-        $spu = Spu::find($spu_id)->toArray();
+        if (! $spu = Spu::find($spu_id)) {
+            abort(404);
+        }
+
+        $spu = $spu->toArray();
         return view('adminEditSpu')->with([ 'spu' => $spu ]);
     }
 
@@ -46,7 +50,7 @@ class AdminSpuController extends Controller
         ]);
 
         if (! $spu = Spu::find($spu_id)) {
-            throw new APIException('商品細項找不到', 404);
+            abort(404);
         }
 
         if (request()->hasFile('image')) {
@@ -78,12 +82,12 @@ class AdminSpuController extends Controller
     public function destroy($spu_id)
     {
         if (! $spu = Spu::find($spu_id)) {
-            throw new APIException('購物車內商品找不到', 404);
+            abort(404);
         }
         $status = $spu->delete();
 
         //商品標題刪除的同時也要把底下的商品項目全都刪除
-        $deleteSku = Sku:: where('spu_id', '=', $spu_id)->delete();
+        $deleteSkuStatus = Sku:: where('spu_id', '=', $spu_id)->delete();
 
         return redirect()->action('AdminSpuController@index');
     }

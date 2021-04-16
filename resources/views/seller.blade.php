@@ -7,7 +7,7 @@
     @foreach( $commodities as $commodity )
     <div class="col mb-4">
         <div class="card h-100">
-            <img src="{{asset('/images'). "/" . $commodity['image']}}"  width="250px;" height="250px;" >
+            <img src="{{asset('/storage'). "/" . $commodity['image']}}"  width="250px;" height="250px;" >
             <div class="card-body">
                 <h5 class="card-title">{{$commodity['name']}}</h5>
                 <p class="card-text">{{$commodity['description']}}</p>

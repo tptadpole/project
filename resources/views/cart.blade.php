@@ -27,7 +27,7 @@
                         @foreach( $carts as $cart )
                         <tr>                               
                             <td data-th="Product">
-                                <img src="{{asset('/images'). "/" . $cart['image']}}"  width="150px;" height="150px;" >
+                                <img src="{{asset('/storage'). "/" . $cart['image']}}"  width="150px;" height="150px;" >
                             </td>
                             <td data-th="Name">
                                 <div class="col-md-9 text-left mt-sm-2">
