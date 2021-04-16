@@ -49,7 +49,7 @@ class AdminOrderItemController extends Controller
     public function destroy($orderItem_id)
     {
         if (! $orderItem = OrderItem::find($orderItem_id)) {
-            throw new APIException('訂單內商品找不到', 404);
+            abort(404);
         }
 
         $status = $orderItem->delete();
@@ -68,7 +68,7 @@ class AdminOrderItemController extends Controller
     {
 
         if (! $orderItem = OrderItem::find($orderItem_id)) {
-            throw new APIException('商品細項找不到', 404);
+            abort(404);
         }
 
         $orderItemStatus = [ 'status' => '取貨' ];

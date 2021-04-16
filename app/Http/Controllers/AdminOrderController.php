@@ -27,7 +27,7 @@ class AdminOrderController extends Controller
     public function destroy($order_id)
     {
         if (! $order = Order::find($order_id)) {
-            throw new APIException('訂單找不到', 404);
+            abort(404);
         }
 
         $status = $order->delete();
