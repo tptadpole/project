@@ -26,9 +26,9 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($spu_id)
     {
-        $commodities = Sku::where('spu_id', '=', $id)->paginate(8);
+        $commodities = Sku::where('spu_id', '=', $spu_id)->paginate(8);
         return view('customerPick')->with(['commodities' => $commodities]);
     }
 }

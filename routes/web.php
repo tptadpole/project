@@ -49,6 +49,7 @@ Route::delete('/cart/{id}/destroy', 'CartController@destroy')->middleware('auth'
 Route::get('/order', 'OrderController@index')->middleware('auth');
 Route::get('/order/create', 'OrderController@create')->middleware('auth');
 Route::post('/order/store', 'OrderController@store')->middleware('auth');
+Route::delete('/order/{id}/destroy', 'OrderController@destroy')->middleware('auth');
 
 Route::get('/orderItem', 'OrderItemController@index')->middleware('auth');
 Route::get('/orderItem/{id}', 'OrderItemController@show')->middleware('auth');

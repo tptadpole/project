@@ -6,9 +6,11 @@ use App\User;
 use App\Models\Spu;
 use App\Models\Sku;
 use App\Models\CartItem;
+use App\Models\Order;
 use App\Policies\SpuPolicy;
 use App\Policies\SkuPolicy;
 use App\Policies\CartItemPolicy;
+use App\Policies\OrderPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -24,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         Spu::class => SpuPolicy::class,
         Sku::class => SkuPolicy::class,
         CartItem::class => CartItemPolicy::class,
+        Order::class => OrderPolicy::class,
     ];
 
     /**

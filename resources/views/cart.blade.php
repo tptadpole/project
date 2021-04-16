@@ -12,7 +12,7 @@
             <div class="col-lg-12 col-md-12 col-12">
                 <h3 class="display-5 mb-2 text-center">104電商購物車</h3>
                 <p class="mb-5 text-center">
-                    <i class="text-info font-weight-bold">{{count($cart)}}</i> 件商品在購物車中</p>
+                    <i class="text-info font-weight-bold">{{count($carts)}}</i> 件商品在購物車中</p>
                 <table id="shoppingCart" class="table table-condensed table-responsive">
                     <thead>
                         <tr>
@@ -24,29 +24,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach( $cart as $carts )
+                        @foreach( $carts as $cart )
                         <tr>                               
                             <td data-th="Product">
-                                <img src="{{asset('/images'). "/" . $carts['image']}}"  width="150px;" height="150px;" >
+                                <img src="{{asset('/images'). "/" . $cart['image']}}"  width="150px;" height="150px;" >
                             </td>
                             <td data-th="Name">
                                 <div class="col-md-9 text-left mt-sm-2">
-                                    <h4>{{$carts['name']}}</h4>
-                                    <p class="font-weight-light">{{$carts['specification']}}</p>
+                                    <h4>{{$cart['name']}}</h4>
+                                    <p class="font-weight-light">{{$cart['specification']}}</p>
                                 </div>
                             </td>
-                            <td data-th="Price">{{$carts['price']}}元</td>
+                            <td data-th="Price">{{$cart['price']}}元</td>
                             <td data-th="Quantity">
-                                {{$carts['pivot']['amount']}}
+                                {{$cart['pivot']['amount']}}
                             </td>
                             <td class="actions" data-th="">
                                 <div class="row">
-                                <a href="/cart/{{$carts['pivot']['id']}}/edit">
+                                <a href="/cart/{{$cart['pivot']['id']}}/edit">
                                     <button class="btn btn-sm btn-success border-secondary">
                                     <span data-feather="edit"></span>修改數量
                                     </button>
                                 </a>
-                                <form action="/cart/{{$carts['pivot']['id']}}/destroy" method="POST">
+                                <form action="/cart/{{$cart['pivot']['id']}}/destroy" method="POST">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <div class="form-group">

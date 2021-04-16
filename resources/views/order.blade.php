@@ -28,6 +28,18 @@
                     <a href="/orderItem/{{$order['id']}}" class="btn btn-primary">查看更多</a>
                 </div>
             </td>
+            <td>
+              <form action="/order/{{$order['id']}}/destroy" method="post">    
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <form class="form-inline">
+                    @csrf
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-danger">刪除紀錄</button>
+                    </div>
+                </form>
+            </form>
+            </td>
           </tr>
         @endforeach
         </tbody>

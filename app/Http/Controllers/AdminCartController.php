@@ -20,9 +20,10 @@ class AdminCartController extends Controller
             $cart['sku'] = $cart->sku;
         }
 
-        $data = $carts->toArray();
-        
-        return view('adminCart')->with(['carts' => $data['data'], 'link' => $carts]);
+        $cartsData = $carts->toArray();
+
+        //['data']是cartsData裡真正存放資料的index
+        return view('adminCart')->with(['carts' => $cartsData['data'], 'link' => $carts]);
     }
 
     /**
@@ -31,9 +32,9 @@ class AdminCartController extends Controller
      * @param  int  $cart_id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($cart_id)
+    public function destroy($cartId)
     {
-        if (! $cart = CartItem::find($cart_id)) {
+        if (! $cart = CartItem::find($cartId)) {
             throw new APIException('購物車內商品找不到', 404);
         }
 

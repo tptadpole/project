@@ -70,4 +70,33 @@ class OrderController extends Controller
 
         return redirect()->action('OrderItemController@store', ['id' => $orderId]);
     }
+
+    /**
+     * Remove the customer order.
+     *
+     * @param  int  $order_Id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($orderId)
+    {
+        if (! $order = Order::find($orderId)) {
+            throw new APIException('商品細項找不到', 404);
+        }
+        
+        $this->authorize('delete', Order::find($order_Id));
+        $orderItems = Order::find($orderId)->orderItems->toArray();
+
+        $canDelete = true;
+        foreach ($orderItems as $orderItem) {
+            if ($orderItem['status'] != '取消' && $orderItem['status'] != '完成') {
+                $canDelete = false;
+            }
+        }
+
+        if ($canDelete == true) {
+            $status = $order->delete();
+        }
+
+        return redirect()->action('OrderController@index');
+    }
 }

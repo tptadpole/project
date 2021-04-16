@@ -46,8 +46,8 @@ class OrderItemController extends Controller
      */
     public function store($order_id)
     {
-        $id = Auth::id();
-        $carts = User::find($id)->sku()->get()->toArray();
+        $users_id = Auth::id();
+        $carts = User::find($users_id)->sku()->get()->toArray();
         foreach ($carts as $cart) {
             $data['users_id'] = $cart['users_id'];
             $data['order_id'] = $order_id;
@@ -58,9 +58,7 @@ class OrderItemController extends Controller
             $status = OrderItem::create($data);
         }
 
-        $cart_id = $carts[0]['pivot']['id'];
-
-        $status = CartItem::where('users_id', '=', $id)->delete();
+        $status = CartItem::where('users_id', '=', $users_id)->delete();
 
         return view('ordersuccess');
     }

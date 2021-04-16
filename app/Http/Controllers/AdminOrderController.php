@@ -19,7 +19,7 @@ class AdminOrderController extends Controller
     }
 
     /**
-     * Remove the sku information.
+     * Remove the order's information.
      *
      * @param  int  $order_id
      * @return \Illuminate\Http\Response
@@ -27,7 +27,7 @@ class AdminOrderController extends Controller
     public function destroy($order_id)
     {
         if (! $order = Order::find($order_id)) {
-            throw new APIException('購物車內商品找不到', 404);
+            throw new APIException('訂單找不到', 404);
         }
 
         $status = $order->delete();

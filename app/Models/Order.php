@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\OrderItem;
 
 class Order extends Model
 {
@@ -40,4 +41,11 @@ class Order extends Model
         'status' => '',
         'payment' => '',
     ];
+
+    public function orderItems()
+    {
+        return $this->hasMany(
+            OrderItem::class
+        );
+    }
 }

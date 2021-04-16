@@ -32,7 +32,7 @@ class AdminSpuController extends Controller
     }
 
     /**
-     * Update the user information.
+     * Update the spu's information.
      *
      * @param Request $request
      * @param int $spu_id
@@ -64,16 +64,13 @@ class AdminSpuController extends Controller
             }
         }
 
-       
-
-
         $status = $spu->update($validatedData);
 
         return redirect()->action('AdminSpuController@index');
     }
 
     /**
-     * Remove the spu information.
+     * Remove the spu's information.
      *
      * @param  int  $spu_id
      * @return \Illuminate\Http\Response
@@ -85,7 +82,7 @@ class AdminSpuController extends Controller
         }
         $status = $spu->delete();
 
-
+        //商品標題刪除的同時也要把底下的商品項目全都刪除
         $deleteSku = Sku:: where('spu_id', '=', $spu_id)->delete();
 
         return redirect()->action('AdminSpuController@index');

@@ -42,13 +42,14 @@ class SellerController extends Controller
      */
     public function store(Request $request)
     {
-        $id = Auth::id();
+        $users_id = Auth::id();
+        
         $validatedData = $request->validate([
             'name' => 'required|max:20',
             'description' => 'required|max:50',
             'image' => ['required', 'image'],
         ]);
-        $validatedData['users_id'] = $id;
+        $validatedData['users_id'] = $users_id;
 
         if (request()->hasFile('image')) {
             $image = $request->file('image');

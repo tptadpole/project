@@ -17,15 +17,15 @@ class CartController extends Controller
      */
     public function index()
     {
-        $id = Auth::id();
-        $cart = User::find($id)->sku()->get()->toArray();
+        $users_id = Auth::id();
+        $carts = User::find($users_id)->sku()->get()->toArray();
         
         $total = 0;
-        foreach ($cart as $carts) {
-            $total += ($carts['pivot']['amount'] * $carts['price']);
+        foreach ($carts as $cart) {
+            $total += ($cart['pivot']['amount'] * $cart['price']);
         }
 
-        return view('cart')->with([ 'cart' => $cart, 'total' => $total ]);
+        return view('cart')->with([ 'carts' => $carts, 'total' => $total ]);
     }
 
     /**

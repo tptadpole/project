@@ -31,7 +31,7 @@ class AdminSkuController extends Controller
     }
 
     /**
-     * Update the user information.
+     * Update the sku's information.
      *
      * @param Request $request
      * @param int $sku_id
@@ -71,7 +71,7 @@ class AdminSkuController extends Controller
     }
 
     /**
-     * Remove the sku information.
+     * Remove the sku's information.
      *
      * @param  int  $sku_id
      * @return \Illuminate\Http\Response
