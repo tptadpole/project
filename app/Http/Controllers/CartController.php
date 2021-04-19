@@ -11,7 +11,7 @@ use App\User;
 class CartController extends Controller
 {
     /**
-     * Display the users cart
+     * Display the user's cart
      *
      * @return \Illuminate\Http\Response
      */
@@ -30,7 +30,7 @@ class CartController extends Controller
     }
 
     /**
-     * Store a newly created commodity in cart
+     * Store a newly created 商品物品 in cart
      *
      * @param Request $request
      * @return \Illuminate\Http\Response
@@ -60,7 +60,7 @@ class CartController extends Controller
     }
 
     /**
-     * edit the buy amount of specified commodity in cart.
+     * edit the 商品物品的數量 in cart.
      *
      * @param int $cart_id
      * @return \Illuminate\Http\Response
@@ -81,7 +81,7 @@ class CartController extends Controller
     }
 
     /**
-     * Update the buy amount of specified commodity in cart.
+     * Update the 商品物品的數量 in cart.
      *
      * @param Request $request
      * @param int $cart_id
@@ -108,7 +108,7 @@ class CartController extends Controller
     /**
      * Remove the buying of commodity from cart.
      *
-     * @param  int  $cart_Id
+     * @param  int  $cart_id
      * @return \Illuminate\Http\Response
      */
     public function destroy($cart_id)

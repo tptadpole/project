@@ -35,7 +35,7 @@ class AdminCartController extends Controller
     public function destroy($cartId)
     {
         if (! $cart = CartItem::find($cartId)) {
-            throw new APIException('購物車內商品找不到', 404);
+            abort(404);
         }
 
         $status = $cart->delete();

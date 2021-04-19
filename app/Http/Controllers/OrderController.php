@@ -10,7 +10,7 @@ use App\Models\Order;
 class OrderController extends Controller
 {
     /**
-     * Display the users order
+     * Display the user's order
      *
      * @return \Illuminate\Http\Response
      */
@@ -22,7 +22,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Create a new order,get total from user->sku pivot cart
+     * Create a new order,並取得user消費的總金額
      *
      * @return \Illuminate\Http\Response
      */
@@ -68,6 +68,7 @@ class OrderController extends Controller
 
         $orderId = $status->toArray()['id'];
 
+        // 在儲存買家的訂單的時候同時更新賣家的未出貨訂單
         return redirect()->action('OrderItemController@store', ['id' => $orderId]);
     }
 

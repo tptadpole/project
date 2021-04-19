@@ -12,14 +12,17 @@ use App\Models\Spu;
 class SellerSkuController extends Controller
 {
     /**
-     * Display the detail of commodity which is selled by users
+     * Display 賣家的商品標題與所有該商品標題的商品物品
      *
      * @param int $spu_id
      * @return \Illuminate\Http\Response
      */
     public function index($spu_id)
     {
-        $spu = Spu:: where('id', '=', $spu_id)->get()->toArray();
+        if (!$spu = Spu:: where('id', '=', $spu_id)->get()) {
+            abort(404);
+        }
+        $spu = $spu->toArray();
 
         $commodities = Sku:: where('spu_id', '=', $spu_id)->paginate(8);
 
@@ -27,18 +30,17 @@ class SellerSkuController extends Controller
     }
 
     /**
-     * Create a new detail of commodity
-     * @param int $id
+     * Create a new 商品標題底下的商品物品
+     * @param int $spu_id
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create($spu_id)
     {
-        $spu_id = $id;
         return view('createSku')->with(['spu_id' => $spu_id]);
     }
 
     /**
-     * Store a newly created detail of commodity in storage
+     * Store a newly created 商品物品 in storage
      *
      * @param Request $request
      * @param integer $spu_id
@@ -46,7 +48,6 @@ class SellerSkuController extends Controller
      */
     public function store(Request $request, $spu_id)
     {
-        $id = $spu_id;
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
             'price' => 'required|numeric',
@@ -54,7 +55,7 @@ class SellerSkuController extends Controller
             'stock' => 'required|numeric',
             'image' => 'required|image',
         ]);
-        $validatedData['spu_id'] = $id;
+        $validatedData['spu_id'] = $spu_id;
         $validatedData['users_id'] = Auth::id();
 
         if (request()->hasFile('image')) {
@@ -63,16 +64,15 @@ class SellerSkuController extends Controller
             $imageURL = request()->file('image')->store('/public');
             // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
             $validatedData['image'] = substr($imageURL, 7);
-            //$image->move(public_path('/images'), $imageURL);
         }
 
         $show = Sku::create($validatedData);
    
-        return redirect()->action('SellerSkuController@index', ['id' => $id]);
+        return redirect()->action('SellerSkuController@index', ['id' => $spu_id]);
     }
 
     /**
-     * Remove the specified detail of commodity from storage.
+     * Remove the specified 商品物品 from storage.
      *
      * @param  int  $sku_Id
      * @return \Illuminate\Http\Response
@@ -82,8 +82,9 @@ class SellerSkuController extends Controller
         $this->authorize('update', Sku::find($sku_id));
 
         if (! $sku = Sku::find($sku_id)) {
-            throw new APIException('商品細項找不到', 404);
+            abort(404);
         }
+
         $spu_id = $sku->toArray()['spu_id'];
 
         $status = $sku->delete();
@@ -92,19 +93,23 @@ class SellerSkuController extends Controller
     }
 
     /**
-     * edit the specified commodity of detail from storage.
+     * edit the specified 商品物品 from storage.
      *
      * @param int $sku_id
      * @return \Illuminate\Http\Response
      */
     public function edit($sku_id)
     {
-        $data = Sku::find($sku_id)->toArray();
+        if (!$data = Sku::find($sku_id)) {
+            abort(404);
+        }
+        $data = $data->toArray();
+
         return view('editSku')->with(['data' => $data]);
     }
 
     /**
-     * Update the specified commodity of datail in storage.
+     * Update the specified 商品物品 in storage.
      *
      * @param Request $request
      * @param int $id
@@ -123,7 +128,7 @@ class SellerSkuController extends Controller
         ]);
 
         if (! $sku = Sku::find($sku_id)) {
-            throw new APIException('商品細項找不到', 404);
+            abort(404);
         }
 
         if (request()->hasFile('image')) {
@@ -132,7 +137,6 @@ class SellerSkuController extends Controller
             $imageURL = request()->file('image')->store('/public');
             // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
             $validatedData['image'] = substr($imageURL, 7);
-            //$image->move(public_path('/images'), $imageURL);
 
             $image_path = public_path('/storage') . '/' . $sku->toArray() ['image'];
 

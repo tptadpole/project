@@ -19,7 +19,7 @@ class AdminOrderItemController extends Controller
     }
 
     /**
-     * Display all transport orderItem's
+     * Display all transport orderItem's information
      *
      * @return \Illuminate\Http\Response
      */
@@ -30,7 +30,7 @@ class AdminOrderItemController extends Controller
     }
 
     /**
-     * Display the specific transport orderItem's
+     * Display the specific orderItem's information
      *
      * @return \Illuminate\Http\Response
      */
@@ -41,7 +41,7 @@ class AdminOrderItemController extends Controller
     }
 
     /**
-     * Remove the transport orderItem's information.
+     * Remove the orderItem's information.
      *
      * @param  int  $orderItem_id
      * @return \Illuminate\Http\Response
@@ -58,7 +58,7 @@ class AdminOrderItemController extends Controller
     }
 
     /**
-     * Update the transport orderItem's information.
+     * 將狀態為運送中的訂單物品更新狀態為取貨
      *
      * @param Request $request
      * @param int $orderItem_id

@@ -13,19 +13,19 @@ use App\User;
 class SellerController extends Controller
 {
     /**
-     * Display the commodity which is selled by users
+     * Display the 商品標題 which is selled by users
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $id = Auth::id();
-        $commodities = Spu:: where('users_id', '=', $id)->paginate(8);
+        $users_id = Auth::id();
+        $commodities = Spu:: where('users_id', '=', $users_id)->paginate(8);
         return view('seller')->with(['commodities' => $commodities]);
     }
 
     /**
-     * Create a new commodity
+     * Create a new 商品標題
      *
      * @return \Illuminate\Http\Response
      */
@@ -35,7 +35,7 @@ class SellerController extends Controller
     }
 
     /**
-     * Store a newly created commodity in storage
+     * Store a newly created 商品標題 in storage
      *
      * @param Request $request
      * @return \Illuminate\Http\Response
@@ -57,7 +57,6 @@ class SellerController extends Controller
             $imageURL = request()->file('image')->store('/public');
             // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
             $validatedData['image'] = substr($imageURL, 7);
-            //$image->move(public_path('/images'), $imageURL);
         }
 
         $status = Spu::create($validatedData);
@@ -66,16 +65,16 @@ class SellerController extends Controller
     }
 
     /**
-     * Remove the specified commodity from storage.
+     * Remove the specified 商品標題 from storage.
      *
-     * @param  int  $spu_Id
+     * @param  int  $spu_id
      * @return \Illuminate\Http\Response
      */
     public function destroy($spu_id)
     {
 
         if (! $spu = Spu::find($spu_id)) {
-            throw new APIException('商品細項找不到', 404);
+            abort(404);
         }
         
         $status = $spu->delete();
@@ -86,36 +85,40 @@ class SellerController extends Controller
     }
 
     /**
-     * edit the specified commodity from storage.
+     * edit the specified 商品標題 from storage.
      *
-     * @param int $id
+     * @param int $spu_id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($spu_id)
     {
-        $data = Spu::find($id)->toArray();
+        if (!$data = Spu::find($spu_id)) {
+            abort(404);
+        }
+        $data = $data->toArray();
+
         return view('editSpu')->with(['data' => $data]);
     }
 
     /**
-     * Update the specified commodity in storage.
+     * Update the specified 商品標題 in storage.
      *
      * @param Request $request
-     * @param int $id
+     * @param int $spu_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $spu_id)
     {
 
-        $this->authorize('update', Spu::find($id));
+        $this->authorize('update', Spu::find($spu_id));
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
             'description' => 'required|string|max:50',
         ]);
 
-        if (! $spu = Spu::find($id)) {
-            throw new APIException('課程找不到', 404);
+        if (! $spu = Spu::find($spu_id)) {
+            abort(404);
         }
 
         if (request()->hasFile('image')) {
@@ -124,7 +127,6 @@ class SellerController extends Controller
             $imageURL = request()->file('image')->store('/public');
             // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
             $validatedData['image'] = substr($imageURL, 7);
-            $image->move(public_path('/images'), $imageURL);
         }
 
         $image_path = public_path('/images') . '/' . $spu->toArray() ['image'];

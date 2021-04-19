@@ -9,7 +9,7 @@ use App\User;
 class AdminUserController extends Controller
 {
     /**
-     * Display the users information
+     * Display the all users information
      *
      * @return \Illuminate\Http\Response
      */
@@ -55,19 +55,22 @@ class AdminUserController extends Controller
     }
 
     /**
-     * edit the user information.
+     * edit the user's information.
      *
      * @param int $users_id
      * @return \Illuminate\Http\Response
      */
     public function edit($users_id)
     {
-        $user = User::find($users_id)->toArray();
+        if (!$user = User::find($users_id)) {
+            abort(404);
+        }
+        $user = $user->toArray();
         return view('adminEditUser')->with([ 'user' => $user ]);
     }
 
     /**
-     * Update the user information.
+     * Update the user's information.
      *
      * @param Request $request
      * @param int $users_id
@@ -92,7 +95,7 @@ class AdminUserController extends Controller
     }
 
     /**
-     * Remove the users information.
+     * Remove the user's information.
      *
      * @param  int  $user_id
      * @return \Illuminate\Http\Response

@@ -9,7 +9,7 @@ use App\Models\Sku;
 class AdminSpuController extends Controller
 {
     /**
-     * Display all spu's information
+     * Display all 商品標題 information
      *
      * @return \Illuminate\Http\Response
      */
@@ -20,7 +20,7 @@ class AdminSpuController extends Controller
     }
 
     /**
-     * edit the spu's information.
+     * edit the 商品標題 information.
      *
      * @param int $spu_id
      * @return \Illuminate\Http\Response
@@ -36,7 +36,7 @@ class AdminSpuController extends Controller
     }
 
     /**
-     * Update the spu's information.
+     * Update the 商品標題 information.
      *
      * @param Request $request
      * @param int $spu_id
@@ -59,9 +59,8 @@ class AdminSpuController extends Controller
             $imageURL = request()->file('image')->store('/public');
             // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
             $validatedData['image'] = substr($imageURL, 7);
-            $image->move(public_path('/images'), $imageURL);
 
-            $image_path = public_path('/images') . '/' . $spu->toArray() ['image'];
+            $image_path = public_path('/storage') . '/' . $spu->toArray() ['image'];
 
             if (File::exists($image_path)) {
                 File::delete($image_path);
@@ -74,7 +73,7 @@ class AdminSpuController extends Controller
     }
 
     /**
-     * Remove the spu's information.
+     * Remove the 商品標題 information.
      *
      * @param  int  $spu_id
      * @return \Illuminate\Http\Response

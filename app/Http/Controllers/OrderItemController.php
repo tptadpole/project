@@ -19,8 +19,8 @@ class OrderItemController extends Controller
      */
     public function index()
     {
-        $id = Auth::id();
-        $orders = OrderItem:: where([['users_id', '=', $id], ['status', '=', '出貨']])->paginate(8);
+        $users_id = Auth::id();
+        $orders = OrderItem:: where([['users_id', '=', $users_id], ['status', '=', '出貨']])->paginate(8);
         $role = 'seller';
         return view('sellerOrder')->with(['orders' => $orders, 'role' => $role]);
     }
@@ -47,7 +47,11 @@ class OrderItemController extends Controller
     public function store($order_id)
     {
         $users_id = Auth::id();
-        $carts = User::find($users_id)->sku()->get()->toArray();
+        if (! $carts = User::find($users_id)->sku()->get()) {
+            abort(404);
+        }
+        $carts = $carts->toArray();
+
         foreach ($carts as $cart) {
             $data['users_id'] = $cart['users_id'];
             $data['order_id'] = $order_id;
@@ -77,23 +81,25 @@ class OrderItemController extends Controller
         ]);
 
         if (! $orderItem = OrderItem::find($order_id)) {
-            throw new APIException('課程找不到', 404);
+            abort(404);
         }
 
         $status = $orderItem->update($validatedData);
+        $orderItem = $orderItem->toArray();
 
         if ($validatedData['status'] == '運送中' || $validatedData['status'] == '取消') {
-            $sku = Sku::find($orderItem->toArray()['sku_id']);
-            $stock = $sku->toArray() ['stock'];
-
+            $sku = Sku::find($orderItem['sku_id']);
             $commodity = $sku->toArray();
-            $amount = $orderItem->toArray() ['amount'];
+            $stock = $commodity['stock'];
             $unitPrice = $commodity['price'];
 
+            $amount = $orderItem['amount'];
+            
             // 出貨失敗就減少顧客花費的總金額,出貨成功就減少賣家商品的存貨
             if ($stock < $amount || $validatedData['status'] == '取消') {
                 $validatedData['status'] = "取消";
-                $order = Order::find($orderItem->toArray() ['order_id']);
+        
+                $order = Order::find($orderItem['order_id']);
                 $totalAmount = $order->toArray() ['total_amount'];
                 $updatedTotalAmount = [ 'total_amount' => $totalAmount - ($amount * $unitPrice) ];
                 $order->update($updatedTotalAmount);
