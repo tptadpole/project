@@ -10,7 +10,7 @@ use DB;
 class WelcomeController extends Controller
 {
     /**
-     * Display the homepage and recommend commodity
+     * Display the homepage and 前8個商品標題
      *
      * @return \Illuminate\Http\Response
      */

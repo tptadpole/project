@@ -28,6 +28,9 @@ class CustomerController extends Controller
      */
     public function show($spu_id)
     {
+        if (! $spu = Spu::find($spu_id)) {
+            abort(404);
+        }
         $commodities = Sku::where('spu_id', '=', $spu_id)->paginate(8);
         return view('customerPick')->with(['commodities' => $commodities]);
     }

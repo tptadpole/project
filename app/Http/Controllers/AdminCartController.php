@@ -8,7 +8,7 @@ use App\Models\CartItem;
 class AdminCartController extends Controller
 {
     /**
-     * Display all cart's and it's information
+     * 顯示所有的購物車
      *
      * @return \Illuminate\Http\Response
      */

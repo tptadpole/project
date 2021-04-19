@@ -13,7 +13,7 @@ use App\User;
 class OrderItemController extends Controller
 {
     /**
-     * Display the sellers shipment order
+     * Display 賣家該出貨的訂單
      *
      * @return \Illuminate\Http\Response
      */
@@ -26,7 +26,7 @@ class OrderItemController extends Controller
     }
 
     /**
-     * Display the customer's orderItem
+     * Display the 買家的訂單裡的商品物品
      *
      * @param int $order_id
      * @return \Illuminate\Http\Response
@@ -39,7 +39,7 @@ class OrderItemController extends Controller
     }
 
     /**
-     * Store a new orderItem from order
+     * 將訂單內的物品存入訂單商品物品
      *
      * @param int $order_id
      * @return \Illuminate\Http\Response
@@ -89,6 +89,7 @@ class OrderItemController extends Controller
 
         if ($validatedData['status'] == '運送中' || $validatedData['status'] == '取消') {
             $sku = Sku::find($orderItem['sku_id']);
+
             $commodity = $sku->toArray();
             $stock = $commodity['stock'];
             $unitPrice = $commodity['price'];

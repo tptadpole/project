@@ -109,6 +109,9 @@ class SellerController extends Controller
      */
     public function update(Request $request, $spu_id)
     {
+        if (! $spu = Spu::find($spu_id)) {
+            abort(404);
+        }
 
         $this->authorize('update', Spu::find($spu_id));
 
@@ -116,10 +119,6 @@ class SellerController extends Controller
             'name' => 'required|string|max:20',
             'description' => 'required|string|max:50',
         ]);
-
-        if (! $spu = Spu::find($spu_id)) {
-            abort(404);
-        }
 
         if (request()->hasFile('image')) {
             $image = $request->file('image');
