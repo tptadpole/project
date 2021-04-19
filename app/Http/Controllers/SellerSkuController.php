@@ -79,11 +79,10 @@ class SellerSkuController extends Controller
      */
     public function destroy($sku_id)
     {
-        $this->authorize('update', Sku::find($sku_id));
-
         if (! $sku = Sku::find($sku_id)) {
             abort(404);
         }
+        $this->authorize('update', Sku::find($sku_id));
 
         $spu_id = $sku->toArray()['spu_id'];
 
@@ -117,7 +116,9 @@ class SellerSkuController extends Controller
      */
     public function update(Request $request, $sku_id)
     {
-
+        if (! $sku = Sku::find($sku_id)) {
+            abort(404);
+        }
         $this->authorize('update', Sku::find($sku_id));
 
         $validatedData = $request->validate([
@@ -126,10 +127,6 @@ class SellerSkuController extends Controller
             'specification' => 'required|string|max:50',
             'stock' => 'required|numeric',
         ]);
-
-        if (! $sku = Sku::find($sku_id)) {
-            abort(404);
-        }
 
         if (request()->hasFile('image')) {
             $image = $request->file('image');

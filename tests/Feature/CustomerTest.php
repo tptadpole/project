@@ -6,8 +6,6 @@ use App\Models\Spu;
 use Carbon\Carbon;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
 class CustomerTest extends TestCase

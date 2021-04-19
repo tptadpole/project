@@ -13,6 +13,7 @@
     <!-- specific and just exclude rules in some file -->
     <rule ref="PSR2">
         <exclude name="PSR1.Classes.ClassDeclaration.MissingNamespace"/>
+        <exclude name="PSR2.Methods.FunctionCallSignature.MultipleArguments"/>
     </rule>
 
 

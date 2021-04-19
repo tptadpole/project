@@ -90,15 +90,14 @@ class CartController extends Controller
     public function update(Request $request, $cart_id)
     {
 
+        if (! $cart = CartItem::find($cart_id)) {
+            abort(404);
+        }
         $this->authorize('update', CartItem::find($cart_id));
 
         $validatedData = $request->validate([
             'amount' => 'required|numeric',
         ]);
-
-        if (! $cart = CartItem::find($cart_id)) {
-            abort(404);
-        }
 
         $status = $cart->update($validatedData);
 

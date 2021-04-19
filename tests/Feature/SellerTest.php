@@ -2,18 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use App\Models\Spu;
-use Carbon\Carbon;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
 class SellerTest extends TestCase
 {
-    //use RefreshDatabase;
     use DatabaseTransactions;
     /**
      * test get into seller page
@@ -48,11 +43,11 @@ class SellerTest extends TestCase
     {
         $this->demoUserLoginIn();
         $spu = Spu::create([
-            'users_id' => '2',
+            'users_id' => '1',
             'name' => 'test',
             'description' => 'test',
         ]);
-        $response = $this->call('GET', '/seller/2/edit');
+        $response = $this->call('GET', '/seller/3/edit');
         $this->assertEquals(200, $response->status());
     }
 
@@ -76,7 +71,12 @@ class SellerTest extends TestCase
     public function testSellerUpdatedSuccess()
     {
         $this->demoUserLoginIn();
-        $response = $this->call('PATCH', '/seller/2/update', [
+        $spu = Spu::create([
+            'users_id' => '1',
+            'name' => 'test',
+            'description' => 'test',
+        ]);
+        $response = $this->call('PATCH', '/seller/4/update', [
             'name' => 'testUpdate',
             'description' => 'testUpdate',
         ]);
@@ -106,7 +106,12 @@ class SellerTest extends TestCase
     public function testSellerDestroySuccess()
     {
         $this->demoUserLoginIn();
-        $response = $this->call('DELETE', '/seller/2/destroy');
+        $spu = Spu::create([
+            'users_id' => '1',
+            'name' => 'test',
+            'description' => 'test',
+        ]);
+        $response = $this->call('DELETE', '/seller/5/destroy');
         $this->assertEquals(302, $response->status());
     }
 

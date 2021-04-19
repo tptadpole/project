@@ -26,6 +26,15 @@ class CartItem extends Model
         'image',
     ];
 
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'image' => '',
+    ];
+
     public function sku()
     {
         return $this->belongsTo(
