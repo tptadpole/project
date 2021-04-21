@@ -28,21 +28,21 @@ class CartTest extends TestCase
      *
      * @return void
      */
-    public function testCartUpdateSuccess()
-    {
-        $this->demoUserLoginIn();
-        $cart = CartItem::create([
-            'users_id' => '2',
-            'sku_id' => '1',
-            'amount' => '1',
-        ]);
-        $response = $this->call('PATCH', '/cart/1/update', [
-            'users_id' => '10',
-            'sku_id' => '10',
-            'amount' => '10',
-        ]);
-        $this->assertEquals(302, $response->status());
-    }
+    // public function testCartUpdateSuccess()
+    // {
+    //     $this->demoUserLoginIn();
+    //     $cart = CartItem::create([
+    //         'users_id' => '2',
+    //         'sku_id' => '1',
+    //         'amount' => '1',
+    //     ]);
+    //     $response = $this->call('PATCH', '/cart/1/update', [
+    //         'users_id' => '10',
+    //         'sku_id' => '10',
+    //         'amount' => '10',
+    //     ]);
+    //     $this->assertEquals(302, $response->status());
+    // }
 
     /**
      * test user update to a non exist cart
@@ -65,17 +65,17 @@ class CartTest extends TestCase
      *
      * @return void
      */
-    public function testCartDestroySuccess()
-    {
-        $this->demoUserLoginIn();
-        $cart = CartItem::create([
-            'users_id' => '2',
-            'sku_id' => '1',
-            'amount' => '1',
-        ]);
-        $response = $this->call('DELETE', '/cart/2/destroy');
-        $this->assertEquals(302, $response->status());
-    }
+    // public function testCartDestroySuccess()
+    // {
+    //     $this->demoUserLoginIn();
+    //     $cart = CartItem::create([
+    //         'users_id' => '2',
+    //         'sku_id' => '1',
+    //         'amount' => '1',
+    //     ]);
+    //     $response = $this->call('DELETE', '/cart/2/destroy');
+    //     $this->assertEquals(302, $response->status());
+    // }
 
     /**
      * test user destroy a non exist cart

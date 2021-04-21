@@ -28,25 +28,25 @@ class OrderItemTest extends TestCase
      *
      * @return void
      */
-    public function testOrderPageShowSuccess()
-    {
-        $this->demoUserLoginIn();
-        $response = $this->get('/orderItem/1');
-        $response->assertStatus(200);
-    }
+    // public function testOrderPageShowSuccess()
+    // {
+    //     $this->demoUserLoginIn();
+    //     $response = $this->get('/orderItem/1');
+    //     $response->assertStatus(200);
+    // }
 
-    public function testOrderItemUpdateSuccess()
-    {
-        $this->demoUserLoginIn();
-        $orderItem = OrderItem::create([
-            'users_id' => '1',
-            'order_id' => '1',
-            'sku_id' => '1',
-            'amount' => '1',
-            'price' => '1',
-            'status' => '出貨',
-        ]);
-        $response = $this->call('PATCH', '/orderItem/1/update');
-        $this->assertEquals(302, $response->status());
-    }
+    // public function testOrderItemUpdateSuccess()
+    // {
+    //     $this->demoUserLoginIn();
+    //     $orderItem = OrderItem::create([
+    //         'users_id' => '1',
+    //         'order_id' => '1',
+    //         'sku_id' => '1',
+    //         'amount' => '1',
+    //         'price' => '1',
+    //         'status' => '出貨',
+    //     ]);
+    //     $response = $this->call('PATCH', '/orderItem/1/update');
+    //     $this->assertEquals(302, $response->status());
+    // }
 }

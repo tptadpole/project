@@ -9,11 +9,10 @@ use Tests\TestCase;
 
 class OrderTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     /**
-     * test user can see his order page
+     * test user get into order page
      *
      * @return void
      */
@@ -48,21 +47,21 @@ class OrderTest extends TestCase
      *
      * @return void
      */
-    public function testOrderDestroySuccess()
-    {
-        $this->demoUserLoginIn();
+    // public function testOrderDestroySuccess()
+    // {
+    //     $this->demoUserLoginIn();
 
-        Order::create([
-            'users_id' => '1',
-            'name' => 'test',
-            'address' => 'test',
-            'phone' => '0912345678',
-            'total_amount' => '1',
-            'status' => '出貨',
-        ]);
-        $response = $this->call('DELETE', '/order/1/destroy');
-        $this->assertEquals(302, $response->status());
-    }
+    //     Order::create([
+    //         'users_id' => '1',
+    //         'name' => 'test',
+    //         'address' => 'test',
+    //         'phone' => '0912345678',
+    //         'total_amount' => '1',
+    //         'status' => '出貨',
+    //     ]);
+    //     $response = $this->call('DELETE', '/order/1/destroy');
+    //     $this->assertEquals(302, $response->status());
+    // }
 
     /**
      * test user destroy a non exist order
