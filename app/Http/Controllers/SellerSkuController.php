@@ -19,11 +19,11 @@ class SellerSkuController extends Controller
      */
     public function index($spu_id)
     {
-        if (!$spu = Spu:: where('id', '=', $spu_id)->get()) {
+        // 特別注意:如果要比較物件是不是空的用陣列去判斷
+        $spu = Spu::where('id', '=', $spu_id)->get()->toArray();
+        if (empty($spu)) {
             abort(404);
         }
-        $spu = $spu->toArray();
-
         $commodities = Sku:: where('spu_id', '=', $spu_id)->paginate(8);
 
         return view('sku')->with([ 'spu' => $spu, 'commodities' => $commodities ]);

@@ -13,6 +13,11 @@ class HomeTest extends TestCase
     use DatabaseTransactions;
     use WithoutMiddleware;
 
+    /**
+     * 測試所有人都會被導向home
+     *
+     * @return void
+     */
     public function testSuccess()
     {
         $response = $this->get('/home');

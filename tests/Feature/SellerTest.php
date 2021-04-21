@@ -11,16 +11,16 @@ use Tests\TestCase;
 class SellerTest extends TestCase
 {
     use DatabaseTransactions;
-    /**
-     * test get into seller page
-     *
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
         $this->artisan('migrate:refresh');
     }
+    /**
+     * test user can get into seller page
+     *
+     * @return void
+     */
     public function testSellerPageSuccess()
     {
         $this->demoUserLoginIn();
@@ -29,7 +29,7 @@ class SellerTest extends TestCase
     }
 
     /**
-     * test get into edit spu page
+     * test user can get into create commodity(spu) page
      *
      * @return void
      */
@@ -41,7 +41,7 @@ class SellerTest extends TestCase
     }
 
     /**
-     * test get into an exist spu edit page
+     * test user can get into edit commodity(spu) page
      *
      * @return void
      */
@@ -59,7 +59,7 @@ class SellerTest extends TestCase
     }
 
     /**
-     * test get into a non exist spu edit page
+     * test user try to edit a non exist commodity(spu) page
      *
      * @return void
      */
@@ -71,7 +71,7 @@ class SellerTest extends TestCase
     }
 
     /**
-     * test seller update his commodity(spu)
+     * test seller can update his commodity(spu)
      *
      * @return void
      */
@@ -82,16 +82,18 @@ class SellerTest extends TestCase
             'users_id' => '1',
             'name' => 'test',
             'description' => 'test',
+            'image' => 'test',
         ]);
         $response = $this->call('PATCH', '/seller/1/update', [
             'name' => 'testUpdate',
             'description' => 'testUpdate',
+            'image' => 'testUpdateImage',
         ]);
         $this->assertEquals(302, $response->status());
     }
 
     /**
-     * test seller update a non exist commodity(spu)
+     * test seller try to update a non exist commodity(spu)
      *
      * @return void
      */
@@ -123,7 +125,7 @@ class SellerTest extends TestCase
     }
 
     /**
-     * test seller delete a non exist commodity(spu)
+     * test seller try to delete a non exist commodity(spu)
      *
      * @return void
      */

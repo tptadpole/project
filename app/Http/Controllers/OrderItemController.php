@@ -46,6 +46,7 @@ class OrderItemController extends Controller
      */
     public function store($order_id)
     {
+        dd($order_id);
         $users_id = Auth::id();
         if (! $carts = User::find($users_id)->sku()->get()) {
             abort(404);
@@ -83,7 +84,7 @@ class OrderItemController extends Controller
         if (! $orderItem = OrderItem::find($order_id)) {
             abort(404);
         }
-
+        
         $status = $orderItem->update($validatedData);
         $orderItem = $orderItem->toArray();
 

@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 25),
+    'port' => env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'wk7293@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'wk7294@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'tptadpole'),
     ],
 

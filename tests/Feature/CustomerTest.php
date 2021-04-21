@@ -11,9 +11,14 @@ use Tests\TestCase;
 class CustomerTest extends TestCase
 {
     use DatabaseTransactions;
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('migrate:refresh');
+    }
     
     /**
-     * test get into customer page
+     * test user can get into customer page
      *
      * @return void
      */
@@ -29,20 +34,20 @@ class CustomerTest extends TestCase
      *
      * @return void
      */
-    // public function testCustomerPickSuccess()
-    // {
-    //     Spu::create([
-    //         'users_id' => '999',
-    //         'name' => '測試商品標題',
-    //         'description' => 'test',
-    //     ]);
+    public function testCustomerPickSuccess()
+    {
+        Spu::create([
+            'users_id' => '999',
+            'name' => '測試商品標題',
+            'description' => 'test',
+        ]);
 
-    //     $response = $this->get('/customer/1');
-    //     $response->assertStatus(200);
-    // }
+        $response = $this->get('/customer/1');
+        $response->assertStatus(200);
+    }
 
     /**
-     * test customer choose a not exist commodity from customer page
+     * test customer try to choose a not exist commodity from customer page
      *
      * @return void
      */

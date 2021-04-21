@@ -38,7 +38,10 @@ class CartController extends Controller
     public function store(Request $request, $sku_id)
     {
         $users_id = Auth::id();
-        $sku = Sku:: where('id', '=', $sku_id)->get()->toArray();
+        if (!$sku = Sku:: where('id', '=', $sku_id)->get()) {
+            abort(404);
+        }
+        $sku = $sku->toArray();
 
         $validatedData = $request->validate([
             'amount' => 'required|numeric',
