@@ -66,7 +66,7 @@ class OrderItemController extends Controller
 
         $status = CartItem::where('users_id', '=', $users_id)->delete();
 
-        return view('ordersuccess');
+        return view('orderSuccess');
     }
 
     /**
