@@ -17,6 +17,11 @@ class AdminTest extends TestCase
         $this->artisan('migrate:refresh');
     }
 
+    /**
+     * 測試admin可以進入到admin的首頁
+     *
+     * @return void
+     */
     public function testAdminPage()
     {
         $this->demoUserLoginIn();

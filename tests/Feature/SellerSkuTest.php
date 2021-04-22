@@ -18,28 +18,14 @@ class SellerSkuTest extends TestCase
     }
 
     /**
-     * test seller can get into sku page
+     * 測試賣家可以進入到商品物品的頁面
      *
      * @return void
      */
     public function testSellerSkuPage()
     {
-        $sku = Sku::create([
-            'users_id' => '1',
-            'spu_id' => '1',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-            'image' => 'test',
-        ]);
-
-        $spu = Spu::create([
-            'users_id' => '1',
-            'name' => 'test',
-            'description' => 'test',
-            'image' => 'test',
-        ]);
+        $sku = factory(Sku::class)->create();
+        $spu = factory(Spu::class)->create();
 
         $this->demoUserLoginIn();
         $response = $this->call('GET', '/seller/commodity/1');
@@ -47,7 +33,7 @@ class SellerSkuTest extends TestCase
     }
 
     /**
-     * test seller try to get in non exist sku page
+     * 測試賣家進入到不存在商品物品的頁面
      *
      * @return void
      */
@@ -59,7 +45,7 @@ class SellerSkuTest extends TestCase
     }
 
     /**
-     * test seller can get into create sku(商品物品) page
+     * 測試賣家可以進入到新增商品物品的頁面
      *
      * @return void
      */
@@ -67,38 +53,26 @@ class SellerSkuTest extends TestCase
     {
         $this->demoUserLoginIn();
 
-        $spu = Spu::create([
-            'users_id' => '1',
-            'name' => 'test',
-            'description' => 'test',
-        ]);
+        $spu = factory(Spu::class)->create();
         $response = $this->call('GET', '/seller/commodity/1/create');
         $this->assertEquals(200, $response->status());
     }
 
     /**
-     * test seller can get into edit sku(商品物品)
+     * 測試賣家可以進入到編輯商品物品的頁面
      *
      * @return void
      */
     public function testSellerSkuEditSuccess()
     {
-        $sku = Sku::create([
-            'users_id' => '1',
-            'spu_id' => '2',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-            'image' => 'test',
-        ]);
+        $sku = factory(Sku::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('GET', '/seller/commodity/1/edit');
         $this->assertEquals(200, $response->status());
     }
 
     /**
-     * test seller try to edit a non exist sku(商品物品)
+     * 測試賣家進入到不存在的商品物品的頁面
      *
      * @return void
      */
@@ -110,53 +84,39 @@ class SellerSkuTest extends TestCase
     }
 
     /**
-     * test seller can store a new sku(商品物品)
+     * 測試賣家可以新增一筆商品物品
      *
      * @return void
      */
     public function testSellerSkuStoreSuccess()
     {
         $this->demoUserLoginIn();
-        $response = $this->call('POST', '/seller/commodity/1/store', [
-            'users_id' => '1',
-            'spu_id' => '2',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-        ]);
+        $sku = factory(Sku::class)->make()->toArray();
+        $response = $this->call('POST', '/seller/commodity/1/store', $sku);
         $this->assertEquals(302, $response->status());
     }
 
     /**
-     * test seller can update an exist sku(商品物品)
+     * 測試賣家可以更新商品物品
      *
      * @return void
      */
     public function testSellerSkuUpdateSuccess()
     {
         $this->demoUserLoginIn();
-        $sku = Sku::create([
-            'users_id' => '1',
-            'spu_id' => '2',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-            'image' => 'test',
-        ]);
+        $sku = factory(Sku::class)->create();
         $response = $this->call('PATCH', '/seller/commodity/1/update', [
             'name' => 'testUpdate',
             'specification' => 'testUpdate',
-            'price' => '100',
-            'stock' => '100',
+            'price' => 100,
+            'stock' => 100,
             'image' => 'testUpdateImage',
         ]);
         $this->assertEquals(302, $response->status());
     }
 
     /**
-     * test seller try to update a non exist sku(商品物品)
+     * 測試賣家對於不存在的商品物品進行更新
      *
      * @return void
      */
@@ -173,27 +133,20 @@ class SellerSkuTest extends TestCase
     }
 
     /**
-     * test seller can delete exist sku(商品物品)
+     * 測試賣家可以刪除商品物品
      *
      * @return void
      */
     public function testSellerSkuDestroySuccess()
     {
         $this->demoUserLoginIn();
-        $sku = Sku::create([
-            'users_id' => '1',
-            'spu_id' => '2',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-        ]);
+        $sku = factory(Sku::class)->create();
         $response = $this->call('DELETE', '/seller/commodity/1/destroy');
         $this->assertEquals(302, $response->status());
     }
 
     /**
-     * test seller try to delete a non exist sku(商品物品)
+     * 測試賣家刪除不存在的商品物品
      *
      * @return void
      */

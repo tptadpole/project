@@ -17,7 +17,7 @@ class SellerTest extends TestCase
         $this->artisan('migrate:refresh');
     }
     /**
-     * test user can get into seller page
+     * 測試賣家可以進入到商品標題的頁面
      *
      * @return void
      */
@@ -29,7 +29,7 @@ class SellerTest extends TestCase
     }
 
     /**
-     * test user can get into create commodity(spu) page
+     * 測試賣家可以進入到新增商品標題的頁面
      *
      * @return void
      */
@@ -41,25 +41,21 @@ class SellerTest extends TestCase
     }
 
     /**
-     * test user can get into edit commodity(spu) page
+     * 測試賣家進入到編輯商品標題的頁面
      *
      * @return void
      */
     public function testSellerEditSuccess()
     {
         $this->demoUserLoginIn();
-        $spu = Spu::create([
-            'users_id' => '1',
-            'name' => 'test',
-            'description' => 'test',
-        ]);
+        $spu = factory(Spu::class)->create();
         $response = $this->call('GET', '/seller/1/edit');
         $this->assertEquals(1, $spu->id);
         // $this->assertEquals(200, $response->status());
     }
 
     /**
-     * test user try to edit a non exist commodity(spu) page
+     * 測試賣家進入到不存在的商品標題編輯頁面
      *
      * @return void
      */
@@ -71,19 +67,14 @@ class SellerTest extends TestCase
     }
 
     /**
-     * test seller can update his commodity(spu)
+     * 測試賣家可以更新商品標題
      *
      * @return void
      */
     public function testSellerUpdatedSuccess()
     {
         $this->demoUserLoginIn();
-        $spu = Spu::create([
-            'users_id' => '1',
-            'name' => 'test',
-            'description' => 'test',
-            'image' => 'test',
-        ]);
+        $spu = factory(Spu::class)->create();
         $response = $this->call('PATCH', '/seller/1/update', [
             'name' => 'testUpdate',
             'description' => 'testUpdate',
@@ -93,7 +84,7 @@ class SellerTest extends TestCase
     }
 
     /**
-     * test seller try to update a non exist commodity(spu)
+     * 測試賣家對於不存在的商品標題進行更新
      *
      * @return void
      */
@@ -108,24 +99,20 @@ class SellerTest extends TestCase
     }
 
     /**
-     * test seller delete his commodity(spu)
+     * 測試賣家可以刪除商品標題
      *
      * @return void
      */
     public function testSellerDestroySuccess()
     {
         $this->demoUserLoginIn();
-        $spu = Spu::create([
-            'users_id' => '1',
-            'name' => 'test',
-            'description' => 'test',
-        ]);
+        $spu = factory(Spu::class)->create();
         $response = $this->call('DELETE', '/seller/1/destroy');
         $this->assertEquals(302, $response->status());
     }
 
     /**
-     * test seller try to delete a non exist commodity(spu)
+     * 測試賣家對於不存在的商品標題進行刪除
      *
      * @return void
      */
@@ -137,7 +124,7 @@ class SellerTest extends TestCase
     }
 
     /**
-     * test seller store a new commodity(spu)
+     * 測試賣家可以新增一筆商品標題
      *
      * @return void
      */

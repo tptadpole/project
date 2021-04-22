@@ -46,12 +46,13 @@ class OrderItemController extends Controller
      */
     public function store($order_id)
     {
-        dd($order_id);
+
         $users_id = Auth::id();
-        if (! $carts = User::find($users_id)->sku()->get()) {
+        $carts = User::find($users_id)->sku()->get()->toArray();
+
+        if (empty($carts)) {
             abort(404);
         }
-        $carts = $carts->toArray();
 
         foreach ($carts as $cart) {
             $data['users_id'] = $cart['users_id'];
@@ -84,7 +85,7 @@ class OrderItemController extends Controller
         if (! $orderItem = OrderItem::find($order_id)) {
             abort(404);
         }
-        
+
         $status = $orderItem->update($validatedData);
         $orderItem = $orderItem->toArray();
 

@@ -17,6 +17,11 @@ class AdminOrderItemTest extends TestCase
         $this->artisan('migrate:refresh');
     }
 
+    /**
+     * 測試admin可以進入到admin的訂單商品頁面
+     *
+     * @return void
+     */
     public function testAdminOrderItemPage()
     {
         $this->demoUserLoginIn();
@@ -24,6 +29,11 @@ class AdminOrderItemTest extends TestCase
         $this->assertEquals(200, $response->status());
     }
 
+    /**
+     * 測試admin可以進入到查看所有運輸中的訂單商品頁面
+     *
+     * @return void
+     */
     public function testAdminTransportOrderItemPage()
     {
         $this->demoUserLoginIn();
@@ -31,36 +41,37 @@ class AdminOrderItemTest extends TestCase
         $this->assertEquals(200, $response->status());
     }
 
+    /**
+     * 測試admin可以進入到訂單的查看更多頁面
+     *
+     * @return void
+     */
     public function testAdminOrderItemDisplayPage()
     {
-        $orderItem = OrderItem::create([
-            'users_id' => '1',
-            'order_id' => '1',
-            'sku_id' => '1',
-            'amount' => '1',
-            'price' => '1',
-            'status' => '出貨',
-        ]);
+        $orderItem = factory(OrderItem::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('GET', '/admin/orderItem/1/display');
         $this->assertEquals(200, $response->status());
     }
 
+    /**
+     * 測試admin可以對訂單商品進行刪除
+     *
+     * @return void
+     */
     public function testAdminDestroyOrderItemSuccess()
     {
-        $orderItem = OrderItem::create([
-            'users_id' => '1',
-            'order_id' => '1',
-            'sku_id' => '1',
-            'amount' => '1',
-            'price' => '1',
-            'status' => '出貨',
-        ]);
+        $orderItem = factory(OrderItem::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('DELETE', '/admin/orderItem/1/destroy');
         $this->assertEquals(302, $response->status());
     }
 
+    /**
+     * 測試admin對不存在的訂單商品進行刪除
+     *
+     * @return void
+     */
     public function testAdminDestroyOrderItemFailed()
     {
         $this->demoUserLoginIn();
@@ -68,21 +79,24 @@ class AdminOrderItemTest extends TestCase
         $this->assertEquals(404, $response->status());
     }
 
+    /**
+     * 測試admin對運送中的訂單商品進行狀態更新(運送中->取貨)
+     *
+     * @return void
+     */
     public function testAdminUpdateOrderItemSuccess()
     {
-        $orderItem = OrderItem::create([
-            'users_id' => '1',
-            'order_id' => '1',
-            'sku_id' => '1',
-            'amount' => '1',
-            'price' => '1',
-            'status' => '出貨',
-        ]);
+        $orderItem = factory(OrderItem::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('PATCH', '/admin/orderItem/1/update');
         $this->assertEquals(302, $response->status());
     }
 
+    /**
+     * 測試admin對不存在的訂單商品進行狀態更新(運送中->取貨)
+     *
+     * @return void
+     */
     public function testAdminUpdateOrderItemFailed()
     {
         $this->demoUserLoginIn();

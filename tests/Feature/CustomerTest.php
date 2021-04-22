@@ -18,7 +18,7 @@ class CustomerTest extends TestCase
     }
     
     /**
-     * test user can get into customer page
+     * 測試所有人可以進入到"我要去購物"的頁面
      *
      * @return void
      */
@@ -30,24 +30,19 @@ class CustomerTest extends TestCase
     }
 
     /**
-     * test customer choose a commodity from customer page
+     * 測試所有人進入單項商品標題的頁面
      *
      * @return void
      */
     public function testCustomerPickSuccess()
     {
-        Spu::create([
-            'users_id' => '999',
-            'name' => '測試商品標題',
-            'description' => 'test',
-        ]);
-
+        $spu = factory(Spu::class)->create();
         $response = $this->get('/customer/1');
         $response->assertStatus(200);
     }
 
     /**
-     * test customer try to choose a not exist commodity from customer page
+     * 測試所有人進入不存在的單項商品標題的頁面
      *
      * @return void
      */

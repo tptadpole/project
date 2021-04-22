@@ -18,7 +18,7 @@ class AdminSkuTest extends TestCase
     }
 
     /**
-     * test admin can get into admin sku page
+     * 測試admin可以進入到admin的商品物品頁面
      *
      * @return void
      */
@@ -30,27 +30,20 @@ class AdminSkuTest extends TestCase
     }
 
     /**
-     * test admin can edit sku
+     * 測試admin可以進入到admin的編輯商品物品頁面
      *
      * @return void
      */
     public function testAdminSkuEditSuccess()
     {
-        $sku = Sku::create([
-            'users_id' => '1',
-            'spu_id' => '2',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-        ]);
+        $sku = factory(Sku::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('GET', '/admin/sku/1/edit');
         $this->assertEquals(200, $response->status());
     }
 
     /**
-     * test admin try to edit a non exist sku
+     * 測試admin進入到不存在的商品物品編輯頁面
      *
      * @return void
      */
@@ -62,21 +55,13 @@ class AdminSkuTest extends TestCase
     }
 
     /**
-     * test admin can update sku
+     * 測試admin可以對商品物品進行更新
      *
      * @return void
      */
     public function testAdminSkuUpdateSuccess()
     {
-        $sku = Sku::create([
-            'users_id' => '1',
-            'spu_id' => '2',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-            'image' => 'test',
-        ]);
+        $sku = factory(Sku::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('PATCH', '/admin/sku/1/update', [
             'name' => 'adminTestUpdate',
@@ -89,7 +74,7 @@ class AdminSkuTest extends TestCase
     }
 
     /**
-     * test admin try to update a non exist sku
+     * 測試admin對不存在的商品物品進行更新
      *
      * @return void
      */
@@ -106,27 +91,20 @@ class AdminSkuTest extends TestCase
     }
     
     /**
-     * test admin can destroy to a sku
+     * 測試admin可以對商品物品進行刪除
      *
      * @return void
      */
     public function testAdminSkuDestroySuccess()
     {
-        $sku = Sku::create([
-            'users_id' => '1',
-            'spu_id' => '2',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-        ]);
+        $sku = factory(Sku::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('DELETE', '/admin/sku/1/destroy');
         $this->assertEquals(302, $response->status());
     }
     
     /**
-     * test admin try to destroy a non exist sku
+     * 測試admin對不存在的商品物品進行刪除
      *
      * @return void
      */

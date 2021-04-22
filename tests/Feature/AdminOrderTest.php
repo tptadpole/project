@@ -18,7 +18,7 @@ class AdminOrderTest extends TestCase
     }
 
     /**
-     * test admin can get into admin order page
+     * 測試admin進入到admin的訂單頁面
      *
      * @return void
      */
@@ -30,27 +30,20 @@ class AdminOrderTest extends TestCase
     }
 
     /**
-     * test admin can destroy order
+     * 測試admin對訂單進行刪除
      *
      * @return void
      */
     public function testAdminOrderDestroySuccess()
     {
-        $order = Order::create([
-            'users_id' => '1',
-            'name' => 'test',
-            'address' => 'test',
-            'phone' => '0912345678',
-            'total_amount' => '1',
-            'status' => '出貨',
-        ]);
+        $order = factory(Order::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('DELETE', '/admin/order/1/destroy');
         $this->assertEquals(302, $response->status());
     }
 
     /**
-     * test admin try to destroy a non exist order
+     * 測試admin對不存在的訂單進行刪除
      *
      * @return void
      */

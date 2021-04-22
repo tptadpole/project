@@ -19,50 +19,34 @@ class AdminCartTest extends TestCase
     }
 
     /**
-     * test admin can get into admin cart page
+     * 測試admin可以進入到admin的購物車頁面
      *
      * @return void
      */
     public function testAdminCartPageSuccess()
     {
-        $cart = CartItem::create([
-            'users_id' => '1',
-            'sku_id' => '1',
-            'amount' => '1',
-        ]);
-        $sku = Sku::create([
-            'users_id' => '1',
-            'spu_id' => '2',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-            'image' => 'test',
-        ]);
+        $cart = factory(CartItem::class)->create();
+        $sku = factory(Sku::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('GET', '/admin/cart');
         $this->assertEquals(200, $response->status());
     }
 
     /**
-     * test admin can destroy cart
+     * 測試admin可以對購物車進行刪除
      *
      * @return void
      */
     public function testAdminCartDestroySuccess()
     {
         $this->demoUserLoginIn();
-        $cart = CartItem::create([
-            'users_id' => '1',
-            'sku_id' => '1',
-            'amount' => '1',
-        ]);
+        $cart = factory(CartItem::class)->create();
         $response = $this->call('DELETE', '/admin/cart/1/destroy');
         $this->assertEquals(302, $response->status());
     }
 
     /**
-     * test admin try to destroy a non exist cart
+     * 測試admin對不存在的購物車進行刪除
      *
      * @return void
      */

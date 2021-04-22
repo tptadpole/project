@@ -18,7 +18,7 @@ class OrderItemTest extends TestCase
         $this->artisan('migrate:refresh');
     }
     /**
-     * test seller can see his orderItem page
+     * 測試賣家可以進入到"未出貨訂單"的頁面
      *
      * @return void
      */
@@ -30,7 +30,7 @@ class OrderItemTest extends TestCase
     }
 
     /**
-     * test user can see his orderItem page
+     * 測試買家可以進入到"我的訂單"的頁面
      *
      * @return void
      */
@@ -42,87 +42,35 @@ class OrderItemTest extends TestCase
     }
 
     /**
-     * test user can update orderitem
+     * 測試賣家可以對未出貨商品進行出貨或是取消
      *
      * @return void
      */
-    // public function testOrderItemUpdateSuccess()
-    // {
-    //     $this->demoUserLoginIn();
-    //     $orderItem = OrderItem::create([
-    //         'users_id' => '1',
-    //         'order_id' => '1',
-    //         'sku_id' => '1',
-    //         'amount' => '1',
-    //         'price' => '1',
-    //         'status' => '出貨',
-    //     ]);
-    //     $response = $this->call('PATCH', '/orderItem/1/update');
-    //     $this->assertEquals(302, $response->status());
-    // }
-
     public function testSellerOrderItemUpdateSuccess()
     {
         $this->demoUserLoginIn();
-        $sku = Sku::create([
-            'users_id' => '1',
-            'spu_id' => '2',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-        ]);
-        $orderItem = OrderItem::create([
-            'users_id' => '1',
-            'order_id' => '1',
-            'sku_id' => '1',
-            'amount' => '1',
-            'price' => '1',
-            'status' => '出貨',
-        ]);
+        $sku = factory(Sku::class)->create();
+        $orderItem = factory(OrderItem::class)->create();
         $response = $this->call('PATCH', '/orderItem/1/update');
         $this->assertEquals(302, $response->status());
     }
 
     /**
-     * test user try to update a non exist orderitem
-     *
-     * @return void
-     */
-    // public function testOrderItemUpdateFailed()
-    // {
-    //     $this->demoUserLoginIn();
-    //     $response = $this->call('PATCH', '/orderItem/999/update');
-    //     $this->assertEquals(404, $response->status());
-    // }
-
-    /**
-     * test user can store a new orderitem
+     * 測試買家可以在訂單內加入商品項目
      *
      * @return void
      */
     public function testOrderItemStoreSuccess()
     {
-        $sku = Sku::create([
-            'users_id' => '1',
-            'spu_id' => '2',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-        ]);
-        $cart = CartItem::create([
-            'users_id' => '1',
-            'sku_id' => '1',
-            'amount' => '1',
-        ]);
+        $sku = factory(Sku::class)->create();
+        $cart = factory(CartItem::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('GET', '/orderItem/1/store');
         $this->assertEquals(200, $response->status());
     }
 
     /**
-     * test user try to store a non exist Orderitem
+     * 測試使用者在訂單內加入不存在的商品
      *
      * @return void
      */

@@ -18,7 +18,7 @@ class AdminSpuTest extends TestCase
     }
 
     /**
-     * test Admin can get into Admin Spu page
+     * 測試admin可以進入到admin的商品標題的頁面
      *
      * @return void
      */
@@ -30,24 +30,20 @@ class AdminSpuTest extends TestCase
     }
 
     /**
-     * test admin can edit spu
+     * 測試admin可以進入到admin的編輯商品標題的頁面
      *
      * @return void
      */
     public function testAdminSpuEditSuccess()
     {
-        $spu = Spu::create([
-            'users_id' => '1',
-            'name' => 'test',
-            'description' => 'test',
-        ]);
+        $spu = factory(Spu::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('GET', '/admin/spu/1/edit');
         $this->assertEquals(200, $response->status());
     }
     
     /**
-     * test admin try to edit a non exist spu
+     * 測試admin進入到admin的不存在商品標題編輯頁面
      *
      * @return void
      */
@@ -59,18 +55,13 @@ class AdminSpuTest extends TestCase
     }
 
     /**
-     * test admin can update spu
+     * 測試admin可以對商品標題進行更新
      *
      * @return void
      */
     public function testAdminSpuUpdateSuccess()
     {
-        $spu = Spu::create([
-            'users_id' => '1',
-            'name' => 'test',
-            'description' => 'test',
-            'image' => 'test'
-        ]);
+        $spu = factory(Spu::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('PATCH', '/admin/spu/1/update', [
             'users_id' => '2',
@@ -82,7 +73,7 @@ class AdminSpuTest extends TestCase
     }
 
     /**
-     * test admin try to update a non exist spu
+     * 測試admin可以對不存在的商品標題進行更新
      *
      * @return void
      */
@@ -98,24 +89,20 @@ class AdminSpuTest extends TestCase
     }
 
     /**
-     * test admin can destroy spu
+     * 測試admin可以對商品標題進行刪除
      *
      * @return void
      */
     public function testAdminSpuDestroySuccess()
     {
-        $spu = Spu::create([
-            'users_id' => '1',
-            'name' => 'test',
-            'description' => 'test',
-        ]);
+        $spu = factory(Spu::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('DELETE', '/admin/spu/1/destroy');
         $this->assertEquals(302, $response->status());
     }
 
     /**
-     * test admin try to destroy a non exist spu
+     * 測試admin對不存在的商品標題進行刪除
      *
      * @return void
      */

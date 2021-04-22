@@ -20,7 +20,7 @@ class OrderTest extends TestCase
     }
 
     /**
-     * test user can get into order page
+     * 測試使用者可以進入到"我的訂單"的頁面
      *
      * @return void
      */
@@ -38,19 +38,8 @@ class OrderTest extends TestCase
      */
     public function testOrderCreateSuccess()
     {
-        $sku = Sku::create([
-            'users_id' => '1',
-            'spu_id' => '2',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-        ]);
-        $cart = CartItem::create([
-            'users_id' => '1',
-            'sku_id' => '1',
-            'amount' => '1',
-        ]);
+        $sku = factory(Sku::class)->create();
+        $cart = factory(CartItem::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('GET', '/order/create');
         $this->assertEquals(200, $response->status());
@@ -63,21 +52,14 @@ class OrderTest extends TestCase
      */
     public function testOrderCreateFailed()
     {
-        $sku = Sku::create([
-            'users_id' => '1',
-            'spu_id' => '2',
-            'name' => 'test',
-            'price' => '1',
-            'specification' => 'test',
-            'stock' => '1',
-        ]);
+        $sku = factory(Sku::class)->create();
         $this->demoUserLoginIn();
         $response = $this->call('GET', '/order/create');
         $this->assertEquals(302, $response->status());
     }
 
     /**
-     * test user can store his order
+     * 測試使用者新增一筆訂單
      *
      * @return void
      */
@@ -95,7 +77,7 @@ class OrderTest extends TestCase
     }
     
     /**
-     * test user can destroy exist order
+     * 測試使用者可以對於訂單進行刪除
      *
      * @return void
      */
@@ -103,20 +85,13 @@ class OrderTest extends TestCase
     {
         $this->demoUserLoginIn();
 
-        Order::create([
-            'users_id' => '1',
-            'name' => 'test',
-            'address' => 'test',
-            'phone' => '0912345678',
-            'total_amount' => '1',
-            'status' => '出貨',
-        ]);
+        $order = factory(Order::class)->create();
         $response = $this->call('DELETE', '/order/1/destroy');
         $this->assertEquals(302, $response->status());
     }
 
     /**
-     * test user destroy a non exist order
+     * 測試使用者對於不存在的訂單進行刪除
      *
      * @return void
      */

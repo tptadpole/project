@@ -17,7 +17,7 @@ class AdminUserTest extends TestCase
         $this->artisan('migrate:refresh');
     }
     /**
-     * test admin can get into adminUser page
+     * 測試admin可以進入到admin內的user頁面
      *
      * @return void
      */
@@ -29,7 +29,7 @@ class AdminUserTest extends TestCase
     }
 
     /**
-     * test admin can get into admin create user page
+     * 測試admin可以進入到admin的user新增頁面
      *
      * @return void
      */
@@ -41,7 +41,7 @@ class AdminUserTest extends TestCase
     }
 
     /**
-     * test admin store a new user
+     * 測試admin可以新增一個user
      *
      * @return void
      */
@@ -58,7 +58,7 @@ class AdminUserTest extends TestCase
     }
 
     /**
-     * test admin can get into admin edit user page
+     * 測試admin可以到admin的編輯user的頁面
      *
      * @return void
      */
@@ -76,7 +76,7 @@ class AdminUserTest extends TestCase
     }
 
     /**
-     * test admin try to edit a non exist user
+     * 測試admin對於不存在的user進入到編輯頁面
      *
      * @return void
      */
@@ -88,7 +88,7 @@ class AdminUserTest extends TestCase
     }
 
     /**
-     * test Admin can update user
+     * 測試admin對於user進行更新
      *
      * @return void
      */
@@ -105,7 +105,7 @@ class AdminUserTest extends TestCase
     }
 
     /**
-     * test admin try to update a nom exist user
+     * 測試admin對於不存在的user進行更新
      *
      * @return void
      */
@@ -122,7 +122,7 @@ class AdminUserTest extends TestCase
     }
 
     /**
-     * test admin can destroy a user
+     * 測試admin可以刪除user
      *
      * @return void
      */
@@ -134,7 +134,7 @@ class AdminUserTest extends TestCase
     }
 
     /**
-     * test admin try to destroy a non exist user
+     * 測試admin對於不存在的user進行刪除
      *
      * @return void
      */
