@@ -83,10 +83,9 @@ class AdminSpuController extends Controller
         if (! $spu = Spu::find($spu_id)) {
             abort(404);
         }
-        $status = $spu->delete();
 
-        //商品標題刪除的同時也要把底下的商品項目全都刪除
-        $deleteSkuStatus = Sku:: where('spu_id', '=', $spu_id)->delete();
+        // 在刪除商品標題的同時也透過軟刪除來做刪除商品物品
+        $status = Spu::where('id', '=', $spu_id)->first()->delete();
 
         return redirect()->action('AdminSpuController@index');
     }

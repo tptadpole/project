@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Spu;
 
 class Spu extends Model
 {
@@ -35,4 +36,19 @@ class Spu extends Model
         'name' => '',
         'image' => '',
     ];
+
+    public function sku()
+    {
+        return $this->hasMany(
+            Sku::class,
+        );
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($spu) {
+            $spu->sku()->delete();
+        });
+    }
 }

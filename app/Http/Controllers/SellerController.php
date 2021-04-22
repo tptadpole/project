@@ -65,7 +65,7 @@ class SellerController extends Controller
     }
 
     /**
-     * Remove the specified 商品標題 from storage.
+     * 在移除商品標題的同時也刪除了商品標題內的商品物品
      *
      * @param  int  $spu_id
      * @return \Illuminate\Http\Response
@@ -77,9 +77,8 @@ class SellerController extends Controller
             abort(404);
         }
         
-        $status = $spu->delete();
-
-        $deleteSku = Sku:: where('spu_id', '=', $spu_id)->delete();
+        // 在刪除商品標題的同時也透過軟刪除來做刪除商品物品
+        $status = Spu::where('id', '=', $spu_id)->first()->delete();
 
         return redirect()->action('SellerController@index');
     }

@@ -89,6 +89,7 @@ class AdminUserController extends Controller
             abort(404);
         }
 
+        $validatedData['password'] = Hash::make($validatedData['password']);
         $status = $user->update($validatedData);
 
         return redirect()->action('AdminUserController@index');

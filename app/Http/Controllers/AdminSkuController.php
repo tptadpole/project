@@ -85,7 +85,7 @@ class AdminSkuController extends Controller
             abort(404);
         }
 
-        $status = $sku->delete();
+        $status = Sku::find($sku_id)->first()->delete();
 
         return redirect()->action('AdminSkuController@index');
     }

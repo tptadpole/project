@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Spu;
+use App\Models\CartItem;
 
 class Sku extends Model
 {
@@ -47,5 +48,20 @@ class Sku extends Model
         return $this->belongsTo(
             Spu::class,
         );
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(
+            CartItem::class,
+        );
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($cartItem) {
+            $cartItem->cart()->forcedelete();
+        });
     }
 }

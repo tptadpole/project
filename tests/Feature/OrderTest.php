@@ -6,6 +6,7 @@ use App\User;
 use App\Models\Sku;
 use App\Models\CartItem;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -77,15 +78,31 @@ class OrderTest extends TestCase
     }
     
     /**
-     * 測試使用者可以對於訂單進行刪除
+     * 測試使用者對於訂單不能進行刪除(訂單商品狀態不是取消且不是完成)
      *
      * @return void
      */
-    public function testOrderDestroySuccess()
+    public function testOrderCanNotDestroySuccess()
     {
         $this->demoUserLoginIn();
-
         $order = factory(Order::class)->create();
+        $orderItem = factory(OrderItem::class)->create();
+        $response = $this->call('DELETE', '/order/1/destroy');
+        $this->assertEquals(302, $response->status());
+    }
+
+    /**
+     * 測試使用者對於訂單可以進行刪除(訂單商品狀態為取消或是完成)
+     *
+     * @return void
+     */
+    public function testOrderCanDestroySuccess()
+    {
+        $this->demoUserLoginIn();
+        $order = factory(Order::class)->create();
+        $orderItem = factory(OrderItem::class)->create([
+            'status' => '完成',
+        ]);
         $response = $this->call('DELETE', '/order/1/destroy');
         $this->assertEquals(302, $response->status());
     }
