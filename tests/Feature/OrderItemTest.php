@@ -56,20 +56,6 @@ class OrderItemTest extends TestCase
     }
 
     /**
-     * 測試買家可以在訂單內加入商品項目
-     *
-     * @return void
-     */
-    // public function testOrderItemStoreSuccess()
-    // {
-    //     $sku = factory(Sku::class)->create();
-    //     $cart = factory(CartItem::class)->create();
-    //     $this->demoUserLoginIn();
-    //     $response = $this->call('GET', '/orderItem/1/store');
-    //     $this->assertEquals(200, $response->status());
-    // }
-
-    /**
      * 測試使用者在訂單內加入不存在的商品
      *
      * @return void
