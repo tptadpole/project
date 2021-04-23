@@ -48,6 +48,7 @@ deploy:
   app: "garyke-test-project"
   env: "Garyketestproject-env"
   bucket_name: "104-aws-training-cicd-bucket"
+  bucket_path: "/garyke/garyke-demo/"
   on:
     branch: main
 
