@@ -89,7 +89,7 @@ class SellerSkuController extends Controller
 
         $spu_id = $sku->toArray()['spu_id'];
 
-        $status = Sku::find($sku_id)->first()->delete();
+        $status = Sku::find($sku_id)->delete();
 
         return redirect()->action('SellerSkuController@index', ['id' => $spu_id]);
     }
