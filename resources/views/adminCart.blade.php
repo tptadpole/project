@@ -21,14 +21,16 @@
           <tr>
             <td>{{$cart['id']}}</td>
             <td>{{$cart['users_id']}}</td>
-            <td>{{$cart['sku']['name']}}</td>
-            <td>
-              @if($cart['sku']['image'])
-                <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$cart['sku']['image']}} "width="100px;" height="100px;" />
-              @endif
-            </td>
-            <td>{{$cart['sku']['specification']}}</td>
-            <td>{{$cart['sku']['price']}}</td>
+            @if ( $cart['sku'] )
+              <td>{{$cart['sku']['name']}}</td>
+              <td>
+                @if($cart['sku']['image'])
+                  <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$cart['sku']['image']}} "width="100px;" height="100px;" />
+                @endif
+              </td>
+              <td>{{$cart['sku']['specification']}}</td>
+              <td>{{$cart['sku']['price']}}</td>
+            @endif
             <td>{{$cart['amount']}}</td>
             <td>{{$cart['updated_at']}}</td>
             <td>

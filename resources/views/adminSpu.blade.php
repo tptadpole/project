@@ -21,7 +21,7 @@
             <td>{{$spu['name']}}</td>
             <td>
               @if($spu['image'])
-                <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$spu['image']}} "width="250px;" height="250px;" />
+                <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$spu['image']}} "width="100px;" height="100px;" />
               @endif
             </td>
             <td>{{$spu['description']}}</td>
