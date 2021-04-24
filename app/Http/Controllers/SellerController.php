@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\Spu;
 use App\Models\Sku;
 use App\User;
+use Storage;
 
 class SellerController extends Controller
 {
@@ -52,10 +53,12 @@ class SellerController extends Controller
         $validatedData['users_id'] = $users_id;
 
         if (request()->hasFile('image')) {
-            $image = $request->file('image');
             // 檔案存在，所以存到project/storage/app/public，並拿到url，此範例會拿到public/fileName
             $imageURL = request()->file('image')->store('/public');
             // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
+            $imageName = 'garyke/garyke-demo/image/' .substr($imageURL, 7);
+            $path = $request->image->path();
+            Storage::disk('s3')->put($imageName, file_get_contents($path), 'public');
             $validatedData['image'] = substr($imageURL, 7);
         }
 
@@ -120,17 +123,19 @@ class SellerController extends Controller
         ]);
 
         if (request()->hasFile('image')) {
-            $image = $request->file('image');
             // 檔案存在，所以存到project/storage/app/public，並拿到url，此範例會拿到public/fileName
             $imageURL = request()->file('image')->store('/public');
             // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
+            $imageName = 'garyke/garyke-demo/image/' .substr($imageURL, 7);
+            $path = $request->image->path();
+            Storage::disk('s3')->put($imageName, file_get_contents($path), 'public');
             $validatedData['image'] = substr($imageURL, 7);
-        }
 
-        $image_path = public_path('/images') . '/' . $spu->toArray() ['image'];
+            $image_path = 'garyke/garyke-demo/image/'. $spu->toArray() ['image'];
 
-        if (File::exists($image_path)) {
-            File::delete($image_path);
+            if ($exists = Storage::disk('s3')->has($image_path)) {
+                Storage::disk('s3')->delete($image_path);
+            }
         }
 
         $status = $spu->update($validatedData);

@@ -23,7 +23,7 @@
             <td>{{$cart['users_id']}}</td>
             <td>{{$cart['sku']['name']}}</td>
             <td>
-                <img src="{{asset('/storage'). "/" . $cart['sku']['image']}}"  width="75px;" height="75px;" >
+                <img src="{{Storage::disk('s3')->url('garyke/garyke-demo/image/' . $cart['sku']['image'])}} "width="250px;" height="250px;" /> 
             </td>
             <td>{{$cart['sku']['specification']}}</td>
             <td>{{$cart['sku']['price']}}</td>

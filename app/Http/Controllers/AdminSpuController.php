@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Spu;
 use App\Models\Sku;
+use Storage;
 
 class AdminSpuController extends Controller
 {
@@ -54,16 +55,18 @@ class AdminSpuController extends Controller
         }
 
         if (request()->hasFile('image')) {
-            $image = $request->file('image');
             // 檔案存在，所以存到project/storage/app/public，並拿到url，此範例會拿到public/fileName
             $imageURL = request()->file('image')->store('/public');
             // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
+            $imageName = 'garyke/garyke-demo/image/' .substr($imageURL, 7);
+            $path = $request->image->path();
+            Storage::disk('s3')->put($imageName, file_get_contents($path), 'public');
             $validatedData['image'] = substr($imageURL, 7);
 
-            $image_path = public_path('/storage') . '/' . $spu->toArray() ['image'];
+            $image_path = 'garyke/garyke-demo/image/'. $spu->toArray() ['image'];
 
-            if (File::exists($image_path)) {
-                File::delete($image_path);
+            if ($exists = Storage::disk('s3')->has($image_path)) {
+                Storage::disk('s3')->delete($image_path);
             }
         }
 

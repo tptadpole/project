@@ -20,7 +20,7 @@
             <td>{{$spu['users_id']}}</td>
             <td>{{$spu['name']}}</td>
             <td>
-                <img src="{{asset('/storage'). "/" . $spu['image']}}"  width="75px;" height="75px;" >
+                <img src="{{Storage::disk('s3')->url('garyke/garyke-demo/image/' . $spu['image'])}} "width="100px;" height="100px;" /> 
             </td>
             <td>{{$spu['description']}}</td>
             <td>{{$spu['updated_at']}}</td>
