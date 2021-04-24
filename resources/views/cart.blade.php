@@ -27,8 +27,11 @@
                         @foreach( $carts as $cart )
                         <tr>                               
                             <td data-th="Product">
-                                <img src="{{Storage::disk('s3')->url('garyke/garyke-demo/image/' . $cart['image'])}} "width="250px;" height="250px;" />
-                                {{-- <img src="{{asset('/storage'). "/" . $cart['image']}}"  width="150px;" height="150px;" > --}}
+                                @if($cart['image'])
+
+                                    {{-- <img src="{{Storage::disk('s3')->url('garyke/garyke-demo/image/' . $cart['image'])}} "width="250px;" height="250px;" /> --}}
+                                    <img src="https://104-aws-training-cicd-bucket/garyke/garyke-demo/image/{{$cart['image']}} "width="250px;" height="250px;" />
+                                @endif
                             </td>
                             <td data-th="Name">
                                 <div class="col-md-9 text-left mt-sm-2">
