@@ -24,7 +24,9 @@
             <td>{{$sku['spu_id']}}</td>
             <td>{{$sku['name']}}</td>
             <td>
-                <img src="{{Storage::disk('s3')->url('garyke/garyke-demo/image/' . $sku['image'])}} "width="100px;" height="100px;" /> 
+              @if($sku['image'])
+                <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$sku['image']}} "width="250px;" height="250px;" />
+              @endif
             </td>
             <td>{{$sku['specification']}}</td>
             <td>{{$sku['price']}}</td>

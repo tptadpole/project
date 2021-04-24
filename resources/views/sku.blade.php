@@ -4,7 +4,9 @@
 <div class="container">
     <h3>歡迎回來: {{ Auth::user()->name }} 你目前所販賣的{{$spu[0]['name']}}總共有{{count($commodities)}}種</h3>
     <div class="card w-100">
-        <img src="{{Storage::disk('s3')->url('garyke/garyke-demo/image/' . $spu[0]['image'])}} "width="250px;" height="250px;" />
+        @if($spu[0]['image'])
+            <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$spu[0]['image']}} "width="250px;" height="250px;" />
+        @endif
         <div class="card-body">
             <h5 class="card-title">{{$spu[0]['name']}}</h5>
             <p class="card-text">{{$spu[0]['description']}}</p>
@@ -24,7 +26,9 @@
     @foreach( $commodities as $commodity )
         <div class="col mb-4">
             <div class="card h-100">
-                <img src="{{Storage::disk('s3')->url('garyke/garyke-demo/image/' . $commodity['image'])}} "width="250px;" height="250px;" />
+                @if($commodity['image'])
+                    <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$commodity['image']}} "width="250px;" height="250px;" />
+                @endif
                 <div class="card-body">
                     <h2 class="card-title">{{$commodity['name']}}</h2>
                     <h5 class="text-info">{{$spu[0]['name']}}規格:{{$commodity['specification']}}</h5>

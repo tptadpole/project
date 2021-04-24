@@ -23,7 +23,9 @@
             <td>{{$cart['users_id']}}</td>
             <td>{{$cart['sku']['name']}}</td>
             <td>
-                <img src="{{Storage::disk('s3')->url('garyke/garyke-demo/image/' . $cart['sku']['image'])}} "width="250px;" height="250px;" /> 
+              @if($cart['sku']['image'])
+                <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$cart['sku']['image']}} "width="250px;" height="250px;" />
+              @endif
             </td>
             <td>{{$cart['sku']['specification']}}</td>
             <td>{{$cart['sku']['price']}}</td>

@@ -17,7 +17,9 @@
             @foreach( $homepageProducts as $homepageProduct ) 
             <div class="col mb-4">
               <div class="card h-100">
-                <img src="{{asset('/storage'). "/" . $homepageProduct['image']}}"  width="250px;" height="250px;" >
+                @if($homepageProduct['image'])
+                    <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$homepageProduct['image']}} "width="250px;" height="250px;" />
+                @endif
                 <div class="card-body">
                   <h5 class="card-title">{{$homepageProduct['name']}}</h5>
                   <p class="card-text">{{$homepageProduct['description']}}</p>

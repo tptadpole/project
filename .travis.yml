@@ -3,10 +3,6 @@ language: php
 php:
   - 7.4
 
-env:
-  AWS_DEFAULT_REGION="ap-northeast-1"
-  AWS_BUCKET="104-aws-training-cicd-bucket"
-
 branch:
   only:
     - main
@@ -26,7 +22,6 @@ before_script:
 
 script:
   - vendor/bin/phpunit
-  - cat storage/logs/laravel.log
   # Search for PHP syntax errors.
   - find -L . -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
   - vendor/bin/phpcs

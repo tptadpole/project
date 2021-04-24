@@ -7,7 +7,9 @@
     @foreach( $commodities as $commodity )
     <div class="col mb-4">
         <div class="card h-100">
-            <img src="{{Storage::disk('s3')->url('garyke/garyke-demo/image/' . $commodity['image'])}} "width="250px;" height="250px;" />
+            @if($commodity['image'])
+                <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$commodity['image']}} "width="250px;" height="250px;" />
+            @endif
             <div class="card-body">
                 <h5 class="card-title">{{$commodity['name']}}</h5>
                 <p class="card-text">{{$commodity['description']}}</p>
