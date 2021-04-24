@@ -24,7 +24,7 @@
             <td>{{$cart['sku']['name']}}</td>
             <td>
               @if($cart['sku']['image'])
-                <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$cart['sku']['image']}} "width="250px;" height="250px;" />
+                <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$cart['sku']['image']}} "width="100px;" height="100px;" />
               @endif
             </td>
             <td>{{$cart['sku']['specification']}}</td>
