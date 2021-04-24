@@ -25,7 +25,7 @@
             <td>{{$sku['name']}}</td>
             <td>
               @if($sku['image'])
-                <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$sku['image']}} "width="200px;" height="200px;" />
+                <img src="https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com/garyke/garyke-demo/image/{{$sku['image']}} "width="100px;" height="100px;" />
               @endif
             </td>
             <td>{{$sku['specification']}}</td>
