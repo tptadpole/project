@@ -66,7 +66,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/comment/index">
+          <a class="nav-link" href="/admin/comment">
             <span data-feather="book"></span>評論
           </a>
         </li>

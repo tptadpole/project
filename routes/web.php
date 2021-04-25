@@ -119,6 +119,6 @@ Route::middleware('can:admin')->prefix('admin/orderItem')->group(function () {
 });
 
 Route::middleware('can:admin')->prefix('admin/comment')->group(function () {
-    Route::get('/index', 'AdminCommentController@index');
+    Route::get('/', 'AdminCommentController@index');
     Route::delete('/{id}/destroy', 'AdminCommentController@destroy');
 });
