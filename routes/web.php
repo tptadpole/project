@@ -66,6 +66,15 @@ Route::middleware('auth')->prefix('orderItem')->group(function () {
     Route::patch('/{id}/update', 'OrderItemController@update');
 });
 
+Route::middleware('auth')->prefix('comment')->group(function () {
+    Route::get('/', 'CommentController@index');
+    Route::get('/{id}/show', 'CommentController@show');
+    Route::get('/{id}/edit', 'CommentController@edit');
+    Route::post('/{id}/store', 'CommentController@store');
+    Route::patch('/{id}/update', 'CommentController@update');
+    Route::delete('/{id}/destroy', 'CommentController@destroy');
+});
+
 Route::get('/admin', 'AdminController@index')->middleware('can:admin');
 
 Route::middleware('can:admin')->prefix('admin/users')->group(function () {
@@ -107,4 +116,9 @@ Route::middleware('can:admin')->prefix('admin/orderItem')->group(function () {
     Route::get('/{id}/display', 'AdminOrderItemController@display');
     Route::patch('/{id}/update', 'AdminOrderItemController@update');
     Route::delete('/{id}/destroy', 'AdminOrderItemController@destroy');
+});
+
+Route::middleware('can:admin')->prefix('admin/comment')->group(function () {
+    Route::get('/index', 'AdminCommentController@index');
+    Route::delete('/{id}/destroy', 'AdminCommentController@destroy');
 });

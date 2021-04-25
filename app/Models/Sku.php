@@ -57,11 +57,21 @@ class Sku extends Model
         );
     }
 
+    public function comment()
+    {
+        return $this->hasMany(
+            Comment::class,
+        );
+    }
+
     protected static function boot()
     {
         parent::boot();
         static::deleting(function ($cartItem) {
             $cartItem->cart()->forcedelete();
+        });
+        static::deleting(function ($comment) {
+            $comment->comment()->forcedelete();
         });
     }
 }

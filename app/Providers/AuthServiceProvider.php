@@ -4,13 +4,15 @@ namespace App\Providers;
 
 use App\User;
 use App\Models\Spu;
-use App\Models\Sku;
-use App\Models\CartItem;
-use App\Models\Order;
 use App\Policies\SpuPolicy;
+use App\Models\Sku;
 use App\Policies\SkuPolicy;
+use App\Models\CartItem;
 use App\Policies\CartItemPolicy;
+use App\Models\Order;
 use App\Policies\OrderPolicy;
+use App\Models\Comment;
+use App\Policies\CommentPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -27,6 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         Sku::class => SkuPolicy::class,
         CartItem::class => CartItemPolicy::class,
         Order::class => OrderPolicy::class,
+        Comment::class => CommentPolicy::class,
     ];
 
     /**

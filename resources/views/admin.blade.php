@@ -66,6 +66,11 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/admin/comment/index">
+            <span data-feather="book"></span>評論
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/">
             <span data-feather="home"></span>返回一般版
           </a>

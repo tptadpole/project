@@ -50,4 +50,13 @@ class User extends Authenticatable
             'users_id',
         )->withPivot('id', 'amount');
     }
+
+    public function commentSku()
+    {
+        return $this->belongsToMany(
+            Sku::class,
+            'comment',
+            'users_id',
+        )->withPivot('id', 'comment');
+    }
 }

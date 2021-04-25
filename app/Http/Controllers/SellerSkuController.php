@@ -85,7 +85,7 @@ class SellerSkuController extends Controller
         if (! $sku = Sku::find($sku_id)) {
             abort(404);
         }
-        $this->authorize('update', Sku::find($sku_id));
+        $this->authorize('delete', Sku::find($sku_id));
 
         $spu_id = $sku->toArray()['spu_id'];
 

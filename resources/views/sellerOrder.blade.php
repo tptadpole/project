@@ -60,6 +60,22 @@
                     </form>
                 </td>
             @endif
+            @if( $role == 'customer' && $order['status'] == '完成' )
+                <td>
+                    <form method="post" action="/comment/{{$order['sku_id']}}/store">    
+                        <form class="form-inline">
+                            @csrf
+                            <div class="col-auto">
+                              <label for="comment">評論</label>
+                              <input type="text" class="form-control" name="comment" placeholder="給點評論...">
+                            </div>
+                            <div class="col-auto">
+                              <button type="submit" class="btn btn-success">送出評論</button>
+                            </div>
+                        </form>
+                    </form>
+                </td>
+            @endif
           </tr>
         @endforeach
         </tbody>

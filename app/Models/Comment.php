@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Sku;
 
 class Comment extends Model
 {
@@ -22,7 +23,7 @@ class Comment extends Model
      */
     protected $fillable = [
         'users_id',
-        'spu_id',
+        'sku_id',
         'comment',
     ];
 
@@ -34,4 +35,11 @@ class Comment extends Model
     protected $attributes = [
         'comment' => '',
     ];
+
+    public function sku()
+    {
+        return $this->belongsTo(
+            Sku::class,
+        );
+    }
 }

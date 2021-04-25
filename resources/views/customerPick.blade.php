@@ -30,9 +30,10 @@
                   @csrf
                   <label for="amount">數量:</label>
                   <input type="number" class="form-control form-control-lg text-center" name="amount" value="1" min="1" max="{{$commodity->stock}}">
-                </div>
+                </div> 
                 <button type="submit" class="btn btn-success">加入購物車</button>             
               </form>
+              <a href="/comment/{{$commodity['id']}}/show" class="btn btn-primary">查看評論</a>
             </div>
           </div>
         </div>

@@ -94,6 +94,9 @@
                                     <a class="dropdown-item" href="{{ url('/orderItem') }}">
                                         {{ __('未出貨訂單') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ url('/comment') }}">
+                                        {{ __('我的商品評論') }}
+                                    </a>
                                     @can('admin')
                                         <a class="dropdown-item" href="{{ url('/admin') }}">
                                             {{ __('admin後台') }}
