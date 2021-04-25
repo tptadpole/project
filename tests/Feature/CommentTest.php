@@ -2,8 +2,7 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\Comment;
 use App\Models\Sku;
 use App\Models\Order;
@@ -79,8 +78,37 @@ class CommentTest extends TestCase
         $this->demoUserLoginIn();
         $comment = factory(Comment::class)->create();
         $order = factory(Order::class)->create();
-        $response = $this->call('PATCH', '/comment/1/store');
+        $response = $this->call('POST', '/comment/1/store');
         $this->assertEquals(302, $response->status());
+    }
+
+    /**
+     * 測試更新評論
+     *
+     * @return void
+     */
+    public function testSkuCommentUpdateSuccess()
+    {
+        $this->demoUserLoginIn();
+        $comment = factory(Comment::class)->create();
+        $response = $this->call('PATCH', '/comment/1/update', [
+            'comment' => 'test',
+        ]);
+        $this->assertEquals(302, $response->status());
+    }
+
+    /**
+     * 測試更新不存在的評論
+     *
+     * @return void
+     */
+    public function testSkuCommentUpdatFailed()
+    {
+        $this->demoUserLoginIn();
+        $response = $this->call('PATCH', '/comment/999/update', [
+            'comment' => 'test',
+        ]);
+        $this->assertEquals(404, $response->status());
     }
 
     /**
