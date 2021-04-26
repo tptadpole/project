@@ -51,7 +51,7 @@ class SellerSkuController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|max:1000000',
             'specification' => 'required|string|max:50',
             'stock' => 'required|numeric',
             'image' => 'required|image',
@@ -126,9 +126,10 @@ class SellerSkuController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|max:1000000',
             'specification' => 'required|string|max:50',
             'stock' => 'required|numeric',
+            'image' => 'image',
         ]);
 
         if (request()->hasFile('image')) {
