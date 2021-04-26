@@ -44,7 +44,7 @@ class CartController extends Controller
         }
 
         $validatedData = $request->validate([
-            'amount' => 'required|numeric',
+            'amount' => 'required|numeric|min:1',
         ]);
 
         if ($cart = CartItem:: where([['users_id', '=', $users_id],['sku_id', '=', $sku_id]])->first()) {
@@ -99,7 +99,7 @@ class CartController extends Controller
         $this->authorize('update', CartItem::find($cart_id));
 
         $validatedData = $request->validate([
-            'amount' => 'required|numeric',
+            'amount' => 'required|numeric|min:1',
         ]);
 
         $status = $cart->update($validatedData);
