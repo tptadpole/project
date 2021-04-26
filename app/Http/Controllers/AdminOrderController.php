@@ -14,7 +14,7 @@ class AdminOrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate(10);
+        $orders = Order::withTrashed()->paginate(10);
         return view('adminOrder')->with(['orders' => $orders]);
     }
 
@@ -26,11 +26,16 @@ class AdminOrderController extends Controller
      */
     public function destroy($order_id)
     {
-        if (! $order = Order::find($order_id)) {
-            abort(404);
+
+        if ($order = Order::withTrashed()->find($order_id)) {
+            $status = $order->forceDelete();
+        } else {
+            if (! $order = Order::find($order_id)) {
+                abort(404);
+            }
+            $status = $order->delete();
         }
 
-        $status = $order->delete();
 
         return redirect()->action('AdminOrderController@index');
     }

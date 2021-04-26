@@ -11,6 +11,7 @@
             <th scope="col">手機號碼</th>
             <th scope="col">付費方式</th>
             <th scope="col">下訂時間</th>
+            <th scope="col">刪除時間</th>
             <th scope="col">操作</th>
           </tr>
         </thead>
@@ -23,6 +24,11 @@
             <td>{{$order['phone']}}</td>
             <td>{{$order['payment']}}</td>
             <td>{{$order['created_at']}}</td>
+            <td>
+              @if ($order['deleted_at'])
+                {{$order['deleted_at']}}
+              @endif
+            </td>
             <td>
                 <div class="form-group">
                     <a href="/admin/orderItem/{{$order['id']}}/display" class="btn btn-primary">查看更多</a>

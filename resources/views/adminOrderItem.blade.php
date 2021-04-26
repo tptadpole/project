@@ -13,6 +13,7 @@
             <th scope="col">價格</th>
             <th scope="col">狀態</th>
             <th scope="col">最後修改時間</th>
+            <th scope="col">刪除時間</th>
             <th scope="col">刪除</th>
           </tr>
         </thead>
@@ -27,6 +28,11 @@
             <td>{{$orderItem['price']}}</td>
             <td>{{$orderItem['status']}}</td>
             <td>{{$orderItem['updated_at']}}</td>
+            <td>
+              @if ( $orderItem['deleted_at'] )
+                {{$orderItem['deleted_at']}}
+              @endif
+            </td>
             <td>
               <form action="/admin/orderItem/{{$orderItem['id']}}/destroy" method="POST">
                 {{ csrf_field() }}

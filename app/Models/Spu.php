@@ -7,6 +7,7 @@ use App\Models\Spu;
 
 class Spu extends Model
 {
+
     /**
      * The table associated with the model.
      *
@@ -24,7 +25,7 @@ class Spu extends Model
         'users_id',
         'name',
         'description',
-        'image'
+        'image',
     ];
 
     /**

@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->string('status');
             $table->string('payment');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
