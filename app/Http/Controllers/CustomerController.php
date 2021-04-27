@@ -17,7 +17,7 @@ class CustomerController extends Controller
     public function index()
     {
         $users_id = Auth::id();
-        $commodities = Spu::where('users_id', '!=', $users_id)->paginate(8);
+        $commodities = Spu::paginate(8);
         return view('customerTotal')->with(['commodities' => $commodities]);
     }
 

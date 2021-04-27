@@ -54,7 +54,7 @@ class SellerSkuController extends Controller
             'name' => 'required|string|max:20',
             'price' => 'required|numeric|integer|max:1000000',
             'specification' => 'required|string|max:50',
-            'stock' => 'required|numeric|integer',
+            'stock' => 'required|numeric|integer|max:10000',
             'image' => 'required|image',
         ]);
         $validatedData['spu_id'] = $spu_id;
