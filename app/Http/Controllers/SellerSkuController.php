@@ -51,9 +51,9 @@ class SellerSkuController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
-            'price' => 'required|numeric|max:1000000',
+            'price' => 'required|numeric|integer|max:1000000',
             'specification' => 'required|string|max:50',
-            'stock' => 'required|numeric',
+            'stock' => 'required|numeric|integer',
             'image' => 'required|image',
         ]);
         $validatedData['spu_id'] = $spu_id;
