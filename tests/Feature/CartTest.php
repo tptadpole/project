@@ -137,7 +137,9 @@ class CartTest extends TestCase
     public function testCartStoreRepeatSuccess()
     {
         $cart = factory(CartItem::class)->create();
-        $sku = factory(Sku::class)->create();
+        $sku = factory(Sku::class)->create([
+            'users_id' => '2',
+        ]);
         $this->demoUserLoginIn();
         $response = $this->call('POST', '/cart/1/store', [
             "amount" => '1',
@@ -152,7 +154,9 @@ class CartTest extends TestCase
      */
     public function testCartStoreSuccess()
     {
-        $sku = factory(Sku::class)->create();
+        $sku = factory(Sku::class)->create([
+            'users_id' => '2',
+        ]);
         $this->demoUserLoginIn();
         $response = $this->call('POST', '/cart/1/store', [
             "amount" => '1',
