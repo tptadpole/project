@@ -56,7 +56,7 @@ class OrderController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
             'address' => 'required|string|max:50',
-            'phone' => ['required','string','regex:/^09[0-9]{8}$/',],
+            'phone' => ['required','regex:/^09[0-9]{8}$/',],
             'total_amount' => 'required|numeric',
             'payment' => 'required|in:cash,credit-card',
         ]);
