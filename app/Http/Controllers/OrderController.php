@@ -73,7 +73,7 @@ class OrderController extends Controller
     }
 
     /**
-     * Remove the customer order.
+     * Remove the order(使用軟刪除).
      *
      * @param  int  $order_id
      * @return \Illuminate\Http\Response

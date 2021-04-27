@@ -8,13 +8,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\Spu;
 use App\Models\Sku;
-use App\User;
 use Storage;
 
 class SellerController extends Controller
 {
     /**
-     * Display the 商品標題 which is selled by users
+     * 顯示該賣家所有的商品標題
      *
      * @return \Illuminate\Http\Response
      */
@@ -26,7 +25,7 @@ class SellerController extends Controller
     }
 
     /**
-     * Create a new 商品標題
+     * 前往新增商品標題的頁面
      *
      * @return \Illuminate\Http\Response
      */
@@ -69,7 +68,7 @@ class SellerController extends Controller
 
     /**
      * 在移除商品標題的同時也刪除了商品標題內的商品物品
-     *
+     * 在刪除商品標題內的商品物品也刪除了購物車內的商品物品
      * @param  int  $spu_id
      * @return \Illuminate\Http\Response
      */

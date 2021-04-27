@@ -11,14 +11,13 @@ use App\User;
 class CartController extends Controller
 {
     /**
-     * Display the user's cart
+     * Display the user's 購物車
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $users_id = Auth::id();
-
         $carts = User::find($users_id)->sku()->get()->toArray();
         
         $total = 0;
@@ -30,9 +29,10 @@ class CartController extends Controller
     }
 
     /**
-     * Store a newly created 商品物品 in cart
+     * 將商品物品放入購物車
      *
      * @param Request $request
+     * @param int $sku_id
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $sku_id)
@@ -46,7 +46,7 @@ class CartController extends Controller
         $validatedData = $request->validate([
             'amount' => 'required|numeric|min:1',
         ]);
-
+        // 如果購物車內有相同的商品了,更新數量即可,否則將商品加入到購物車中
         if ($cart = CartItem:: where([['users_id', '=', $users_id],['sku_id', '=', $sku_id]])->first()) {
             if (($cart->amount + $request->amount) <= $sku[0]['stock']) {
                 $cart->update([
@@ -99,16 +99,15 @@ class CartController extends Controller
         $this->authorize('update', CartItem::find($cart_id));
 
         $validatedData = $request->validate([
-            'amount' => 'required|numeric|min:1',
+            'amount' => 'required|integer|min:1',
         ]);
-
         $status = $cart->update($validatedData);
 
         return redirect()->action('CartController@index');
     }
 
     /**
-     * Remove the buying of commodity from cart.
+     * Remove 購物車內的商品物品.
      *
      * @param  int  $cart_id
      * @return \Illuminate\Http\Response
@@ -118,8 +117,8 @@ class CartController extends Controller
         if (! $cart = CartItem::find($cart_id)) {
             abort(404);
         }
-
         $status = $cart->delete();
+        
         return redirect()->action('CartController@index');
     }
 }

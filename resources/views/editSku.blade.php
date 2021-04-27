@@ -21,32 +21,32 @@
                     </ul>
                 </div><br/>
             @endif
-            <form method="post" action="/seller/commodity/{{$data['id']}}/update" enctype="multipart/form-data" autocomplete="off">
+            <form method="post" action="/seller/commodity/{{$sku['id']}}/update" enctype="multipart/form-data" autocomplete="off">
                 {{ csrf_field() }}
                 {{ method_field('PATCH') }}
                 <div class="form-group">
                     @csrf
                     <label for="name">商品名稱 :</label>
-                    <input type="text" class="form-control" name="name" value="{{$data['name']}}"/>
+                    <input type="text" class="form-control" name="name" value="{{$sku['name']}}"/>
                 </div>
                 <div class="form-group">
                     <label for="price">商品價格 :</label>
-                    <input type="text" class="form-control" name="price" value="{{$data['price']}}"/>
+                    <input type="text" class="form-control" name="price" value="{{$sku['price']}}"/>
                 </div>
                 <div class="form-group">
                     <label for="specification">規格 :</label>
-                    <input type="text" class="form-control" name="specification" value="{{$data['specification']}}"/>
+                    <input type="text" class="form-control" name="specification" value="{{$sku['specification']}}"/>
                 </div>
                 <div class="form-group">
                     <label for="stock">商品存貨 :</label>
-                    <input type="text" class="form-control" name="stock" value="{{$data['stock']}}"/>
+                    <input type="text" class="form-control" name="stock" value="{{$sku['stock']}}"/>
                 </div>
                 <div class="form-group">
                     <label for="image">商品圖片 :</label>
                     <input type="file" class="form-control" name="image"/>
                 </div>
                 <button type="submit" class="btn btn-success">確定編輯</button>
-                <a href="/seller/commodity/{{$data['spu_id']}}" class="btn btn-light">取消</a>
+                <a href="/seller/commodity/{{$sku['spu_id']}}" class="btn btn-light">取消</a>
             </form>
         </div>
     </div>

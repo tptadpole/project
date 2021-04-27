@@ -18,6 +18,21 @@ class SkuPolicy
     }
 
     /**
+     * Determine whether the user can index the sku.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Models\Sku  $sku
+     * @return mixed
+     */
+    public function index(User $user, Sku $sku)
+    {
+        if ($user->id === $sku->users_id) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Determine whether the user can update the sku.
      *
      * @param  \App\User  $user

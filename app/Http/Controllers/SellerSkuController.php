@@ -13,25 +13,26 @@ use Storage;
 class SellerSkuController extends Controller
 {
     /**
-     * Display 賣家的商品標題與所有該商品標題的商品物品
+     *  顯示賣家某商品標題與該標題底下所有的商品物品
      *
      * @param int $spu_id
      * @return \Illuminate\Http\Response
      */
     public function index($spu_id)
     {
-        // 特別注意:如果要比較物件是不是空的用陣列去判斷
         $spu = Spu::where('id', '=', $spu_id)->get()->toArray();
         if (empty($spu)) {
             abort(404);
         }
+        $this->authorize('index', Spu::find($spu_id));
+
         $commodities = Sku:: where('spu_id', '=', $spu_id)->paginate(8);
 
         return view('sku')->with([ 'spu' => $spu, 'commodities' => $commodities ]);
     }
 
     /**
-     * Create a new 商品標題底下的商品物品
+     * 前往新增商品物品的頁面
      * @param int $spu_id
      * @return \Illuminate\Http\Response
      */
@@ -85,11 +86,11 @@ class SellerSkuController extends Controller
         if (! $sku = Sku::find($sku_id)) {
             abort(404);
         }
-        $this->authorize('delete', Sku::find($sku_id));
+        $this->authorize('delete', $sku);
 
         $spu_id = $sku->toArray()['spu_id'];
 
-        $status = Sku::find($sku_id)->delete();
+        $status = $sku->delete();
 
         return redirect()->action('SellerSkuController@index', ['id' => $spu_id]);
     }
@@ -102,12 +103,12 @@ class SellerSkuController extends Controller
      */
     public function edit($sku_id)
     {
-        if (!$data = Sku::find($sku_id)) {
+        if (!$sku = Sku::find($sku_id)) {
             abort(404);
         }
-        $data = $data->toArray();
+        $sku = $sku->toArray();
 
-        return view('editSku')->with(['data' => $data]);
+        return view('editSku')->with(['sku' => $sku]);
     }
 
     /**
@@ -122,13 +123,13 @@ class SellerSkuController extends Controller
         if (! $sku = Sku::find($sku_id)) {
             abort(404);
         }
-        $this->authorize('update', Sku::find($sku_id));
+        $this->authorize('update', $sku);
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
-            'price' => 'required|numeric|max:1000000',
+            'price' => 'required|integer|max:1000000',
             'specification' => 'required|string|max:50',
-            'stock' => 'required|numeric',
+            'stock' => 'required|integer',
             'image' => 'image',
         ]);
 
@@ -149,8 +150,8 @@ class SellerSkuController extends Controller
         }
 
         $status = $sku->update($validatedData);
-        $spu_id = $sku->toArray();
+        $sku = $sku->toArray();
 
-        return redirect()->action('SellerSkuController@index', ['id' => $spu_id['spu_id']]);
+        return redirect()->action('SellerSkuController@index', ['id' => $sku['spu_id']]);
     }
 }

@@ -26,7 +26,7 @@ class OrderItemController extends Controller
     }
 
     /**
-     * Display the 買家的訂單裡的商品物品
+     * Display 買家的訂單裡的商品物品
      *
      * @param int $order_id
      * @return \Illuminate\Http\Response
@@ -39,7 +39,7 @@ class OrderItemController extends Controller
     }
 
     /**
-     * 將訂單內的物品存入訂單商品物品
+     * 將訂單內的物品存入訂單商品物品的storage
      *
      * @param int $order_id
      * @return \Illuminate\Http\Response
@@ -54,6 +54,7 @@ class OrderItemController extends Controller
             abort(404);
         }
 
+        // 在將購物車內商品物品資訊存入訂單物品後,將購物車內商品刪除
         foreach ($carts as $cart) {
             $data['users_id'] = $cart['users_id'];
             $data['order_id'] = $order_id;
@@ -63,14 +64,13 @@ class OrderItemController extends Controller
             $data['status'] = '出貨';
             $status = OrderItem::create($data);
         }
-
         $status = CartItem::where('users_id', '=', $users_id)->delete();
 
         return view('ordersuccess');
     }
 
     /**
-     * Update the status of orderItem.
+     * (買家與賣家)Update the status of orderItem.
      *
      * @param Request $request
      * @param int $order_id

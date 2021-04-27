@@ -13,7 +13,7 @@ class CommentController extends Controller
 {
 
     /**
-     * Display the user's comment
+     * Display 買家過去所做的所有評論
      *
      * @return \Illuminate\Http\Response
      */
@@ -111,7 +111,6 @@ class CommentController extends Controller
         $validatedData = $request->validate([
             'comment' => 'required|string',
         ]);
-
         $status = $comment->update($validatedData);
 
         return redirect()->action('CommentController@index');
