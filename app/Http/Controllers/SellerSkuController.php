@@ -20,11 +20,11 @@ class SellerSkuController extends Controller
      */
     public function index($spu_id)
     {
-        $spu = Spu::where('id', '=', $spu_id)->get()->toArray();
-        if (empty($spu)) {
+        if (!$spu = Spu::find($spu_id)) {
             abort(404);
         }
-        $this->authorize('index', Spu::find($spu_id));
+        $this->authorize('index', $spu);
+        $spu = $spu->toArray();
 
         $commodities = Sku:: where('spu_id', '=', $spu_id)->paginate(8);
 
