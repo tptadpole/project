@@ -15,11 +15,7 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        if ($users_id = Auth::id()) {
-            $homepageProducts = Spu::where('users_id', '!=', $users_id)->take(8)->get()->toArray();
-        } else {
-            $homepageProducts = Spu::take(8)->get()->toArray();
-        }
+        $homepageProducts = Spu::take(8)->get()->toArray();
         
         return view('welcome')->with(['homepageProducts' => $homepageProducts]);
     }

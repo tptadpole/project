@@ -89,7 +89,6 @@ class SellerSkuController extends Controller
         $this->authorize('delete', $sku);
 
         $spu_id = $sku->toArray()['spu_id'];
-
         $status = $sku->delete();
 
         return redirect()->action('SellerSkuController@index', ['id' => $spu_id]);
@@ -130,10 +129,12 @@ class SellerSkuController extends Controller
             'price' => 'required|integer|max:1000000',
             'specification' => 'required|string|max:50',
             'stock' => 'required|integer',
-            'image' => 'image',
         ]);
-
         if (request()->hasFile('image')) {
+            $request->validate([
+                'image' => 'image',
+            ]);
+
             // 檔案存在，所以存到project/storage/app/public，並拿到url，此範例會拿到public/fileName
             $imageURL = request()->file('image')->store('/public');
             // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理
@@ -148,8 +149,8 @@ class SellerSkuController extends Controller
                 Storage::disk('s3')->delete($image_path);
             }
         }
-
         $status = $sku->update($validatedData);
+
         $sku = $sku->toArray();
 
         return redirect()->action('SellerSkuController@index', ['id' => $sku['spu_id']]);

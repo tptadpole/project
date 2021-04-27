@@ -74,10 +74,10 @@ class SellerController extends Controller
      */
     public function destroy($spu_id)
     {
-
         if (! $spu = Spu::find($spu_id)) {
             abort(404);
         }
+        $this->authorize('delete', $spu);
         
         // 在刪除商品標題的同時也透過軟刪除來做刪除商品物品
         $status = Spu::where('id', '=', $spu_id)->first()->delete();
@@ -122,6 +122,10 @@ class SellerController extends Controller
         ]);
 
         if (request()->hasFile('image')) {
+            $request->validate([
+                'image' => 'image',
+            ]);
+
             // 檔案存在，所以存到project/storage/app/public，並拿到url，此範例會拿到public/fileName
             $imageURL = request()->file('image')->store('/public');
             // 因為我們只想要將純粹的檔名存到資料庫，所以特別做處理

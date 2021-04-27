@@ -38,17 +38,20 @@ class CartController extends Controller
     public function store(Request $request, $sku_id)
     {
         $users_id = Auth::id();
-        $sku = Sku:: where('id', '=', $sku_id)->get()->toArray();
-        if (empty($sku)) {
+        if (!$sku = Sku::find($sku_id)) {
             abort(404);
         }
+        if ($users_id == $sku->users_id) {
+            abort(403);
+        }
+        $sku = $sku->toArray();
 
         $validatedData = $request->validate([
             'amount' => 'required|numeric|min:1',
         ]);
         // 如果購物車內有相同的商品了,更新數量即可,否則將商品加入到購物車中
         if ($cart = CartItem:: where([['users_id', '=', $users_id],['sku_id', '=', $sku_id]])->first()) {
-            if (($cart->amount + $request->amount) <= $sku[0]['stock']) {
+            if (($cart->amount + $request->amount) <= $sku['stock']) {
                 $cart->update([
                     'amount' => $cart->amount + $request->amount,
                 ]);
@@ -59,7 +62,7 @@ class CartController extends Controller
             $show = CartItem::create($validatedData);
         }
 
-        return redirect()->action('CustomerController@show', ['id' => $sku[0]['spu_id']]);
+        return redirect()->action('CustomerController@show', ['id' => $sku['spu_id']]);
     }
 
     /**

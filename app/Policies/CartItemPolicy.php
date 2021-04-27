@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\CartItem;
+use App\Models\Sku;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -42,6 +43,21 @@ class CartItemPolicy
     public function delete(User $user, CartItem $cart)
     {
         if ($user->id === $cart->users_id) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Determine whether the user can store sku to the cart.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Models\Sku  $sku
+     * @return mixed
+     */
+    public function cartStore(User $user, Sku $sku)
+    {
+        if ($user->id != $sku->users_id) {
             return true;
         }
         return false;
