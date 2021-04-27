@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Testing\TestResponse;
 use App\Models\Comment;
 use App\Models\Sku;
 use App\Models\Order;
@@ -69,17 +70,31 @@ class CommentTest extends TestCase
     }
 
     /**
-     * 測試找不到該商品物品的編輯評論頁面
+     * 測試新增商品物品的評論
      *
      * @return void
      */
     public function testSkuCommentStoreSuccess()
     {
         $this->demoUserLoginIn();
-        $comment = factory(Comment::class)->create();
+        $sku = factory(Sku::class)->create();
         $order = factory(Order::class)->create();
-        $response = $this->call('POST', '/comment/1/store');
-        $this->assertEquals(302, $response->status());
+        $response = $this->call('POST', '/comment/1/store', [
+            'comment' => 'test',
+        ]);
+        $this->assertEquals(200, $response->status());
+    }
+
+    /**
+     * 測試找不到該商品物品卻要新增評論
+     *
+     * @return void
+     */
+    public function testSkuCommentStoreFailed()
+    {
+        $this->demoUserLoginIn();
+        $response = $this->call('POST', '/comment/999/store');
+        $this->assertEquals(404, $response->status());
     }
 
     /**

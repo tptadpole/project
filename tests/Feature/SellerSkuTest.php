@@ -6,6 +6,7 @@ use App\Models\Spu;
 use App\Models\Sku;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class SellerSkuTest extends TestCase
@@ -91,9 +92,27 @@ class SellerSkuTest extends TestCase
     public function testSellerSkuStoreSuccess()
     {
         $this->demoUserLoginIn();
-        $sku = factory(Sku::class)->make()->toArray();
-        $response = $this->call('POST', '/seller/commodity/1/store', $sku);
+        $spu = factory(Spu::class)->create();
+        $response = $this->call('POST', '/seller/commodity/1/store', [
+            'name' => 'test',
+            'price' => '1',
+            'specification' => 'test',
+            'stock' => '1',
+            'image' => '',
+        ]);
         $this->assertEquals(302, $response->status());
+    }
+
+    /**
+     * 測試賣家新增一筆商品物品但商品標題卻不存在
+     *
+     * @return void
+     */
+    public function testSellerSkuStoreFailed()
+    {
+        $this->demoUserLoginIn();
+        $response = $this->call('POST', '/seller/commodity/999/store');
+        $this->assertEquals(404, $response->status());
     }
 
     /**

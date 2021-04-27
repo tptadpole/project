@@ -78,14 +78,14 @@ class OrderItemController extends Controller
      */
     public function update(Request $request, $order_id)
     {
-        $validatedData = $request->validate([
-            'status' => 'required|in:運送中,取消,取貨,完成'
-        ]);
 
         if (! $orderItem = OrderItem::find($order_id)) {
             abort(404);
         }
-
+        
+        $validatedData = $request->validate([
+            'status' => 'required|in:運送中,取消,取貨,完成'
+        ]);
         $status = $orderItem->update($validatedData);
         $orderItem = $orderItem->toArray();
 

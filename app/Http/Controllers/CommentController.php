@@ -48,6 +48,10 @@ class CommentController extends Controller
     {
         $users_id = Auth::id();
 
+        if (!$sku = Sku::find($sku_id)) {
+            abort(404);
+        }
+
         $validatedData = $request->validate([
             'comment' => ['required', 'string', 'max:50'],
         ]);

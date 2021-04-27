@@ -6,6 +6,7 @@ use App\Models\Spu;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class SellerTest extends TestCase
@@ -134,6 +135,7 @@ class SellerTest extends TestCase
         $response = $this->call('POST', '/seller/store', [
             'name' => 'testStore',
             'description' => 'testStore',
+            'image' => '',
         ]);
         $this->assertEquals(302, $response->status());
     }

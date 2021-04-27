@@ -52,10 +52,7 @@ class AdminOrderItemController extends Controller
         if ($orderItem = OrderItem::withTrashed()->find($orderItem_id)) {
             $orderItem->forceDelete();
         } else {
-            if (! $orderItem = OrderItem::find($orderItem_id)) {
-                abort(404);
-            }
-            $status = $orderItem->delete();
+            abort(404);
         }
 
         return redirect()->action('AdminOrderItemController@index');

@@ -50,11 +50,19 @@ class SellerSkuController extends Controller
      */
     public function store(Request $request, $spu_id)
     {
+        if (! $spu = Spu::find($spu_id)) {
+            abort(404);
+        }
+
+        if (Auth::id() !== $spu->users_id) {
+            abort(403);
+        }
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
-            'price' => 'required|numeric|integer|max:1000000',
+            'price' => 'required|numeric|integer|max:100000',
             'specification' => 'required|string|max:50',
-            'stock' => 'required|numeric|integer|max:10000',
+            'stock' => 'required|numeric|integer|max:1000',
             'image' => 'required|image',
         ]);
         $validatedData['spu_id'] = $spu_id;
@@ -126,9 +134,9 @@ class SellerSkuController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
-            'price' => 'required|integer|max:1000000',
+            'price' => 'required|integer|max:100000',
             'specification' => 'required|string|max:50',
-            'stock' => 'required|integer',
+            'stock' => 'required|integer|max:1000',
         ]);
         if (request()->hasFile('image')) {
             $request->validate([

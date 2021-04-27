@@ -177,4 +177,38 @@ class CartTest extends TestCase
         ]);
         $this->assertEquals(404, $response->status());
     }
+
+    /**
+     * 測試使用者在購物車內放入自己的商品(sku)
+     *
+     * @return void
+     */
+    public function testCartStoreSameUserFailed()
+    {
+        $sku = factory(Sku::class)->create();
+        $this->demoUserLoginIn();
+        $response = $this->call('POST', '/cart/1/store', [
+            "amount" => '1',
+        ]);
+        $this->assertEquals(403, $response->status());
+    }
+
+    /**
+     * 測試使用者在購物車內放入超過1000個商品(sku)
+     *
+     * @return void
+     */
+    public function testCartStoreOverSuccess()
+    {
+        $cart = factory(CartItem::class)->create();
+        $sku = factory(Sku::class)->create([
+            'users_id' => '2',
+            'stock' => '10000',
+        ]);
+        $this->demoUserLoginIn();
+        $response = $this->call('POST', '/cart/1/store', [
+            "amount" => '1001',
+        ]);
+        $this->assertEquals(302, $response->status());
+    }
 }
