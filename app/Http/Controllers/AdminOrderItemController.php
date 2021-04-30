@@ -73,7 +73,6 @@ class AdminOrderItemController extends Controller
         }
 
         $orderItemStatus = [ 'status' => '取貨' ];
-
         $status = $orderItem->update($orderItemStatus);
 
         return redirect()->action('AdminOrderItemController@show');

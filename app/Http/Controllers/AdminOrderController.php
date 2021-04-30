@@ -33,6 +33,7 @@ class AdminOrderController extends Controller
             if (! $order = Order::find($order_id)) {
                 abort(404);
             }
+            
             $status = $order->delete();
         }
 

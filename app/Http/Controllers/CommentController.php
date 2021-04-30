@@ -20,8 +20,8 @@ class CommentController extends Controller
     public function index()
     {
         $users_id = Auth::id();
-
         $comments = User::find($users_id)->commentSku()->get()->toArray();
+
         return view('comment')->with([ 'comments' => $comments ]);
     }
 
@@ -34,6 +34,7 @@ class CommentController extends Controller
     {
         $sku = Sku::where('id', '=', $sku_id)->get()->toArray();
         $comments = Sku::find($sku_id)->comment()->get()->toArray();
+
         return view('skuComment')->with([ 'sku' => $sku, 'comments' => $comments ]);
     }
 
@@ -46,19 +47,19 @@ class CommentController extends Controller
      */
     public function store(Request $request, $sku_id)
     {
-        $users_id = Auth::id();
+
 
         if (!$sku = Sku::find($sku_id)) {
             abort(404);
         }
 
+        $users_id = Auth::id();
+
         $validatedData = $request->validate([
             'comment' => ['required', 'string', 'max:50'],
         ]);
-
         $validatedData['users_id'] = $users_id;
         $validatedData['sku_id'] = $sku_id;
-
         $status = Comment::create($validatedData);
 
         $orders = Order:: where('users_id', '=', $users_id)->paginate(8);
@@ -77,9 +78,9 @@ class CommentController extends Controller
             abort(404);
         }
 
-        $this->authorize('delete', Comment::find($comment_id));
-
+        $this->authorize('delete', $comment);
         $status = $comment->delete();
+
         return redirect()->action('CommentController@index');
     }
 
@@ -94,6 +95,7 @@ class CommentController extends Controller
         if (! $comment = Comment::find($comment_id)) {
             abort(404);
         }
+
         return view('editComment')->with([ 'comment' => $comment ]);
     }
 
@@ -110,7 +112,8 @@ class CommentController extends Controller
         if (! $comment = Comment::find($comment_id)) {
             abort(404);
         }
-        $this->authorize('update', Comment::find($comment_id));
+        
+        $this->authorize('update', $comment);
 
         $validatedData = $request->validate([
             'comment' => 'required|string',

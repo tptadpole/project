@@ -65,6 +65,7 @@ class AdminUserController extends Controller
         if (!$user = User::find($users_id)) {
             abort(404);
         }
+
         $user = $user->toArray();
         return view('adminEditUser')->with([ 'user' => $user ]);
     }
@@ -78,16 +79,16 @@ class AdminUserController extends Controller
      */
     public function update(Request $request, $users_id)
     {
+        if (! $user = User::find($users_id)) {
+            abort(404);
+        }
+
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
             'role' => 'required|in:user,manager,admin',
         ]);
-
-        if (! $user = User::find($users_id)) {
-            abort(404);
-        }
 
         $validatedData['password'] = Hash::make($validatedData['password']);
         $status = $user->update($validatedData);

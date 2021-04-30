@@ -44,16 +44,16 @@ class AdminSkuController extends Controller
      */
     public function update(Request $request, $sku_id)
     {
+        if (! $sku = Sku::find($sku_id)) {
+            abort(404);
+        }
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
             'specification' => 'required|string|max:50',
             'price' => 'required|numeric',
             'stock' => 'required|numeric',
         ]);
-
-        if (! $sku = Sku::find($sku_id)) {
-            abort(404);
-        }
 
         if (request()->hasFile('image')) {
             // 檔案存在，所以存到project/storage/app/public，並拿到url，此範例會拿到public/fileName
@@ -64,10 +64,10 @@ class AdminSkuController extends Controller
             Storage::disk('s3')->put($imageName, file_get_contents($path), 'public');
             $validatedData['image'] = substr($imageURL, 7);
 
-            $image_path = 'garyke/garyke-demo/image/'. $sku->toArray() ['image'];
+            $oldImagePath = 'garyke/garyke-demo/image/'. $sku->toArray()['image'];
 
-            if ($exists = Storage::disk('s3')->has($image_path)) {
-                Storage::disk('s3')->delete($image_path);
+            if ($exists = Storage::disk('s3')->has($oldImagePath)) {
+                Storage::disk('s3')->delete($oldImagePath);
             }
         }
 
@@ -88,7 +88,7 @@ class AdminSkuController extends Controller
             abort(404);
         }
 
-        $status = Sku::find($sku_id)->first()->delete();
+        $status = $sku->delete();
 
         return redirect()->action('AdminSkuController@index');
     }

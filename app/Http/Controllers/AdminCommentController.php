@@ -28,7 +28,7 @@ class AdminCommentController extends Controller
         if (!$comment = Comment::find($comment_id)) {
             abort(404);
         }
-
+        
         $status = $comment->delete();
 
         return redirect()->action('AdminCommentController@index');

@@ -10,6 +10,7 @@ $factory->define(Spu::class, function (Faker $faker) {
         'users_id' => $faker->numberBetween($min = 1, $max = 1),
         'name' => $faker->word,
         'description' => $faker->word,
-        'image' => '',
+        'image' => "https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com
+        /garyke/garyke-demo/image/test.jpg",
     ];
 });

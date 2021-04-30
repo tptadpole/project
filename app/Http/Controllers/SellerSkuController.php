@@ -24,9 +24,9 @@ class SellerSkuController extends Controller
             abort(404);
         }
         $this->authorize('index', $spu);
-        $spu = $spu->toArray();
 
         $commodities = Sku:: where('spu_id', '=', $spu_id)->paginate(8);
+        $spu = $spu->toArray();
 
         return view('sku')->with([ 'spu' => $spu, 'commodities' => $commodities ]);
     }
@@ -138,6 +138,7 @@ class SellerSkuController extends Controller
             'specification' => 'required|string|max:50',
             'stock' => 'required|integer|max:1000',
         ]);
+
         if (request()->hasFile('image')) {
             $request->validate([
                 'image' => 'image',
@@ -159,8 +160,8 @@ class SellerSkuController extends Controller
         }
         $status = $sku->update($validatedData);
 
-        $sku = $sku->toArray();
+        $spu_id = $sku->toArray()['spu_id'];
 
-        return redirect()->action('SellerSkuController@index', ['id' => $sku['spu_id']]);
+        return redirect()->action('SellerSkuController@index', ['id' => $spu_id]);
     }
 }

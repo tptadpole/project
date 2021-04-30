@@ -18,6 +18,7 @@ class OrderController extends Controller
     {
         $users_id = Auth::id();
         $orders = Order:: where('users_id', '=', $users_id)->paginate(8);
+
         return view('order')->with(['orders' => $orders]);
     }
 
@@ -36,7 +37,6 @@ class OrderController extends Controller
         foreach ($cart as $carts) {
             $totalPrice += ($carts['pivot']['amount'] * $carts['price']);
         }
-
         if ($totalPrice == 0) {
             return redirect()->action('CartController@index');
         }
@@ -53,6 +53,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $users_id = Auth::id();
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
             'address' => 'required|string|max:50',
@@ -60,10 +61,8 @@ class OrderController extends Controller
             'total_amount' => 'required|numeric',
             'payment' => 'required|in:cash,credit-card',
         ]);
-
         $validatedData['users_id'] = $users_id;
         $validatedData['status'] = '出貨';
-
         $status = Order::create($validatedData);
 
         $orderId = $status->toArray()['id'];
@@ -83,8 +82,9 @@ class OrderController extends Controller
         if (! $order = Order::find($order_id)) {
             abort(404);
         }
-        
+    
         $this->authorize('delete', $order);
+        
         $orderItems = $order->orderItems->toArray();
 
         $canDelete = true;

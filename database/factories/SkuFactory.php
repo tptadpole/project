@@ -13,6 +13,7 @@ $factory->define(Sku::class, function (Faker $faker) {
         'price' => $faker->numberBetween($min = 1, $max = 200),
         'specification' => $faker->word,
         'stock' => $faker->numberBetween($min = 0, $max = 50),
-        'image' => '',
+        'image' => "https://104-aws-training-cicd-bucket.s3-ap-northeast-1.amazonaws.com
+        /garyke/garyke-demo/image/test.jpg",
     ];
 });

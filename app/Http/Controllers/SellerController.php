@@ -21,6 +21,7 @@ class SellerController extends Controller
     {
         $users_id = Auth::id();
         $commodities = Spu:: where('users_id', '=', $users_id)->paginate(8);
+
         return view('seller')->with(['commodities' => $commodities]);
     }
 
@@ -80,7 +81,7 @@ class SellerController extends Controller
         $this->authorize('delete', $spu);
         
         // 在刪除商品標題的同時也透過軟刪除來做刪除商品物品
-        $status = Spu::where('id', '=', $spu_id)->first()->delete();
+        $status = $spu->delete();
 
         return redirect()->action('SellerController@index');
     }
@@ -93,12 +94,12 @@ class SellerController extends Controller
      */
     public function edit($spu_id)
     {
-        if (!$data = Spu::find($spu_id)) {
+        if (!$spu = Spu::find($spu_id)) {
             abort(404);
         }
-        $data = $data->toArray();
+        $spu = $spu->toArray();
 
-        return view('editSpu')->with(['data' => $data]);
+        return view('editSpu')->with(['spu' => $spu]);
     }
 
     /**
@@ -114,7 +115,7 @@ class SellerController extends Controller
             abort(404);
         }
 
-        $this->authorize('update', Spu::find($spu_id));
+        $this->authorize('update', $spu);
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:20',
@@ -133,8 +134,7 @@ class SellerController extends Controller
             $path = $request->image->path();
             Storage::disk('s3')->put($imageName, file_get_contents($path), 'public');
             $validatedData['image'] = substr($imageURL, 7);
-
-            $image_path = 'garyke/garyke-demo/image/'. $spu->toArray() ['image'];
+            $image_path = 'garyke/garyke-demo/image/'. $spu->toArray()['image'];
 
             if ($exists = Storage::disk('s3')->has($image_path)) {
                 Storage::disk('s3')->delete($image_path);
@@ -142,6 +142,7 @@ class SellerController extends Controller
         }
 
         $status = $spu->update($validatedData);
+
         return redirect()->action('SellerController@index');
     }
 }

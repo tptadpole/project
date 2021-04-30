@@ -63,10 +63,10 @@ class AdminSpuController extends Controller
             Storage::disk('s3')->put($imageName, file_get_contents($path), 'public');
             $validatedData['image'] = substr($imageURL, 7);
 
-            $image_path = 'garyke/garyke-demo/image/'. $spu->toArray() ['image'];
+            $oldImagePath = 'garyke/garyke-demo/image/'. $spu->toArray() ['image'];
 
-            if ($exists = Storage::disk('s3')->has($image_path)) {
-                Storage::disk('s3')->delete($image_path);
+            if ($exists = Storage::disk('s3')->has($oldImagePath)) {
+                Storage::disk('s3')->delete($oldImagePath);
             }
         }
 
@@ -88,7 +88,7 @@ class AdminSpuController extends Controller
         }
 
         // 在刪除商品標題的同時也透過軟刪除來做刪除商品物品
-        $status = Spu::where('id', '=', $spu_id)->first()->delete();
+        $status = $spu->delete();
 
         return redirect()->action('AdminSpuController@index');
     }

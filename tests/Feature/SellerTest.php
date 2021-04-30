@@ -132,11 +132,8 @@ class SellerTest extends TestCase
     public function testSellerStoreSuccess()
     {
         $this->demoUserLoginIn();
-        $response = $this->call('POST', '/seller/store', [
-            'name' => 'testStore',
-            'description' => 'testStore',
-            'image' => '',
-        ]);
+        $spu = factory(Spu::class)->make();
+        $response = $this->call('POST', '/seller/store', $spu->toArray());
         $this->assertEquals(302, $response->status());
     }
 }

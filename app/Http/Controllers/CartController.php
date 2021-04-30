@@ -52,10 +52,8 @@ class CartController extends Controller
         // 如果購物車內有相同的商品了,更新數量即可,否則將商品加入到購物車中
         if ($cart = CartItem:: where([['users_id', '=', $users_id],['sku_id', '=', $sku_id]])->first()) {
             $total_amount = $cart->amount + $request->amount;
+            // 每個商品最多買100份,追加買商品也是
             if ($total_amount <= $sku['stock']) {
-                if ($total_amount >= 1000) {
-                    $total_amount = 1000;
-                }
                 $cart->update([
                     'amount' => $total_amount,
                 ]);
@@ -103,7 +101,7 @@ class CartController extends Controller
         if (! $cart = CartItem::find($cart_id)) {
             abort(404);
         }
-        $this->authorize('update', CartItem::find($cart_id));
+        $this->authorize('update', $cart);
 
         $validatedData = $request->validate([
             'amount' => 'required|integer|min:1',

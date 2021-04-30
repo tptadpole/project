@@ -21,6 +21,7 @@ class OrderItemController extends Controller
     {
         $users_id = Auth::id();
         $orders = OrderItem:: where([['users_id', '=', $users_id], ['status', '=', '出貨']])->paginate(8);
+
         $role = 'seller';
         return view('sellerOrder')->with(['orders' => $orders, 'role' => $role]);
     }
@@ -34,6 +35,7 @@ class OrderItemController extends Controller
     public function show($order_id)
     {
         $orders = OrderItem:: where('order_id', '=', $order_id)->paginate(8);
+
         $role = 'customer';
         return view('sellerOrder')->with(['orders' => $orders, 'role' => $role]);
     }
@@ -83,22 +85,24 @@ class OrderItemController extends Controller
             abort(404);
         }
         
+        //無論是買家還是賣家都要先更新對商品物品的狀態
         $validatedData = $request->validate([
             'status' => 'required|in:運送中,取消,取貨,完成'
         ]);
         $status = $orderItem->update($validatedData);
+
         $orderItem = $orderItem->toArray();
 
+        // 賣家對出貨的商品只有兩個選擇運送中或是取消,如果要取消要退款
         if ($validatedData['status'] == '運送中' || $validatedData['status'] == '取消') {
             $sku = Sku::find($orderItem['sku_id']);
 
             $commodity = $sku->toArray();
             $stock = $commodity['stock'];
             $unitPrice = $commodity['price'];
-
             $amount = $orderItem['amount'];
             
-            // 出貨失敗就減少顧客花費的總金額,出貨成功就減少賣家商品的存貨
+            // 出貨取消或是貨源不足就減少顧客花費的總金額,出貨成功就減少賣家商品的存貨
             if ($stock < $amount || $validatedData['status'] == '取消') {
                 $validatedData['status'] = "取消";
         
