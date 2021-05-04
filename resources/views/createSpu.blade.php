@@ -25,11 +25,11 @@
                 <div class="form-group">
                     @csrf
                     <label for="name">商品標題:</label>
-                    <input type="text" class="form-control" name="name"/>
+                    <input type="text" class="form-control" name="name" value="{{old('name')}}"/>
                 </div>
                 <div class="form-group">
                     <label for="description">商品描述(敘述多一些會讓你的商品有更好的表達) :</label>
-                    <textarea rows="5" columns="5" class="form-control" name="description"></textarea>
+                    <textarea rows="5" columns="5" class="form-control" name="description" value="{{old('description')}}"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="image">商品圖片 :</label>

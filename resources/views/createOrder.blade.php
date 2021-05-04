@@ -25,15 +25,15 @@
                 <div class="form-group">
                     @csrf
                     <label for="name">簽收者姓名:</label>
-                    <input type="text" class="form-control" name="name"/>
+                    <input type="text" class="form-control" name="name" value="{{old('name')}}"/>
                 </div>
                 <div class="form-group">
                     <label for="address">地址:</label>
-                    <input type="text" class="form-control" name="address"/>
+                    <input type="text" class="form-control" name="address" value="{{old('address')}}"/>
                 </div>
                 <div class="form-group">
                     <label for="phone">手機號碼:</label>
-                    <input type="text" class="form-control" name="phone"/>
+                    <input type="text" class="form-control" name="phone" value="{{old('phone')}}"/>
                 </div>
                 <div class="form-group">
                     <label for="total_amount">總金額</label>

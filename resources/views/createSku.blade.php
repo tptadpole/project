@@ -25,19 +25,19 @@
                 <div class="form-group">
                     @csrf
                     <label for="name">商品名稱:</label>
-                    <input type="text" class="form-control" name="name"/>
+                    <input type="text" class="form-control" name="name" value="{{old('name')}}"/>
                 </div>
                 <div class="form-group">
                     <label for="price">價格:</label>
-                    <input type="text" class="form-control" name="price"/>
+                    <input type="text" class="form-control" name="price" value="{{old('price')}}"/>
                 </div>
                 <div class="form-group">
                     <label for="specification">規格:</label>
-                    <input type="text" class="form-control" name="specification"/>
+                    <input type="text" class="form-control" name="specification" value="{{old('specification')}}"/>
                 </div>
                 <div class="form-group">
                     <label for="stock">剩餘存貨:</label>
-                    <input type="text" class="form-control" name="stock"/>
+                    <input type="text" class="form-control" name="stock" value="{{old('stock')}}"/>
                 </div>
                 <div class="form-group">
                     <label for="image">商品圖片 :</label>
